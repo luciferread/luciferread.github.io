@@ -1,2 +1,3 @@
 # luciferread.github.io
-Website
+
+A Jekyll-based static website for my author website.
