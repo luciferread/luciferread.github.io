@@ -268,8 +268,9 @@ img {
       transition: all 0.3s ease;
 
       &:hover {
-        background-color: color.adjust(#32CD32, $lightness: -5%);
+        // background-color: color.adjust(#32CD32, $lightness: -5%, $space: hsl);
         // background-color: color.scale(#32CD32, $lightness: -5%);
+        background-color: #32CD32;
         box-shadow: 0 0 10px rgba(56, 221, 207, 0.5);
       }
     }
