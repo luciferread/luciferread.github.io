@@ -19,6 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Lucifer Read
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://luciferread.com/" # the base hostname & protocol for your site, e.g. http://example.com
 # url can also be github page, https://luciferread.github.io
 
@@ -26,10 +27,6 @@ url: "https://luciferread.com/" # the base hostname & protocol for your site, e.
 github_username:  luciferread
 
 # Build settings
-# remote_theme: jekyll/minima
-# minima:
-#     skin: auto
-
 # remote_theme: jeffreytse/jekyll-theme-yat
 markdown: kramdown
 plugins:
