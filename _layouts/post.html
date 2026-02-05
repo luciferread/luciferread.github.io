@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<article style="padding: 4rem 10%; max-width: 800px; margin: 0 auto;">
+
+    <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--color-text-muted); padding-bottom: 1rem;">
+        <h1
+            style="font-family: var(--font-header); color: var(--color-accent); font-size: 2.5rem; margin-bottom: 0.5rem;">
+            {{ page.title }}
+        </h1>
+        <p style="color: var(--color-text-muted); font-style: italic;">
+            Published on {{ page.date | date: "%B %-d, %Y" }}
+        </p>
+    </div>
+
+    <div class="post-content" style="font-size: 1.1rem; line-height: 1.8;">
+        <!-- 
+           This is where the content of your post (from the .md file) appears.
+        -->
+        {{ content }}
+    </div>
+
+    <!-- SUBSTACK EMBED (appears at end of every post) -->
+    <section>
+        <iframe 
+            src="https://luciferread.substack.com/embed" width="100%" height="320" 
+            style="border: 1px solid var(--color-accent); background: transparent; max-width: 500px; display: block; margin: 0 auto;" 
+            frameborder="0" scrolling="no"></iframe>
+    </section>
+
+    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-text-muted);">
+        <a href="{{ '/news.html' | relative_url }}" class="btn">← BACK TO ALL NEWS</a>
+    </div>
+
+</article>

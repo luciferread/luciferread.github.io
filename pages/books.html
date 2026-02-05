@@ -1,0 +1,63 @@
+---
+layout: default
+title: Books
+permalink: /books.html
+---
+
+<section style="padding: 4rem 10%;">
+    <h1
+        style="font-family: var(--font-header); color: var(--color-accent); border-bottom: 1px solid var(--color-text-muted); padding-bottom: 1rem;">
+        BOOKS</h1>
+
+    <!-- SINGLE BOOK LAYOUT -->
+    <div style="display: flex; flex-wrap: wrap; margin-top: 3rem; gap: 4rem; align-items: start;">
+
+        <!-- Book Cover Image -->
+        <div style="flex: 1; min-width: 300px;">
+            <img src="{{ '/assets/images/radiant_cover_800w75pc.jpg' | relative_url }}" alt="The Radiants Book Cover"
+                style="width: 100%; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+        </div>
+
+        <!-- Book Details -->
+        <div style="flex: 2; min-width: 300px;">
+            <h2 style="font-family: var(--font-header); font-size: 2.5rem; margin-top: 0;">THE RADIANTS</h2>
+            <p style="color: var(--color-accent); font-weight: bold;">AVAILABLE SOON</p>
+
+            <div style="margin-bottom: 2rem;">
+                <p>
+                    <strong><i>On a world that has never known night, the coming eclipse will spark a fight for survival — and expose the truth buried in its own shadow.</i></strong>
+                </p>
+                <p>
+                     <strong>Their sun had never set - until now.</strong>
+                     When the Mintaka discovers a moon orbiting their world, it may spell their doom: an eclipse that will last for millennia.
+                     But when their warnings are met with resistance, it becomes clear that the greatest threat to their survival may not come from above.<br>
+                     As rival families turn against one another, old loyalties fracture and new alliances form.
+                     A reluctant teacher and a young lumen are drawn into the ancient currents of a world that has forgotten how to face the dark.<br>
+                     As the shadow draws near, who will stand beneath the fading light - and who will survive to see what waits beyond?<br>
+                     <i>For readers of Frank Herbert and N. K. Jemisin, <b>The Radiants</b> is the first book in the <b>Heliopaides</b> saga - an epic tale of a civilisation built on sunlight, and the darkness waiting to reclaim it.</i>
+                </p>
+                <p>
+                    <!-- "A masterpiece of atmospheric storytelling." — <em>Reviewer Name</em> -->
+                </p>
+            </div>
+
+            <!-- BUY BUTTONS -->
+            <!-- <h3 style="font-family: var(--font-header); font-size: 1.2rem;">ORDER YOUR COPY:</h3> -->
+            <h3 style="font-family: var(--font-header); font-size: 1.2rem;">COMING 2026</h3>
+            <div style="display: flex; gap: 1rem;">
+                <!-- Replace '#' with your actual Amazon link -->
+                <!-- <a href="#" class="btn">AMAZON</a> -->
+
+                <!-- Additional store buttons can go here -->
+                <!-- <a href="#" class="btn" style="filter: grayscale(100%);">BARNES & NOBLE</a> -->
+            </div>
+
+            <!-- 
+               DIRECT BUY BUTTONS (BookFunnel / BookVault)
+               These are currently hidden in the included file.
+               Open '_includes/direct-buy-buttons.html' to enable them.
+            -->
+            {% include direct-buy-buttons.html %}
+        </div>
+    </div>
+</section>

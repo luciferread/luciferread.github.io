@@ -1,62 +1,40 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# ==============================================================================
+# JEKYLL CONFIGURATION FILE (_config.yml)
+# ==============================================================================
+# This file stores the main settings for your website.
+# Whenever you change this file, you usually need to restart the server
+# (Ctrl+C to stop, then `jekyll serve` to start again) for changes to take effect.
 
-title: Lucifer Read
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://luciferread.com/" # the base hostname & protocol for your site, e.g. http://example.com
-# url can also be github page, https://luciferread.github.io
+# --- SITE IDENTITY ---
+# The title of your website. This appears in the browser tab and search results.
+title: "Lucifer Read"
 
-# twitter_username: jekyllrb
-github_username:  luciferread
+# Your email address. This can be used in the footer or contact page.
+# email: your-email@example.com
 
-# Build settings
-# remote_theme: jeffreytse/jekyll-theme-yat
-markdown: kramdown
+# A short description of your site. 
+# This is very important for search engine optimization (SEO).
+description: "Official website of Lucifer Read, featuring Sci-Fi novels and updates."
+
+# --- URL SETTINGS ---
+# The base URL of your site. 
+# - For local testing, keep this empty ("").
+# - For GitHub Pages, this might need to be "/repository-name" if not using a custom domain.
+baseurl: "" 
+
+# The full URL of your site (e.g., https://yourname.com).
+# Leave this empty while developing locally. Fill it in when you go live.
+# NOTE: The 'sitemap.xml' will only be generated when this contains a value.
+url: "https://luciferread.com/" 
+
+# --- THEME SETTINGS ---
+# We are using a custom setup, so we set the theme to null.
+# If we used a pre-made theme (like "minima"), we would name it here.
+theme: null
+
+# --- PLUGINS ---
+# Plugins add extra functionality to Jekyll.
 plugins:
-  - jekyll-feed
-#  - jekyll-remote-theme
-  - jekyll-sitemap
-#  - jekyll-spaceship
-#  - jekyll-paginate
-  - jekyll-seo-tag
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-exclude:
-   - README.md
-   - .sass-cache/
-   - .jekyll-cache/
-   - gemfiles/
-   - Gemfile
-   - Gemfile.lock
-   - node_modules/
-   - vendor
-   - .bundle/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
-
+  - jekyll-feed       # Creates an RSS feed for your posts (good for blogs)
+  - jekyll-seo-tag    # Automatically adds SEO meta tags to your pages
+  - jekyll-sitemap    # automatically generates a sitemap.xml for search engines

@@ -1,48 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spinnaker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="{{ '/assets/favicon/favicon-96x96.png' | relative_url }}">
-  <link href="{{ '/assets/fonts/GameOfSquids-1GMVL.ttf' | relative_url }}" rel="truetype">
+    <!-- 
+       HEAD SECTION 
+       This contains metadata that doesn't show up on the page itself, 
+       but is used by the browser and search engines.
+    -->
+
+    <!-- 
+       SEO TAGS 
+       The SEO tag below is a "magic" tag that automatically generates 
+       all the meta tags, titles, and social sharing info (Twitter, Facebook) 
+       based on your _config.yml.
+    -->
+    {% seo %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FAVICON: The little icon in the browser tab -->
+    <!-- Place your image named 'favicon.png' in the 'assets/images/' folder -->
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+
+    <!-- Link to Google Fonts (Orbitron for headers) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Link to Awesome Fonts (has social media symbols) -->
+    <script src="https://kit.fontawesome.com/9cb7145b99.js" crossorigin="anonymous"></script>
+
+    <!-- Link to our main stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
+
 <body>
 
-  <main>
-    {{ content }}
-  </main>
+    <!-- 
+       NAVIGATION BAR 
+       Appears at the top of every page.
+    -->
+    <nav class="navbar">
+        <a href="{{ '/' | relative_url }}" class="nav-brand">LUCIFER READ</a>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-nav">
-        <ul>
-          {% for item in site.navigation %}
-            <li>
-              <a href="{{ item.url | relative_url }}" class="footer-link {% if page.url == item.url %}active{% endif %}">
-                {{ item.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="footer-bottom">
-        <div class="copyright">
-          Copyright © {{ 'now' | date: "%Y" }} Lucifer Read All Rights Reserved
-        </div>
-        <div class="author-brand">
-          <h2>LUCIFER READ</h2>
-        </div>
-      </div>
-    </div>
-  </footer>
+        <!-- Hamburger button (mobile only) -->
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+        <div class="nav-links">
+            <a href="{{ '/' | relative_url }}">Home</a>
+
+            <!-- BOOKS DROPDOWN -->
+            <div class="dropdown">
+                <a href="{{ '/books.html' | relative_url }}">Books</a>
+                <div class="dropdown-content">
+                    <a href="{{ '/books.html' | relative_url }}">All Books</a>
+                    <a href="{{ '/books.html' | relative_url }}">The Heliopaides Saga</a>
+                    <!-- Future series can be added here -->
+                </div>
+            </div>
+
+            <a href="{{ '/news.html' | relative_url }}">News</a>
+            <a href="{{ '/about.html' | relative_url }}">About</a>
+            <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 
+      MAIN CONTENT AREA 
+      This is where Jekyll injects the content from your individual pages 
+      (like index.md or books.md). This means you don't have to copy 
+      the header/footer to every single file.
+    -->
+    <main>
+        {{ content }}
+    </main>
+
+    <!-- 
+       FOOTER 
+       Appears at the bottom of every page.
+    -->
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+        <p>Epic Science Fiction from the <em>Éskhatos Kósmos</em>.</p>
+
+        <div style="margin-top: 2rem; font-size: 0.7rem; opacity: 0.7;">
+            <a href="{{ '/privacy.html' | relative_url }}"
+                style="color: var(--color-text-muted); text-decoration: underline; margin: 0 10px;">Privacy Policy</a>
+            |
+            <span style="margin: 0 10px;">Built on <a href="https://pages.github.com/" target="_blank"
+                    style="color: var(--color-text-muted); text-decoration: underline;">GitHub Pages</a></span>
+            <br>
+            <span style="margin: 0 10px;">Design inspired by original cover art from <a href="https://adamfyda.com/"
+                target="_blank" style="color: var(--color-text-muted); text-decoration: underline;">Adam Fyda</a>
+                <!-- Link icon (aria-label is for screen readers) -->
+                <a href="https://adamfyda.com/" target="_blank" aria-label="Adam Fyda's website">
+                    <i class="fa-solid fa-link"></i></a>
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/adam_fyda_art/" target="_blank" aria-label="Adam Fyda's Instagram">
+                    <i class="fa-brands fa-instagram"></i></a>
+                
+        </div>
+    </footer>
+
+    <!-- Script for hamburger menu link when running on phone -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            navLinks.classList.remove('active');
+            }
+        });
+    </script>
+
 </body>
+
 </html>

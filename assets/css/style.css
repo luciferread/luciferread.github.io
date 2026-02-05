@@ -1,0 +1,699 @@
+/* 
+   Welcome to the main stylesheet!
+   This file controls the look and feel of your website.
+   I have set up "variables" at the top so you can easily change colors later.
+*/
+
+:root {
+  /* --- COLOR PALETTE (Extracted from your book cover) --- */
+
+  /* Deep, warm black background */
+  --color-bg-dark: #0F100A;
+
+  /* Primary Gold/Amber Accent - used for Buttons and determining borders */
+  --color-accent: #C9B037;
+
+  /* Hover state for buttons - slightly brighter */
+  --color-accent-hover: #D4AF37;
+
+  /* Main text color - Pale Cream (easier on eyes than pure white) */
+  --color-text-main: #F4F1D6;
+
+  /* Secondary text/borders - Muted Olive Gold */
+  --color-text-muted: #A39634;
+
+  /* Special color for Direct Sales buttons (e.g., a nice Teal or Blue to contrast) */
+  --color-direct-buy: #37C9B0;
+  --color-direct-buy-hover: #37E0C0;
+
+  /* --- FONTS --- */
+  /* 'Orbitron' is our sci-fi header font */
+  --font-header: 'Orbitron', sans-serif;
+
+  /* Simple sans-serif for readable body text */
+  --font-body: system-ui, -apple-system, sans-serif;
+}
+
+/* --- GLOBAL STYLES --- */
+
+body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Links default style */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--color-accent-hover);
+}
+
+/* --- NAVIGATION --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /* Semi-transparent background for sticky nav feel */
+  background: rgba(15, 16, 10, 0.9);
+  border-bottom: 1px solid var(--color-text-muted);
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-brand {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-accent);
+}
+
+.nav-links a {
+  margin-left: 20px;
+  font-family: var(--font-header);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+  text-shadow: 0 0 5px var(--color-accent);
+  /* Glowing effect */
+}
+
+/* --- DROPDOWN MENU --- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--color-bg-dark);
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  border: 1px solid var(--color-text-muted);
+  border-top: none;
+}
+
+.dropdown-content a {
+  color: var(--color-text-main);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 0 !important;
+  /* Reset margin from nav-links */
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(201, 176, 55, 0.1);
+  color: var(--color-accent);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* --- HAMBURGER MENU (hidden on desktop) --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-accent);
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+/* --- RESPONSIVE MOBILE TWEAKS --- */
+@media (max-width: 768px) {
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide nav links by default on mobile */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: rgba(15, 16, 10, 0.98);
+    flex-direction: column;
+    padding: 80px 20px 20px 20px;
+    transition: right 0.3s ease;
+    border-left: 1px solid var(--color-text-muted);
+    overflow-y: auto;
+  }
+
+  /* Show nav links when active */
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    margin: 15px 0;
+    margin-left: 0 !important;
+    display: block;
+    /* Makes each tab take a line */
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: block;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+    margin-top: 10px;
+  }
+
+  .dropdown-content a {
+    margin: 5px 0;
+    /* Reduce gap between subheadings in hamburger menu */
+  }
+
+  .hero {
+    background-position: center right;
+    background-attachment: scroll;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .navbar {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  min-height: 80vh;
+  /* Takes up 80% of viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* Aligns content to the left */
+  padding: 0 10%;
+  position: relative;
+  z-index: 100;
+  /* Added for navbar stacking */
+
+  /* Background Image Setup */
+  background-image:
+    linear-gradient(to right, rgba(15, 16, 10, 0.9) 0%, rgba(15, 16, 10, 0.4) 60%, rgba(15, 16, 10, 0.1) 100%),
+    url('../images/hero_background_1920w80pc.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* Parallax effect */
+}
+
+.hero h1 {
+  font-family: var(--font-header);
+  font-size: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  /* Subtle dropshadow */
+}
+
+.hero p {
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+}
+
+/* --- HERO-NEWSLETTER ALIGNMENT --- */
+.hero-content {
+  width: 100%;
+  max-width: 615px;
+  /* Constrains both title and newsletter box */
+}
+
+.hero-content .newsletter-box {
+  width: 100%; /* Matches the hero-content width */
+  max-width: none;
+  margin-top: 2rem;
+}
+
+/* --- NEWSLETTER BOX (The specific request) --- */
+.newsletter-box {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(201, 176, 55, 0.2);
+  /* Soft gold glow */
+  /* margin: 0 auto; */
+  /* Centres box on page */
+}
+
+.newsletter-box h3 {
+  font-size: 1.5rem;
+  font-family: var(--font-header);
+  margin-top: 0rem;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+/* Use different settings when max width=768px (like on a phone) */
+@media (max-width: 768px) {
+  /* Hero section (i.e., background image) on phone */
+  .hero {
+    align-items: center;
+    /* padding: 0 5%; */
+    /* Reduce padding to give more room */
+    background-size: auto 120%;
+    /* Makes image 120% of container height */
+    background-position: right 7% top 90%;
+    /* centre right means it will be centred on desktop and right on mobile */
+    background-attachment: scroll;
+    /* Fixed backgrounds can be glitchy on mobile */
+  }
+
+  /* Font on first page */
+  .hero h1 {
+  font-size: 2rem;
+  /* Smaller to prevent overflow */
+  /* margin-top: 0rem; */
+  letter-spacing: 2px;
+  /* Tighter spacing */
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    /* margin-top: 0rem; */
+    margin-top: 0rem;
+    margin-bottom: 15rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-content {
+    width: 100%;
+    /* Matches title width */
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Change size of newsletter box for phone */
+  .newsletter-box {
+    width: 100%;
+    /* Forces the box to be 90% of screen width */
+    max-width: none;
+    /* Removes the desktop 650px cap */
+    padding: 0.5rem;
+    /* margin-top: 10rem; */
+  }
+
+}
+
+/* --- BUTTONS --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--color-accent);
+  color: #000;
+  /* Black text on gold button for contrast */
+  font-family: var(--font-header);
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Direct Sales Buttons (Ebook & Print) */
+.btn-direct-ebook {
+  background-color: transparent;
+  border-color: var(--color-direct-buy);
+  color: var(--color-direct-buy);
+  font-size: 0.8rem;
+  /* Slightly smaller than main buy button */
+  padding: 8px 16px;
+}
+
+.btn-direct-ebook:hover {
+  background-color: var(--color-direct-buy);
+  color: #000;
+  box-shadow: 0 0 10px var(--color-direct-buy);
+}
+
+.btn-direct-print {
+  background-color: transparent;
+  border-color: var(--color-text-muted);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  padding: 8px 16px;
+}
+
+.btn-direct-print:hover {
+  background-color: var(--color-text-muted);
+  color: #000;
+  box-shadow: 0 0 10px var(--color-text-muted);
+}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--color-text-muted);
+  margin-top: 4rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* --- DEEP SPACE TRANSMISSION (NASA API) --- */
+.transmission-section {
+  padding: 4rem 10%;
+  background: rgba(15, 16, 10, 0.8);
+  border-top: 1px solid var(--color-text-muted);
+  border-bottom: 1px solid var(--color-text-muted);
+}
+
+.transmission-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 20px rgba(201, 176, 55, 0.1);
+}
+
+.transmission-header {
+  background: var(--color-accent);
+  color: #000;
+  padding: 10px 20px;
+  font-family: var(--font-header);
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.transmission-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.transmission-image-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.transmission-image-container img,
+.transmission-image-container .video-wrapper {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #333;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.transmission-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.transmission-content h3 {
+  font-family: var(--font-header);
+  color: var(--color-accent);
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.transmission-content p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+
+.transmission-footer {
+  padding: 1rem 2rem;
+  border-top: 1px solid #222;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Response handling */
+#nasa-loading {
+  text-align: center;
+  font-family: var(--font-header);
+  padding: 2rem;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+}
+
+/* --- PLANETARY ECLIPSE TRACKER --- */
+.tracker-section {
+  padding: 5rem 10%;
+  background: radial-gradient(circle at center, #1a1b15 0%, #0f100a 100%);
+  color: var(--color-text-main);
+  text-align: center;
+}
+
+.radar-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.radar-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(201, 176, 55, 0.3);
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.radar-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(201, 176, 55, 0.2);
+}
+
+.radar-card h3 {
+  font-family: var(--font-header);
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  margin-top: 0;
+  letter-spacing: 2px;
+}
+
+.countdown-timer {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  color: #00ff00;
+  /* Classic radar green */
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+.event-details {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.radar-scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(201, 176, 55, 0.1);
+  box-shadow: 0 0 10px var(--color-accent);
+  animation: radarLine 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radarLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes alertPulse {
+  0% {
+    box-shadow: 0 0 5px #ff4444;
+    border-color: #ff4444;
+  }
+
+  50% {
+    box-shadow: 0 0 30px #ff4444;
+    border-color: #ff8888;
+  }
+
+  100% {
+    box-shadow: 0 0 5px #ff4444;
+    border-color: #ff4444;
+  }
+}
+
+.active-alert {
+  animation: alertPulse 1.5s infinite ease-in-out !important;
+}
+
+@keyframes sunActivePulse {
+  0% {
+    fill: #FFD700;
+    filter: blur(4px);
+  }
+
+  50% {
+    fill: #ff4444;
+    filter: blur(8px) drop-shadow(0 0 10px #ff4444);
+  }
+
+  100% {
+    fill: #FFD700;
+    filter: blur(4px);
+  }
+}
+
+.sun-active {
+  animation: sunActivePulse 1s infinite ease-in-out;
+}
+
+
+/* --- SVG ORBITAL MAPS --- */
+.orbital-map {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem auto;
+  display: block;
+}
+
+.orbit-path {
+  fill: none;
+  stroke: rgba(201, 176, 55, 0.2);
+  stroke-width: 1;
+}
+
+.planet-core {
+  fill: var(--color-accent);
+}
+
+.moon-orbiter {
+  fill: #00ff00;
+  filter: drop-shadow(0 0 2px #00ff00);
+}
+
+.sun-reference {
+  fill: #FFD700;
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.alignment-axis {
+  stroke: rgba(255, 215, 0, 0.15);
+  stroke-dasharray: 2 4;
+  stroke-width: 0.5;
+}
+
+
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.anim-orbit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orbitSpin 10s linear infinite;
+}
+
