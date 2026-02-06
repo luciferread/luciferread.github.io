@@ -46,5 +46,5 @@ All creative content, including but not limited to:
 - **Images**: Book covers, background art, and author photos.
 - **Text**: Book blurbs, specific "Transmissions" content, and author bios.
 
-These assets are the intellectual property of the author. They may **not** be reproduced, redistributed, or sold as your own. 
-*Permission is granted for use in legitimate book reviews, press features, or blog spotlights, provided credit is given to the author.*
+These assets are the intellectual property of Lucifer Read. They may **not** be reproduced, redistributed, or sold as your own. 
+*Permission is granted for use in legitimate book reviews, press features, or blog spotlights, provided credit is given to Lucifer Read.*
