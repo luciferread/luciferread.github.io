@@ -1,4 +1,4 @@
-# My Author Website
+# Lucifer Read's Author Website
 
 A professional, high-performance static website built for sci-fi authors. This site is designed with a "dark mode" aesthetic, optimized for SEO, and built specifically for hosting on **GitHub Pages**.
 
@@ -40,7 +40,7 @@ This site is pre-configured for **GitHub Pages**. To deploy:
 The structural code of this website (HTML, CSS, and Jekyll configuration) is provided for open use. You are welcome to use this repository as a template for your own personal author website.
 
 ### The Content & Assets
-**Copyright © [Author Name]. All rights reserved.**
+**Copyright © Lucifer Read. All rights reserved.**
 
 All creative content, including but not limited to:
 - **Images**: Book covers, background art, and author photos.
