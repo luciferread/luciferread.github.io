@@ -101,7 +101,7 @@
                 <a href="https://adamfyda.com/" target="_blank" aria-label="Adam Fyda's website">
                     <i class="fa-solid fa-link"></i></a>
                 <!-- Instagram icon -->
-                <a href="https://instagram.com/adam_fyda_art/" target="_blank" aria-label="Adam Fyda's Instagram">
+                <a href="https://instagram.com/adam_fyda_art/" class="instagram-link" target="_blank" aria-label="Adam Fyda's Instagram">
                     <i class="fa-brands fa-instagram"></i></a>
                 
         </div>
@@ -129,6 +129,24 @@
             navLinks.classList.remove('active');
             }
         });
+    </script>
+
+    <!-- Instagram script -->
+     <script>
+        // Detect mobile and use app link
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            document.querySelectorAll('.instagram-link').forEach(link => {
+            const username = link.href.split('instagram.com/')[1];
+            link.href = `instagram://user?username=${username}`;
+            
+            // Fallback to web if app not installed
+            link.addEventListener('click', (e) => {
+                setTimeout(() => {
+                window.location = `https://instagram.com/${username}`;
+                }, 500);
+            });
+            });
+        }
     </script>
 
 </body>
