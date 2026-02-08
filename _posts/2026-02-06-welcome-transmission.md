@@ -2,7 +2,7 @@
 layout: post
 title: "Welcome to Lucifer Read's Transmissions"
 date: 2026-02-06
-description: "Lucifer Read’s monthly updates on their writing journey, including *The Radiants*, the *Heliopaides* saga, and the *Éskhatos Kósmos*."
+description: "Lucifer Read’s monthly updates on their writing journey, including 'The Radiants', the Heliopaides saga, and the Éskhatos Kósmos."
 ---
 
 This is the first Transmission — a localized archive of updates from the <a href="https://luciferread.substack.com/" target="_blank">Éskhatos Kósmos Chronicles</a>.

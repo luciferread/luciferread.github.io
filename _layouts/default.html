@@ -18,6 +18,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Open Graph Image -->
+    <!-- Sets to default (set in _config.yml) if not otherwise specified by page with og_image: -->
+    <meta property="og:image" content="{{ page.og_image | default: site.og_image }}">
 
     <!-- FAVICON: The little icon in the browser tab -->
     <!-- Place your image named 'favicon.png' in the 'assets/images/' folder -->

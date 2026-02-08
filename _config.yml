@@ -16,6 +16,10 @@ title: "Lucifer Read Author Website"
 # This is very important for search engine optimization (SEO).
 description: "Science fiction writing from Lucifer Read, crafting epic, planet-scale stories of extinction, survival, and immortality across the Éskhatos Kósmos."
 
+# Add default OG (open graph) image for website/webpage previews
+site:
+  og_image: "/assets/images/hero_background_1920w80pc.jpg"
+
 # --- URL SETTINGS ---
 # The base URL of your site. 
 # - For local testing, keep this empty ("").
