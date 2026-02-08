@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Privacy Policy
+title: "Lucifer Read's Privacy Policy"
+description: "Privacy policy of Lucifer Read's website and how we handle your personal data."
 permalink: /privacy.html
 ---
 

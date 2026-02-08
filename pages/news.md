@@ -1,6 +1,7 @@
 ---
 layout: default
-title: News
+title: "Lucifer Read News"
+description: "Archive of updates and insights from Lucifer Read, including news on *The Radiants*, the *Heliopaides* saga, and the *Éskhatos Kósmos*."
 permalink: /news.html
 ---
 
