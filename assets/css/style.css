@@ -26,6 +26,12 @@
   --color-direct-buy: #37C9B0;
   --color-direct-buy-hover: #37E0C0;
 
+  /* Additional computed colors */
+  --color-card-bg: rgba(30, 30, 30, 0.85);
+  --color-border-subtle: rgba(201, 176, 55, 0.3);
+  --color-timer-green: #00ff00;
+  --color-alert-red: #ff4444;
+
   /* --- FONTS --- */
   /* 'Orbitron' is our sci-fi header font */
   --font-header: 'Orbitron', sans-serif;
@@ -151,72 +157,6 @@ a:hover {
   transition: 0.3s;
 }
 
-/* --- RESPONSIVE MOBILE TWEAKS --- */
-@media (max-width: 768px) {
-  /* Show hamburger on mobile */
-  .hamburger {
-    display: flex;
-  }
-
-  /* Hide nav links by default on mobile */
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: rgba(15, 16, 10, 0.98);
-    flex-direction: column;
-    padding: 80px 20px 20px 20px;
-    transition: right 0.3s ease;
-    border-left: 1px solid var(--color-text-muted);
-    overflow-y: auto;
-  }
-
-  /* Show nav links when active */
-  .nav-links.active {
-    right: 0;
-  }
-
-  .nav-links a {
-    margin: 15px 0;
-    margin-left: 0 !important;
-    display: block;
-    /* Makes each tab take a line */
-  }
-
-  .dropdown {
-    width: 100%;
-  }
-
-  .dropdown-content {
-    position: static;
-    display: block;
-    border: none;
-    box-shadow: none;
-    padding-left: 10px;
-    margin-top: 10px;
-  }
-
-  .dropdown-content a {
-    margin: 5px 0;
-    /* Reduce gap between subheadings in hamburger menu */
-  }
-
-  .hero {
-    background-position: center right;
-    background-attachment: scroll;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .navbar {
-    flex-direction: row;
-    text-align: left;
-  }
-}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -225,21 +165,32 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  /* Aligns content to the left */
+  align-items: center;
+  /* flex-start aligns content to the left */
   padding: 0 10%;
   position: relative;
   z-index: 100;
   /* Added for navbar stacking */
 
-  /* Background Image Setup */
+  /* Background Image Setup - Default (Desktop/Fallback) */
+  /* Default (Desktop/Fallback) */
   background-image:
-    linear-gradient(to right, rgba(15, 16, 10, 0.9) 0%, rgba(15, 16, 10, 0.4) 60%, rgba(15, 16, 10, 0.1) 100%),
-    url('../images/hero_background_1920w80pc.jpg');
+    linear-gradient(to right, rgba(15, 16, 10, 0.2) 0%, rgba(15, 16, 10, 0.4) 60%, rgba(15, 16, 10, 0.1) 100%),
+    /* Makes image darker/faded */
+    url('../images/hero_background_1920w.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   /* Parallax effect */
+}
+
+
+.hero-tagline {
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+  text-align: center;
 }
 
 .hero h1 {
@@ -251,6 +202,8 @@ a:hover {
   letter-spacing: 5px;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
   /* Subtle dropshadow */
+  text-align: center;
+  /* Added for desktop centering */
 }
 
 .hero p {
@@ -258,6 +211,9 @@ a:hover {
   max-width: 600px;
   margin-bottom: 1rem;
   color: var(--color-text-muted);
+  text-align: center;
+  /* Added for desktop centering */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 /* --- HERO-NEWSLETTER ALIGNMENT --- */
@@ -265,27 +221,32 @@ a:hover {
   width: 100%;
   max-width: 615px;
   /* Constrains both title and newsletter box */
+  text-align: center;
+  /* Centers all child elements */
 }
 
-.hero-content .newsletter-box {
-  width: 100%; /* Matches the hero-content width */
+.hero-content .newsletter-box-minimal {
+  width: 100%;
+  /* Matches the hero-content width */
   max-width: none;
   margin-top: 2rem;
 }
 
 /* --- NEWSLETTER BOX (The specific request) --- */
-.newsletter-box {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  border: 1px solid var(--color-accent);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(201, 176, 55, 0.2);
-  /* Soft gold glow */
-  /* margin: 0 auto; */
-  /* Centres box on page */
+.newsletter-box-minimal {
+  background: transparent;
+  padding: 2rem 0;
+  border: none;
+  max-width: 615px;
+  margin: 0 auto;
 }
 
-.newsletter-box h3 {
+.newsletter-box-minimal h3,
+.newsletter-box-minimal p {
+  text-align: center;
+}
+
+.newsletter-box-minimal h3 {
   font-size: 1.5rem;
   font-family: var(--font-header);
   margin-top: 0rem;
@@ -293,59 +254,6 @@ a:hover {
   text-align: center;
 }
 
-/* --- MOBILE RESPONSIVE --- */
-/* Use different settings when max width=768px (like on a phone) */
-@media (max-width: 768px) {
-  /* Hero section (i.e., background image) on phone */
-  .hero {
-    align-items: center;
-    /* padding: 0 5%; */
-    /* Reduce padding to give more room */
-    background-size: auto 120%;
-    /* Makes image 120% of container height */
-    background-position: right 7% top 90%;
-    /* centre right means it will be centred on desktop and right on mobile */
-    background-attachment: scroll;
-    /* Fixed backgrounds can be glitchy on mobile */
-  }
-
-  /* Font on first page */
-  .hero h1 {
-  font-size: 2rem;
-  /* Smaller to prevent overflow */
-  /* margin-top: 0rem; */
-  letter-spacing: 2px;
-  /* Tighter spacing */
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    /* margin-top: 0rem; */
-    margin-top: 0rem;
-    margin-bottom: 15rem;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-  }
-
-  .hero-content {
-    width: 100%;
-    /* Matches title width */
-    padding: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  /* Change size of newsletter box for phone */
-  .newsletter-box {
-    width: 100%;
-    /* Forces the box to be 90% of screen width */
-    max-width: none;
-    /* Removes the desktop 650px cap */
-    padding: 0.5rem;
-    /* margin-top: 10rem; */
-  }
-
-}
 
 /* --- BUTTONS --- */
 .btn {
@@ -411,6 +319,435 @@ footer {
   font-size: 0.8rem;
   color: var(--color-text-muted);
 }
+
+
+/* --- WRITING PROGRESS --- */
+.progress-tracker {
+    padding: 4rem 10%;
+    background: linear-gradient(135deg, rgba(15, 16, 10, 0.9) 0%, rgba(30, 32, 20, 0.9) 100%);
+    border-top: 1px solid var(--color-text-muted);
+    border-bottom: 1px solid var(--color-text-muted);
+}
+
+.progress-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-header h2 {
+    font-family: var(--font-header);
+    color: var(--color-accent);
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+}
+
+.progress-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+}
+
+.progress-meta-item {
+    white-space: nowrap;
+}
+
+/* Desktop Layout: Book 1 left, Books 2-3 stacked right */
+.progress-container-featured {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Featured Book Card */
+.book-progress-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 176, 55, 0.3);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.book-progress-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 20px rgba(201, 176, 55, 0.2);
+}
+
+.book-progress-card.featured {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Book Cover with Progress Fill */
+.book-cover-container {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    overflow: visible; /* Changed from hidden to show percentage badge */
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    border-radius: 2px;
+}
+
+/* Blur incomplete portion (top) - ONLY appears when progress > 0 */
+.book-cover-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - var(--progress-height, 100%)); /* Default 100% so no blur initially */
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px) grayscale(0.6);
+    z-index: 2;
+    pointer-events: none;
+    transition: height 1s ease;
+    border-radius: 2px;
+}
+
+/* Subtle highlight on completed portion */
+.book-cover-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--progress-height, 0%);
+    background: rgba(201, 176, 55, 0.1);
+    z-index: 3;
+    pointer-events: none;
+    transition: height 1s ease;
+    border-radius: 2px;
+}
+
+/* Progress marker - dashed line */
+.progress-marker {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-top: 2px dashed var(--color-accent);
+    z-index: 4;
+    pointer-events: none;
+    transition: bottom 1s ease;
+    bottom: 0; /* Default position */
+}
+
+.progress-marker::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-accent);
+}
+
+/* Percentage badge - positioned to the LEFT of book cover */
+.progress-percentage-overlay {
+    position: absolute;
+    left: -50px;
+    top: -10px;
+    font-family: var(--font-header);
+    font-size: 1rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    background: rgba(15, 16, 10, 0.95);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--color-accent);
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(201, 176, 55, 0.3);
+}
+
+/* Book Content */
+.book-progress-content {
+    flex: 1;
+}
+
+.book-title {
+    font-family: var(--font-header);
+    font-size: 1.6rem;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.book-series {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.progress-status,
+.progress-next {
+    flex: 1;
+}
+
+.progress-label {
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.progress-value {
+    font-size: 1rem;
+    color: var(--color-text-main);
+    line-height: 1.4;
+}
+
+/* Expected Release - centered below other details */
+.progress-release {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 176, 55, 0.2);
+}
+
+.progress-value-highlight {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    font-family: var(--font-body);
+    letter-spacing: 0.5px
+}
+
+/* Sidebar - Books 2-3 Stacked */
+.book-progress-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.book-progress-card.compact {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+    align-items: center;
+}
+
+/* Small Book Covers */
+.book-cover-container-small {
+    position: relative;
+    width: 80px;
+    height: 120px;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    overflow: visible; /* Changed to show percentage badge */
+}
+
+.book-cover-container-small::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - var(--progress-height, 100%)); /* Default 100% so no blur initially */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px) grayscale(0.7);
+    z-index: 2;
+    pointer-events: none;
+    transition: height 1s ease;
+    border-radius: 2px;
+}
+
+.book-cover-progress-small {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--progress-height, 0%);
+    background: rgba(201, 176, 55, 0.15);
+    z-index: 3;
+    transition: height 1s ease;
+    border-radius: 2px;
+}
+
+.book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(201, 176, 55, 0.2), rgba(201, 176, 55, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    border-radius: 2px;
+}
+
+.placeholder-text {
+    font-family: var(--font-header);
+    color: var(--color-accent);
+    font-size: 0.7rem;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.progress-marker-small {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px dashed var(--color-accent);
+    z-index: 4;
+    transition: bottom 1s ease;
+    bottom: 0; /* Default position */
+}
+
+/* Percentage - to the LEFT of small covers */
+.progress-percentage-small {
+    position: absolute;
+    left: -40px;
+    top: -6px;
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    background: rgba(15, 16, 10, 0.95);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--color-accent);
+    white-space: nowrap;
+    box-shadow: 0 0 8px rgba(201, 176, 55, 0.3);
+}
+
+.book-title-small {
+    font-size: 1rem;
+    margin: 0 0 0.25rem 0;
+    font-family: var(--font-header);
+    color: var(--color-accent);
+}
+
+.book-series-small {
+    font-size: 0.75rem;
+    margin: 0 0 0.5rem 0;
+    opacity: 0.7;
+}
+
+.progress-status-small {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* More Books Indicator - Always centered below ALL books */
+.more-books-indicator {
+    grid-column: 1 / -1; /* Span all columns */
+    text-align: center;
+    padding: 2rem 1rem 0 1rem;
+    opacity: 0.6;
+}
+
+.more-books-indicator .dots {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    display: block;
+    letter-spacing: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.more-books-indicator p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    /* Prevent horizontal overflow at medium widths */
+    .progress-container-featured {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-tracker {
+        padding: 3rem 5%;
+    }
+    
+    .progress-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .progress-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .progress-meta-separator {
+        display: none;
+    }
+    
+    .book-progress-card.featured {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .book-cover-container {
+        margin: 0 auto 1.5rem auto;
+    }
+    
+    .progress-percentage-overlay {
+        left: -45px;
+        font-size: 0.9rem;
+    }
+    
+    .book-progress-content {
+        text-align: center;
+    }
+    
+    .progress-details {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .progress-status,
+    .progress-next {
+        text-align: center;
+    }
+    
+    .book-progress-card.compact {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .progress-release {
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+}
+
 
 /* --- DEEP SPACE TRANSMISSION (NASA API) --- */
 .transmission-section {
@@ -512,6 +849,7 @@ footer {
   letter-spacing: 2px;
 }
 
+
 /* --- PLANETARY ECLIPSE TRACKER --- */
 .tracker-section {
   padding: 5rem 10%;
@@ -521,8 +859,10 @@ footer {
 }
 
 .radar-dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Centers items when they wrap */
   gap: 2rem;
   margin-top: 3rem;
   max-width: 1200px;
@@ -531,13 +871,18 @@ footer {
 }
 
 .radar-card {
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(201, 176, 55, 0.3);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border-subtle);
   padding: 2rem;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  /* Lighten radar card background slightly for better shadow contrast */
+  flex: 0 1 280px;
+  /* Minimum width of 280px, can grow slightly */
+  max-width: 350px;
+  /* Maximum width to keep them from getting too wide */
 }
 
 .radar-card:hover {
@@ -556,7 +901,7 @@ footer {
 .countdown-timer {
   font-family: 'Courier New', Courier, monospace;
   font-size: 2rem;
-  color: #00ff00;
+  color: var(--color-timer-green);
   /* Classic radar green */
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
   margin: 1.5rem 0;
@@ -604,18 +949,18 @@ footer {
 
 @keyframes alertPulse {
   0% {
-    box-shadow: 0 0 5px #ff4444;
-    border-color: #ff4444;
+    box-shadow: 0 0 5px var(--color-alert-red);
+    border-color: var(--color-alert-red);
   }
 
   50% {
-    box-shadow: 0 0 30px #ff4444;
-    border-color: #ff8888;
+    box-shadow: 0 0 30px var(--color-alert-red);
+    border-color: var(--color-alert-red);
   }
 
   100% {
-    box-shadow: 0 0 5px #ff4444;
-    border-color: #ff4444;
+    box-shadow: 0 0 5px var(--color-alert-red);
+    border-color: var(--color-alert-red);
   }
 }
 
@@ -623,6 +968,7 @@ footer {
   animation: alertPulse 1.5s infinite ease-in-out !important;
 }
 
+/* Sun pulsing animation during eclipse */
 @keyframes sunActivePulse {
   0% {
     fill: #FFD700;
@@ -630,8 +976,8 @@ footer {
   }
 
   50% {
-    fill: #ff4444;
-    filter: blur(8px) drop-shadow(0 0 10px #ff4444);
+    fill: var(--color-alert-red);
+    filter: blur(8px) drop-shadow(0 0 10px var(--color-alert-red));
   }
 
   100% {
@@ -680,20 +1026,404 @@ footer {
   stroke-width: 0.5;
 }
 
+/* Eclipse Shadow - appears only during active events */
+.eclipse-shadow {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
 
-@keyframes orbitSpin {
-  from {
-    transform: rotate(0deg);
+.eclipse-shadow.active {
+  opacity: 1;
+  animation: shadowPulse 2s ease-in-out infinite;
+}
+
+.shadow-beam {
+  filter: blur(2px);
+}
+
+/* Pulsing animation for shadow during eclipse */
+@keyframes shadowPulse {
+  0%, 100% {
+    opacity: 0.8;
   }
-
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
   }
 }
 
-.anim-orbit {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: orbitSpin 10s linear infinite;
+/* Moon phase rendering for Earth */
+.moon-phase {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 3px rgba(236, 240, 241, 0.6));
 }
 
+.moon-dark-side {
+  fill: rgba(0, 0, 0, 0.85);
+}
+
+/* Dark spot on planet during eclipse */
+.planet-shadow {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.planet-shadow.active {
+    opacity: 0.85 !important;
+    /* Darker, more prominent planet shadow spot */
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9));
+    animation: shadowFlicker 3s ease-in-out infinite;
+}
+
+@keyframes shadowFlicker {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+/* Enhanced shadow visibility */
+.eclipse-shadow.active ellipse {
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+  opacity: 0.75 !important; /* Slightly more visible */
+}
+
+
+
+/* --- FOOTER SOCIAL LINKS --- */
+.footer-social-container {
+    margin-bottom: 1.5rem;
+}
+
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.footer-social-item a {
+    color: var(--color-text-muted);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-social-item a svg {
+    width: 1.2rem;  /* Match primary icon size */
+    height: 1.2rem;
+}
+
+.footer-social-item a:hover {
+    color: var(--color-accent);
+    opacity: 1;
+    text-decoration: none;
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 4px var(--color-accent));
+}
+
+.footer-social-handle {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+    font-family: var(--font-body);
+    letter-spacing: 0.5px;
+}
+
+/* Secondary accounts - even smaller */
+.footer-social-secondary a {
+    font-size: 1rem !important;
+    opacity: 0.5 !important;
+}
+
+.footer-social-secondary a svg {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.footer-social-secondary a:hover {
+    opacity: 0.9 !important;
+}
+
+.footer-social-secondary .footer-social-handle {
+    font-size: 0.6rem;
+    opacity: 0.4;
+}
+
+/* Divider between primary and secondary */
+.footer-social-divider {
+    color: var(--color-text-muted);
+    opacity: 0.3;
+    font-size: 1rem;
+    align-self: center;
+    margin-top: 0.5rem;
+}
+
+/* Mobile - adjust spacing */
+@media (max-width: 768px) {
+    .footer-social-links {
+        gap: 1.2rem;
+    }
+
+    .footer-social-item a {
+        font-size: 1.1rem;
+    }
+
+    .footer-social-secondary a {
+        font-size: 0.95rem !important;
+    }
+}
+
+
+
+/* --- RESPONSIVE MOBILE TWEAKS --- */
+@media (max-width: 768px) {
+
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide nav links by default on mobile */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: rgba(15, 16, 10, 0.98);
+    flex-direction: column;
+    padding: 80px 20px 20px 20px;
+    transition: right 0.3s ease;
+    border-left: 1px solid var(--color-text-muted);
+    overflow-y: auto;
+  }
+
+  /* Show nav links when active */
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    margin: 15px 0;
+    margin-left: 0 !important;
+    display: block;
+    /* Makes each tab take a line */
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: block;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+    margin-top: 10px;
+  }
+
+  .dropdown-content a {
+    margin: 5px 0;
+    /* Reduce gap between subheadings in hamburger menu */
+  }
+
+  
+  /* Mobile - shrink tagline to fit on one line */
+  .hero-tagline {
+      font-size: clamp(0.75rem, 3.5vw, 1.1rem);
+      margin-bottom: 2rem;
+    }
+
+
+  /* Hero section (i.e., background image) on phone */
+  .hero {
+    background-image:
+      linear-gradient(to right, rgba(15, 16, 10, 0.2) 0%, rgba(15, 16, 10, 0.4) 60%, rgba(15, 16, 10, 0.1) 100%),
+      url('../images/hero_background_phone.webp');
+      /* Use cropped mobile version */
+    background-size: cover;
+    /* Changed from auto 120% (which makes image 120% of container height) */
+    background-position: center;
+    /* Simpler positioning since it's pre-cropped (instead of right 7% top 90%) */
+    background-attachment: scroll;
+    /* Fixed backgrounds can be glitchy on mobile */
+  }
+
+  /* Font on first page */
+  .hero h1 {
+    /* font-size: 2rem; */
+    /* Smaller to prevent overflow */
+    font-size: clamp(1.5rem, 8vw, 2rem);
+    /* Responsive sizing - shrinks/grows with screen */
+    letter-spacing: 2px;
+    /* Tighter spacing */
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    text-align: center;
+    width: 100%;
+    /* Ensures full width for centering */
+  }
+
+  .hero p {
+    /* font-size: 1.1rem; */
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    /* Responsive sizing */
+    margin-top: 0rem;
+    margin-bottom: 25rem;
+    text-align: center;
+    width: 100%;
+    /* Ensures full width for centering */
+  }
+
+  .hero-content {
+    width: 100%;
+    /* Matches title width */
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Change size of newsletter box for phone */
+  .newsletter-box-minimal {
+    width: 100%;
+    /* Forces the box to be 90% of screen width */
+    max-width: none;
+    /* Removes the desktop 650px cap */
+    padding: 0.5rem;
+    /* margin-top: 10rem; */
+  }
+
+  .newsletter-box-minimal h3{
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  
+  /* Writing progress bar */
+.progress-container-featured {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-progress-card.featured {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .book-cover-container {
+    margin: 0 auto;
+  }
+
+  .progress-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .progress-meta-separator {
+    display: none;
+  }
+
+  /* Center progress details on mobile */
+  .book-progress-content {
+    text-align: center;
+  }
+  
+  .progress-details {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .progress-status,
+  .progress-next {
+    text-align: center;
+  }
+
+  /* Mobile: everything stacked */
+  .book-progress-sidebar {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-progress-card.compact {
+    grid-template-columns: 100px 1fr;
+  }
+
+
+/* Internal CSS for homepage tweaks */
+.transmission-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .transmission-body {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem !important;
+    gap: 1rem;
+  }
+
+  .transmission-image-container {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .transmission-image-container img,
+  .transmission-image-container .video-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .transmission-content {
+    min-width: 100%;
+  }
+
+  .transmission-content h3 {
+    text-align: center;
+  }
+
+  .transmission-content p {
+    text-align: left;
+    /* Could also be centre, justify, left */
+  }
+
+
+  /* Writing progress */
+  .progress-tracker {
+    padding: 3rem 5%;
+  }
+
+  .progress-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .book-progress-card {
+    padding: 1.5rem;
+  }
+  
+  .progress-details {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+
+/* --- RESPONSIVE HERO BACKGROUNDS --- */
+/* Tablet - use 800w image */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .hero {
+    background-image:
+      linear-gradient(to right, rgba(15, 16, 10, 0.2) 0%, rgba(15, 16, 10, 0.4) 60%, rgba(15, 16, 10, 0.1) 100%),
+      url('../images/hero_background_800w.webp');
+    background-position: right center;
+    /* Keep silhouette visible */
+    background-size: cover;
+  }
+}

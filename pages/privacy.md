@@ -21,18 +21,18 @@ permalink: /privacy.html
 
         <h3>2. Information We Collect</h3>
         <p>
-            <strong>Hosting Logs:</strong> This website is hosted on <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub Pages</a>. GitHub may collect technical information 
+            <strong>Hosting Logs:</strong> This website is hosted on <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. GitHub may collect technical information 
             such as your IP address and browser type in their server logs to maintain the security and integrity of their service.
         </p>
         <p>
             <strong>Newsletters:</strong> If you sign up for our newsletter, your email address is collected and managed 
-            by <a href="https://substack.com/ccpa?utm_source=embed_publication#personal-data-collected" target="_blank">Substack</a>, a third-party platform. We do not store your email on this website's server. 
+            by <a href="https://substack.com/ccpa?utm_source=embed_publication#personal-data-collected" target="_blank" rel="noopener noreferrer">Substack</a>, a third-party platform. We do not store your email on this website's server. 
             You can unsubscribe at any time via the link in any newsletter email.
         </p>
 
         <p>
             <strong>Contact Form:</strong> If you use our contact form, the information you provide (name, email, and message) 
-            is sent via <a href="https://formspree.io/legal/privacy-policy/" target="_blank">Formspree</a>, a third-party form service. We use this data solely to respond to your inquiry.
+            is sent via <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Formspree</a>, a third-party form service. We use this data solely to respond to your inquiry.
         </p>
 
         <h3>3. Cookies</h3>
@@ -50,7 +50,7 @@ permalink: /privacy.html
             <li>Providing the newsletter service you requested.</li>
             <li>Responding to your contact form messages.</li>
             <li>Analyzing site performance and security (via hosting logs).</li>
-            <li>Displaying daily astronomy content via the <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">NASA APOD API</a>.</li>
+            <li>Displaying daily astronomy content via the <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noopener noreferrer">NASA APOD API</a>.</li>
         </ul>
 
         <h3>5. Contact</h3>

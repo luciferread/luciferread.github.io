@@ -1,9 +1,10 @@
 ---
 layout: default
-title: "About Lucifer Read"
-description: "Learn about Lucifer Read, their science fiction journey, influences, and the expansive Éskhatos Kósmos."
+title: "About Lucifer Read | Science Fiction Author | Bio & Press Kit"
+description: "Meet Lucifer Read, science fiction author of The Radiants and the Éskhatos Kósmos. Official
+author bio, press resources, and downloadable media kit for reviewers and media."
 permalink: /about.html
-og_image: "/assets/images/lucifer_read_800w75pc.jpg"
+og_image: "/assets/images/og_image_author_80pc.jpg"
 ---
 
 <section style="padding: 4rem 10%; max-width: 800px; margin: 0 auto;">
@@ -17,7 +18,10 @@ og_image: "/assets/images/lucifer_read_800w75pc.jpg"
             <!-- You can replace this with an author photo later -->
             <div
                 style="width: 100%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-accent);">
-                <img src="{{ '/assets/images/lucifer_read_800w75pc.jpg' | relative_url }}" alt="Book Cover" style="width: 100%; height: auto; display: block;">
+                <img src="{{ '/assets/images/lucifer_read_800w.webp' | relative_url }}" srcset="{{ '/assets/images/lucifer_read_400w.webp' | relative_url }} 400w,
+                             {{ '/assets/images/lucifer_read_800w.webp' | relative_url }} 800w"
+                    sizes="(max-width: 600px) 100vw, 300px" alt="Lucifer Read Author Photo"
+                    style="width: 100%; height: auto; display: block;">
             </div>
         </div>
 
@@ -77,25 +81,32 @@ og_image: "/assets/images/lucifer_read_800w75pc.jpg"
         <div style="margin-bottom: 3rem;">
             <h3 style="color: var(--color-text-muted); font-family: var(--font-header);">DOWNLOADABLE ASSETS</h3>
 
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; justify-content: center;">
                 <!-- Author Photo -->
-                <div style="flex: 1; min-width: 200px;">
+                <div style="flex: 0 1 250px; max-width: 350px;">
                     <h4 style="margin-top: 0;">Author Photo</h4>
                     <div
                         style="height: 300px; width: auto; display: inline-flex; background: #222; margin-bottom: 1rem; border: 1px solid var(--color-accent);">
-                        <img src="{{ '/assets/images/lucifer_read_800w75pc.jpg' | relative_url }}" alt="Book Cover" style="height: 100%; width: auto; display: block;">
+                        <img src="{{ '/assets/images/lucifer_read_800w.webp' | relative_url }}" alt="Book Cover"
+                            style="height: 100%; width: auto; display: block;">
                     </div>
-                    <a href="{{ '/assets/images/downloads/Lucifer_Read_photo.jpg' | relative_url }}" download class="btn" style="font-size: 0.8rem; padding: 8px 16px; display: block; width: fit-content;">DOWNLOAD JPG</a>
+                    <a href="{{ '/assets/images/downloads/Lucifer_Read_photo.jpg' | relative_url }}" download
+                        class="btn"
+                        style="font-size: 0.8rem; padding: 8px 16px; display: block; width: fit-content;">DOWNLOAD
+                        JPG</a>
                 </div>
 
                 <!-- Book Cover -->
-                <div style="flex: 1; min-width: 200px;">
+                <div style="flex: 0 1 250px; max-width: 350px;">
                     <h4 style="margin-top: 0;">Book Cover</h4>
                     <div
                         style="height: 300px; width: auto; display: inline-flex; background: #222; margin-bottom: 1rem; border: 1px solid var(--color-accent);">
-                        <img src="{{ '/assets/images/radiant_cover_800w75pc.jpg' | relative_url }}" alt="Book Cover" style="height: 100%; width: auto; display: block;">
+                        <img src="{{ '/assets/images/radiant_cover_800w.webp' | relative_url }}" alt="Book Cover"
+                            style="height: 100%; width: auto; display: block;">
                     </div>
-                    <a href="{{ '/assets/images/downloads/The_Radiants_3000.jpg' | relative_url }}" download class="btn" style="font-size: 0.8rem; padding: 8px 16px; display: block; width: fit-content;">DOWNLOAD JPG</a>
+                    <a href="{{ '/assets/images/downloads/The_Radiants_3000.jpg' | relative_url }}" download class="btn"
+                        style="font-size: 0.8rem; padding: 8px 16px; display: block; width: fit-content;">DOWNLOAD
+                        JPG</a>
                 </div>
             </div>
         </div>

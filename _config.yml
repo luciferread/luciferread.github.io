@@ -8,17 +8,19 @@
 # --- SITE IDENTITY ---
 # The title of your website. This appears in the browser tab and search results.
 title: "Lucifer Read Author Website"
+author:
+  name: "Lucifer Read"
 
 # Your email address. This can be used in the footer or contact page.
 # email: your-email@example.com
 
 # A short description of your site. 
 # This is very important for search engine optimization (SEO).
-description: "Science fiction writing from Lucifer Read, crafting epic, planet-scale stories of extinction, survival, and immortality across the Éskhatos Kósmos."
+description: "Lucifer Read - Science Fiction Author | Epic sci-fi novels including The Radiants. Explore planet-scale stories of extinction, survival, and immortality."
 
 # Add default OG (open graph) image for website/webpage previews
-site:
-  og_image: "/assets/images/hero_background_1920w80pc.jpg"
+# Optimal size: 1200x630px
+og_image: "/assets/images/og_image_default_80pc.jpg"
 
 # --- URL SETTINGS ---
 # The base URL of your site. 
@@ -29,7 +31,19 @@ baseurl: ""
 # The full URL of your site (e.g., https://yourname.com).
 # Leave this empty while developing locally. Fill it in when you go live.
 # NOTE: The 'sitemap.xml' will only be generated when this contains a value.
-url: "https://luciferread.com/" 
+url: "https://luciferread.com/"
+
+# --- SOCIAL MEDIA HANDLES ---
+# Social Media
+social:
+  twitter: "LuciferRead"
+  facebook: "luciferread"
+  instagram: "lucifer.read"
+  bluesky: "luciferread.bsky.social"
+  github: "luciferread"
+  substack: "luciferread"
+  tiktok: "lucifer.read"
+  youtube: "lucifer.read.author"
 
 # --- THEME SETTINGS ---
 # We are using a custom setup, so we set the theme to null.

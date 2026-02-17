@@ -5,9 +5,9 @@ date: 2026-02-06
 description: "Lucifer Read’s monthly updates on their writing journey, including 'The Radiants', the Heliopaides saga, and the Éskhatos Kósmos."
 ---
 
-This is the first Transmission — a localized archive of updates from the <a href="https://luciferread.substack.com/" target="_blank">Éskhatos Kósmos Chronicles</a>.
+This is the first Transmission — a localized archive of updates from the <a href="https://luciferread.substack.com/" target="_blank" rel="noopener noreferrer">Éskhatos Kósmos Chronicles</a>.
 
-While these messages are broadcast via <a href="https://luciferread.substack.com/" target="_blank">Substack</a>, I believe in keeping a record anchored here, on my own station. Platforms drift. Signals fade. Archives endure. No matter what happens out there in the void, this ensures the connection remains intact.
+While these messages are broadcast via <a href="https://luciferread.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>, I believe in keeping a record anchored here, on my own station. Platforms drift. Signals fade. Archives endure. No matter what happens out there in the void, this ensures the connection remains intact.
 
 ### What these transmissions contain:
 *   Monthly progress updates on my debut novel, *The Radiants*, and the opening saga of the *Heliopaides*

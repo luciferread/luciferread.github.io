@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Lucifer Read News"
-description: "Archive of updates and insights from Lucifer Read, including news on 'The Radiants', the Heliopaides saga, and the Éskhatos Kósmos."
+title: "News & Updates | Lucifer Read | Latest Posts"
+description: "Latest news from science fiction author Lucifer Read. Updates on The Radiants, the Heliopaides saga, and upcoming Éskhatos Kósmos releases."
 permalink: /news.html
 ---
 

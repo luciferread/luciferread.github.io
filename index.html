@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Lucifer Read | Science Fiction Author"
-description: "Official site of Lucifer Read, author of 'The Radiants' and the Éskhatos Kósmos. Explore epic stories of extinction, survival, and immortality."
+title: Home
+description: "Official site of Lucifer Read, science fiction author. Explore The Radiants and the Heliopaides saga—epic
+stories of extinction, survival, and immortality."
 ---
-
 <!-- 
     HERO SECTION 
     This is the big visual area at the top.
@@ -11,22 +11,34 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
 -->
 <header class="hero">
     <div class="hero-content">
-        <h1>The Radiants</h1>
-        <p>A new sci-fi novel by Lucifer Read</p>
+        <h1>LUCIFER READ</h1>
+        <p class="hero-tagline">Science Fiction | Planet-Scale Stories | Éskhatos Kósmos</p>
 
         <!-- NEWSLETTER BOX -->
-        <div class="newsletter-box">
+        <div class="newsletter-box-minimal">
             <h3 style="text-align: center; margin-bottom: 0.5rem;">Join the newsletter</h3>
-            <p style="color: #ccc; margin-bottom: 1rem;">Discover the <em>Heliopaides</em> saga</p>
-            
+            <!-- <p style="color: #ccc; margin-bottom: 1rem;">Discover the <em>Heliopaides</em> saga</p> -->
+
             <!-- SUBSTACK EMBED -->
-            <iframe 
-                src="https://luciferread.substack.com/embed" width="100%" height="320" 
-                style="border: 1px solid var(--color-accent); background: transparent; display: block; margin: 0 auto;" 
-                frameborder="0" scrolling="no"></iframe>
+            <iframe id="substack-embed" src="" width="100%" height="320"
+                style="border: 1px solid var(--color-accent); background: transparent;"
+                frameborder="0" scrolling="no" loading="lazy"></iframe>
+            
+            <!-- Load substack after page is ready -->
+            <script>
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('substack-embed').src = 'https://luciferread.substack.com/embed';
+                }, 500);
+            });
+            </script>
+            
         </div>
     </div>
 </header>
+
+<!-- SECTION DIVIDER -->
+<hr style="border: none; border-top: 1px solid var(--color-text-muted); margin: 0; width: 100%;">
 
 <!-- FEATURED BOOK SECTION -->
 <section style="padding: 4rem 10%; text-align: center;">
@@ -36,19 +48,112 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
         fight for survival — and expose the truth buried in its own shadow.
         Discover the debut novel that readers are calling "fresh and unique."
     </p>
-    <a href="{{ '/books.html' | relative_url }}" class="btn">VIEW THE BOOK</a>
+    <a href="{{ '/books.html' | relative_url }}" class="btn">VIEW THE RADIANTS</a>
 </section>
+
+
+<!-- BOOK PROGRESS TRACKER -->
+<section class="progress-tracker">
+    <div class="progress-header">
+        <h2>WRITING PROGRESS</h2>
+    </div>
+    <div class="progress-meta">
+        <span class="progress-meta-item">📅 Last Updated: <strong>February 17, 2026</strong></span>
+        <span class="progress-meta-separator">•</span>
+        <span class="progress-meta-item">⏰ Next Update: <strong>End of February</strong></span>
+    </div>
+
+    <div class="progress-container-featured">
+        <!-- FEATURED BOOK 1 -->
+        <div class="book-progress-card featured">
+            <div class="book-cover-container">
+                <div class="book-cover-progress" data-progress="90"></div>
+                <img src="/assets/images/radiant_cover_400w.webp" alt="The Radiants Cover" class="book-cover">
+                <div class="progress-marker">
+                    <span class="progress-percentage-overlay"></span>
+                </div>
+            </div>
+            <div class="book-progress-content">
+                <h3 class="book-title">THE RADIANTS</h3>
+                <p class="book-series">Book 1 | Heliopaides Saga</p>
+                
+                <div class="progress-details">
+                    <div class="progress-status">
+                        <div class="progress-label">Current Status</div>
+                        <div class="progress-value">With Beta Readers</div>
+                    </div>
+                    <div class="progress-next">
+                        <div class="progress-label">Next Step</div>
+                        <div class="progress-value">Incorporating Feedback</div>
+                    </div>
+                </div>
+
+                <!-- Expected Release (uncomment when date is confirmed) -->
+                <div class="progress-release">
+                    <div class="progress-label">Expected Release</div>
+                    <div class="progress-value progress-value-highlight">Q3 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR: BOOKS 2-3 STACKED -->
+        <div class="book-progress-sidebar">
+            <!-- BOOK 2 -->
+            <div class="book-progress-card compact">
+                <div class="book-cover-container-small">
+                    <div class="book-cover-progress-small" data-progress="2"></div>
+                    <div class="book-cover-placeholder">
+                        <span class="placeholder-text">BOOK 2</span>
+                    </div>
+                    <div class="progress-marker-small">
+                        <span class="progress-percentage-small"></span>
+                    </div>
+                </div>
+                <div class="book-progress-content-compact">
+                    <h4 class="book-title-small">HELIOPAIDES BOOK 2</h4>
+                    <!-- <p class="book-series-small">Untitled</p> -->
+                    <p class="progress-status-small">First Draft</p>
+                </div>
+            </div>
+            
+            <!-- BOOK 3 -->
+            <div class="book-progress-card compact">
+                <div class="book-cover-container-small">
+                    <div class="book-cover-progress-small" data-progress="0"></div>
+                    <div class="book-cover-placeholder">
+                        <span class="placeholder-text">BOOK 3</span>
+                    </div>
+                    <div class="progress-marker-small">
+                        <span class="progress-percentage-small"></span>
+                    </div>
+                </div>
+                <div class="book-progress-content-compact">
+                    <h4 class="book-title-small">HELIOPAIDES BOOK 3</h4>
+                    <!-- <p class="book-series-small">Untitled</p> -->
+                    <p class="progress-status-small">Outlining</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- More to come indicator -->
+        <div class="more-books-indicator">
+            <span class="dots">• • •</span>
+            <p>More books in development</p>
+        </div>
+    </div>
+</section>
+
 
 <!-- PLANETARY ECLIPSE TRACKING STATION -->
 <section class="tracker-section">
     <div style="margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
         <p
             style="font-style: italic; font-size: 1.2rem; line-height: 1.6; color: var(--color-accent); margin-bottom: 0.5rem;">
-            "Their sun had never set - until now. The eclipse would last 200 generations, ending all life."
+            "Their sun had never set - until now. The eclipse will last 200 generations, ending all life."
         </p>
         <p
             style="font-size: 0.8rem; color: var(--color-text-muted); opacity: 0.8; text-transform: uppercase; letter-spacing: 2px;">
-            Novel Data Reference Hub - Synchronizing with Sector Events
+            Novel Data Reference Hub - Synchronising with Sector Events
         </p>
     </div>
 
@@ -63,12 +168,40 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
             <div class="radar-scan"></div>
             <!-- SVG ORBITAL MAP -->
             <svg class="orbital-map" viewBox="0 0 100 100">
+                <!-- Mars look -->
+                <defs>
+                    <!-- Shadow gradient for the beam -->
+                    <radialGradient id="mars-shadowGradient" cx="50%" cy="20%">
+                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
+                    </radialGradient>
+
+                    <!-- Mars radial gradient -->
+                    <radialGradient id="mars-surface">
+                        <stop offset="0%" style="stop-color:#e27b58" />
+                        <stop offset="50%" style="stop-color:#cd5c5c" />
+                        <stop offset="100%" style="stop-color:#a0342c" />
+                    </radialGradient>
+                </defs>
+                
                 <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" cx="50" cy="5" r="8" />
+                <circle class="sun-reference" id="mars-sun" cx="50" cy="5" r="8" />
+
                 <circle class="orbit-path" cx="50" cy="50" r="30" />
-                <circle class="planet-core" cx="50" cy="50" r="10" />
+                <!-- <circle class="planet-core" cx="50" cy="50" r="10" style="fill: #cd5c5c;" /> -->
+                <circle class="planet-core" cx="50" cy="50" r="10" style="fill: url(#mars-surface);" />
+                
+                <!-- Dark spot on planet (appears during eclipse) -->
+                <circle class="planet-shadow" id="mars-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
+                
+                <!-- Eclipse shadow beam -->
+                <g class="eclipse-shadow" id="mars-shadow">
+                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#mars-shadowGradient)" opacity="0.6"/>
+                </g>
+                
+                <!-- Add colour to Phobos -->
                 <g id="mars-orbit-group">
-                    <circle class="moon-orbiter" cx="80" cy="50" r="3" />
+                    <circle class="moon-orbiter" cx="80" cy="50" r="3" style="fill: #8B7355; filter: drop-shadow(0 0 1px #5c4a3a);" />
                 </g>
             </svg>
 
@@ -77,18 +210,54 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
             <div class="countdown-timer" id="mars-timer">00:00:00:00</div>
             <p class="event-details" id="mars-status">Est. Duration: 30s</p>
         </div>
-
+        
         <!-- EARTH TRACKER -->
         <div class="radar-card" id="earth-card">
             <div class="radar-scan" style="animation-delay: 1s;"></div>
             <!-- SVG ORBITAL MAP -->
             <svg class="orbital-map" viewBox="0 0 100 100">
+                <!-- Moon phase mask -->
+                <defs>
+                    <mask id="earth-moon-phase">
+                        <circle cx="90" cy="50" r="4" fill="white" />
+                        <path id="earth-moon-dark-side" d="M 90 46 A 4 4 0 0 1 90 54 A 4 4 0 0 0 90 46" fill="black" />
+                    </mask>
+                </defs>
+                
+                <!-- Earth look -->
+                <defs>
+                    <!-- Shadow gradient for the beam -->
+                    <radialGradient id="earth-shadowGradient" cx="50%" cy="20%">
+                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
+                    </radialGradient>
+
+                    <!-- Earth radial gradient -->
+                    <radialGradient id="earth-surface">
+                        <stop offset="20%" style="stop-color:#5fa3d7" />
+                        <stop offset="60%" style="stop-color:#4a90e2" />
+                        <stop offset="100%" style="stop-color:#2c5f8d" />
+                    </radialGradient>
+                </defs>
+                
                 <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" cx="50" cy="5" r="8" />
+                <circle class="sun-reference" id="earth-sun" cx="50" cy="5" r="8" />
+
                 <circle class="orbit-path" cx="50" cy="50" r="40" />
-                <circle class="planet-core" cx="50" cy="50" r="12" style="fill: #2c3e50;" />
+                <!-- <circle class="planet-core" cx="50" cy="50" r="12" style="fill: #4a90e2;" /> -->
+                <circle class="planet-core" cx="50" cy="50" r="12" style="fill: url(#earth-surface);" />
+                
+                <!-- Dark spot on planet (appears during eclipse) -->
+                <circle class="planet-shadow" id="earth-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
+                
+                <!-- Eclipse shadow beam -->
+                <g class="eclipse-shadow" id="earth-shadow">
+                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#earth-shadowGradient)" opacity="0.6"/>
+                </g>
+                
                 <g id="earth-orbit-group">
-                    <circle class="moon-orbiter" cx="90" cy="50" r="4" style="fill: #ecf0f1; filter: none;" />
+                    <!-- Moon with phase rendering -->
+                    <circle class="moon-phase" cx="90" cy="50" r="4" mask="url(#earth-moon-phase)" />
                 </g>
             </svg>
 
@@ -103,12 +272,40 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
             <div class="radar-scan" style="animation-delay: 2s;"></div>
             <!-- SVG ORBITAL MAP -->
             <svg class="orbital-map" viewBox="0 0 100 100">
+                <!-- Jupiter look -->
+                <defs>
+                    <!-- Shadow gradient for the beam -->
+                    <radialGradient id="jupiter-shadowGradient" cx="50%" cy="20%">
+                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
+                    </radialGradient>
+
+                    <!-- Jupiter radial gradient -->
+                    <radialGradient id="jupiter-surface">
+                        <stop offset="0%" style="stop-color:#e8c89f" />
+                        <stop offset="40%" style="stop-color:#d4a574" />
+                        <stop offset="80%" style="stop-color:#b8895a" />
+                    </radialGradient>
+                </defs>
+                
                 <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" cx="50" cy="5" r="8" />
+                <circle class="sun-reference" id="jupiter-sun" cx="50" cy="5" r="8" />
+
                 <circle class="orbit-path" cx="50" cy="50" r="35" />
-                <circle class="planet-core" cx="50" cy="50" r="15" />
+                <!-- <circle class="planet-core" cx="50" cy="50" r="15" style="fill: #d4a574;" /> -->
+                <circle class="planet-core" cx="50" cy="50" r="15" style="fill: url(#jupiter-surface);" />
+                
+                <!-- Dark spot on planet (appears during eclipse) -->
+                <circle class="planet-shadow" id="jupiter-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
+                
+                <!-- Eclipse shadow beam -->
+                <g class="eclipse-shadow" id="jupiter-shadow">
+                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#jupiter-shadowGradient)" opacity="0.6"/>
+                </g>
+                
+                <!-- Add colour to Io -->
                 <g id="jupiter-orbit-group">
-                    <circle class="moon-orbiter" cx="85" cy="50" r="4" />
+                    <circle class="moon-orbiter" cx="85" cy="50" r="4" style="fill: #F4D03F; filter: drop-shadow(0 0 2px #d4a520);" />
                 </g>
             </svg>
 
@@ -118,26 +315,31 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
             <p class="event-details" id="jupiter-status">Transit Duration: 135m</p>
         </div>
     </div>
-    <!-- DATA CITATION -->
-    <div style="margin-top: 3rem; opacity: 0.6;">
-        <p style="font-size: 0.75rem; color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">
-            Note: All durations listed above are real-world data provided to highlight the radical,
-            multi-generational nature of the eclipse events in the novel.
-        </p>
-        <p style="font-size: 0.7rem; color: var(--color-accent); margin-top: 1rem;">
-            Data Source:
-            <a href="https://eclipse.gsfc.nasa.gov/eclipse.html" target="_blank" style="color: var(--color-text-muted);
-            text-decoration: underline;">NASA Eclipse Web Service</a> & <a href="https://www.projectpluto.com/ephem.htm"
-            target="_blank" style="color: var(--color-text-muted); text-decoration: underline;">
-            Project Pluto Digital Ephemeris</a>.
-            
-        </p>
+
+    <!-- SYSTEM DESCRIPTION & DATA CITATION -->
+    <div style="margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <!-- Description -->
+        <div style="background: rgba(201, 176, 55, 0.05); padding: 1.5rem; border-left: 3px solid var(--color-accent); margin-bottom: 2rem;">
+            <p style="font-size: 0.85rem; color: var(--color-text-main); line-height: 1.6; margin: 0 0 1rem 0;">
+                <strong style="color: var(--color-accent);">What You're Seeing:</strong>
+                Real-time tracking of eclipse events across three worlds. Each visualisation shows the moon's orbital
+                position, countdown to the next transit, and—during an eclipse—the shadow cast on the planet's surface.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--color-text-main); line-height: 1.6; margin: 0;">
+                <strong style="color: var(--color-accent);">How It Works:</strong> Earth's moon displays accurate
+                phases based on the current lunar cycle (synced with Feb 17, 2026 new moon). Mars's Phobos and Jupiter's
+                Io follow their real orbital periods—7h 39m and 42.5h respectively. Eclipse timing and durations use
+                <a href="https://eclipse.gsfc.nasa.gov/eclipse.html" target="_blank" rel="noopener noreferrer" style="color: var(--color-text-muted); text-decoration: underline;">NASA Eclipse Web Service</a>
+                and <a href="https://www.projectpluto.com/ephem.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-text-muted); text-decoration: underline;">Project Pluto Digital Ephemeris</a>
+                data to illustrate the scale of planetary transits.
+            </p>
+        </div>
     </div>
 </section>
 
 <!-- DEEP SPACE TRANSMISSION (Dynamic Astronomy Fact) -->
 <section class="transmission-section">
-    <div id="nasa-loading">INITIALIZING SENSORS... SCANNING DEEP SPACE...</div>
+    <div id="nasa-loading">INITIALISING SENSORS... SCANNING DEEP SPACE...</div>
 
     <div id="nasa-transmission" class="transmission-card" style="display: none;">
         <div class="transmission-header">
@@ -160,252 +362,19 @@ description: "Official site of Lucifer Read, author of 'The Radiants' and the É
             </div>
         </div>
         <div class="transmission-footer">
-            Source: <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"
+            Source: <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noopener noreferrer"
                 style="color: var(--color-accent); text-decoration: underline;">NASA Astronomy Picture of the Day</a>
         </div>
     </div>
 </section>
 
-<script>
-    // NASA Astronomy Picture of the Day (APOD) Integration
-    async function fetchTransmission() {
-        const loading = document.getElementById('nasa-loading');
-        const card = document.getElementById('nasa-transmission');
-        const img = document.getElementById('nasa-image');
-        const videoContainer = document.getElementById('nasa-video-container');
-        const videoFrame = document.getElementById('nasa-video');
-        const copyrightEl = document.getElementById('nasa-copyright');
 
-        try {
-            // Using the user's personal NASA API key
-            const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=idnQSUVorcc9PskcWyfc4WgZUKXbrDke2UCwMeoZ');
+<!-- SCRIPTS -->
+<!-- Plantary eclipse tracker logic v4.0 -->
+<script src="/assets/scripts/eclipse-tracker.js"></script>
 
-            if (!response.ok) {
-                if (response.status === 429) {
-                    throw new Error('RATE_LIMIT_EXCEEDED');
-                }
-                throw new Error('NETWORK_ERROR');
-            }
+<!-- NASA Astronomy Picture of the Day (APOD) Integration -->
+<script src="/assets/scripts/NASA-picture.js"></script>
 
-            const data = await response.json();
-
-            // Validate data presence
-            if (!data || !data.title) {
-                throw new Error('INVALID_DATA');
-            }
-
-            let explanation = data.explanation;
-            // Sanitize: NASA often appends promotional links like "Jigsaw Galaxy" or "Astronomy Puzzle" to the end.
-            // We trim these to keep the focus on the actual astronomical fact.
-            const promoPhrases = ['Jigsaw Galaxy', 'Astronomy Puzzle', 'Sky Movie'];
-            for (const phrase of promoPhrases) {
-                const index = explanation.indexOf(phrase);
-                if (index !== -1) {
-                    explanation = explanation.substring(0, index).trim();
-                }
-            }
-
-            document.getElementById('nasa-title').innerText = data.title;
-            document.getElementById('nasa-explanation').innerText = explanation;
-            document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
-
-            // Handle Copyright if provided
-            if (data.copyright) {
-                copyrightEl.innerText = '© ' + data.copyright;
-                copyrightEl.style.display = 'block';
-            } else {
-                copyrightEl.style.display = 'none';
-            }
-
-            if (data.media_type === 'image') {
-                img.src = data.url;
-                img.style.display = 'block';
-                videoContainer.style.display = 'none';
-            } else if (data.media_type === 'video') {
-                videoFrame.src = data.url;
-                videoContainer.style.display = 'block';
-                img.style.display = 'none';
-            }
-
-            loading.style.display = 'none';
-            card.style.display = 'block';
-
-        } catch (error) {
-            console.error('Transmission failed:', error);
-            if (error.message === 'RATE_LIMIT_EXCEEDED') {
-                loading.innerHTML = 'SENSOR OVERLOAD: NASA API rate limit exceeded. <br><small>Please try again later or configure a personal API key.</small>';
-            } else {
-                loading.innerText = 'SIGNAL LOST: Sector currently unreachable.';
-            }
-        }
-    }
-
-    // Run when page loads
-    window.addEventListener('load', fetchTransmission);
-
-    // --- PLANETARY ECLIPSE TRACKER LOGIC v3.0 ---
-
-    // Future Total Solar Eclipses on Earth (100 Years: 2026-2126)
-    // Source: NASA Five Millennium Catalog
-    const earthEvents = [
-        { date: "2026-08-12T17:00:00Z", duration: "2m 18s", loc: "Spain / Arctic" },
-        { date: "2027-08-02T10:00:00Z", duration: "6m 23s", loc: "Egypt / N. Africa" },
-        { date: "2028-07-22T04:00:00Z", duration: "5m 10s", loc: "Australia / NZ" },
-        { date: "2030-11-25T07:00:00Z", duration: "3m 44s", loc: "S. Africa / Australia" },
-        { date: "2031-11-14T18:00:00Z", duration: "1m 08s", loc: "Pacific / Panama" },
-        { date: "2033-03-30T18:00:00Z", duration: "2m 37s", loc: "Alaska / Russia" },
-        { date: "2034-03-20T10:00:00Z", duration: "4m 09s", loc: "Nigeria / China" },
-        { date: "2035-09-02T02:00:00Z", duration: "1m 16s", loc: "China / Japan" },
-        { date: "2037-07-13T02:00:00Z", duration: "3m 58s", loc: "Australia" },
-        { date: "2038-01-05T14:00:00Z", duration: "3m 18s", loc: "Caribbean / W. Africa" },
-        { date: "2038-07-02T14:00:00Z", duration: "1m 00s", loc: "N. America / Africa" },
-        { date: "2039-12-15T23:00:00Z", duration: "1m 51s", loc: "Antarctica" },
-        { date: "2126-10-16T12:00:00Z", duration: "4m 00s", loc: "Global Coverage Stop" }
-    ];
-
-    // Indefinite Mathematical Anchors
-    const phobosPeriod = 7 * 60 * 60 * 1000 + 39 * 60 * 1000; // 7h 39m
-    const ioPeriod = 1 * 24 * 60 * 60 * 1000 + 18 * 60 * 60 * 1000 + 47 * 60 * 1000; // ~1.769 days
-
-    // Logic to update all sectors
-    function updateTrackingStation() {
-        const now = new Date();
-
-        // 1. EARTH (List-based 100 Year Automation)
-        const nextEarth = earthEvents.find(e => new Date(e.date) > now);
-        updateCard('earth', nextEarth ? new Date(nextEarth.date) : null, 15 * 60 * 1000); // 15m assumed transit
-        if (nextEarth) {
-            document.getElementById('earth-status').innerText = `Location: ${nextEarth.loc} | Dur: ${nextEarth.duration}`;
-            positionMoon('earth', new Date(nextEarth.date), 27.3 * 24 * 60 * 60 * 1000); // Earth orbit ref
-        }
-
-        // 2. MARS (Fixed Periodic Loop)
-        const marsAnchor = new Date("2026-01-01T00:00:00Z");
-        const marsElapsed = now - marsAnchor;
-        const marsDuration = 30 * 1000; // 30s transit
-
-        // Calculate current cycle and check if we're in an active event
-        const marsCurrentCycle = Math.floor(marsElapsed / phobosPeriod);
-        const marsCurrentEventStart = new Date(marsAnchor.getTime() + marsCurrentCycle * phobosPeriod);
-        const marsTimeSinceEvent = now - marsCurrentEventStart;
-
-        // If we're past the current event's duration, target the next event
-        const targetMars = (marsTimeSinceEvent > marsDuration)
-            ? new Date(marsAnchor.getTime() + (marsCurrentCycle + 1) * phobosPeriod)
-            : marsCurrentEventStart;
-
-        updateCard('mars', targetMars, marsDuration);
-        positionMoon('mars', targetMars, phobosPeriod);
-
-        // 3. JUPITER (Fixed Periodic Loop)
-        const jupiterAnchor = new Date("2026-01-30T22:18:00Z");
-        const jupiterElapsed = now - jupiterAnchor;
-        const jupiterDuration = 135 * 60 * 1000; // 135m transit
-
-        // Calculate current cycle and check if we're in an active event
-        const jupiterCurrentCycle = Math.floor(jupiterElapsed / ioPeriod);
-        const jupiterCurrentEventStart = new Date(jupiterAnchor.getTime() + jupiterCurrentCycle * ioPeriod);
-        const jupiterTimeSinceEvent = now - jupiterCurrentEventStart;
-
-        // If we're past the current event's duration, target the next event
-        const targetJupiter = (jupiterTimeSinceEvent > jupiterDuration)
-            ? new Date(jupiterAnchor.getTime() + (jupiterCurrentCycle + 1) * ioPeriod)
-            : jupiterCurrentEventStart;
-
-        updateCard('jupiter', targetJupiter, jupiterDuration);
-        positionMoon('jupiter', targetJupiter, ioPeriod);
-    }
-
-    function updateCard(sector, targetDate, durationMs) {
-        const timerEl = document.getElementById(`${sector}-timer`);
-        const cardEl = document.getElementById(`${sector}-card`);
-        const eventDetailsEl = cardEl.querySelector('.event-details');
-        const now = new Date();
-
-        if (!targetDate) {
-            timerEl.innerText = "OFFLINE";
-            return;
-        }
-
-        const diff = targetDate - now;
-
-        // Check if Event is Happening NOW
-        // (Assuming event starts at targetDate and lasts durationMs)
-        const eventOngoing = (diff <= 0 && diff > -durationMs);
-
-        if (eventOngoing) {
-            // Calculate remaining time in the event
-            const remaining = durationMs + diff; // diff is negative, so we add it
-            timerEl.innerText = formatTime(Math.max(0, remaining));
-            timerEl.style.color = "#ff4444";
-            timerEl.style.textShadow = "0 0 15px rgba(255, 68, 68, 0.8)";
-            cardEl.style.borderColor = "#ff4444";
-            cardEl.classList.add('active-alert');
-            const sun = cardEl.querySelector('.sun-reference');
-            if (sun) sun.classList.add('sun-active');
-
-            // Update event description to active state
-            if (sector === 'mars') {
-                eventDetailsEl.innerText = 'PHOBOS TRANSIT ACTIVE';
-            } else if (sector === 'earth') {
-                eventDetailsEl.innerText = 'TOTAL ECLIPSE IN PROGRESS';
-            } else if (sector === 'jupiter') {
-                const jupiterEventEl = document.getElementById('jupiter-event-name');
-                if (jupiterEventEl) jupiterEventEl.innerText = 'IO SHADOW CROSSING';
-            }
-        } else {
-            timerEl.innerText = formatTime(Math.max(0, diff));
-            timerEl.style.color = "#00ff00";
-            timerEl.style.textShadow = "0 0 10px rgba(0, 255, 0, 0.5)";
-            cardEl.style.borderColor = "rgba(201, 176, 55, 0.3)";
-            cardEl.classList.remove('active-alert');
-            const sun = cardEl.querySelector('.sun-reference');
-            if (sun) sun.classList.remove('sun-active');
-
-            // Reset event description to default
-            if (sector === 'mars') {
-                eventDetailsEl.innerText = 'Next Phobos Shadow Transit';
-            } else if (sector === 'earth') {
-                eventDetailsEl.innerText = 'Next Total Solar Eclipse';
-            } else if (sector === 'jupiter') {
-                const jupiterEventEl = document.getElementById('jupiter-event-name');
-                if (jupiterEventEl) jupiterEventEl.innerText = 'Next Io Shadow Transit';
-            }
-        }
-    }
-
-    function positionMoon(sector, targetDate, periodMs) {
-        const group = document.getElementById(`${sector}-orbit-group`);
-        if (!group) return;
-
-        const now = new Date();
-        const diff = targetDate - now;
-
-        // Progress percentage (0 to 1)
-        // 0 = alignment point
-        let progress = (diff % periodMs) / periodMs;
-        if (progress < 0) progress += 1;
-
-        // We want 0-360 degrees. 
-        // 90 degrees is the right side (where alignment usually is represented)
-        const angle = (progress * 360) + 90;
-
-        group.style.transformOrigin = "50px 50px";
-        group.style.transform = `rotate(-${angle}deg)`;
-    }
-
-    function formatTime(ms) {
-        const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-        const hours = Math.floor((ms % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-        const mins = Math.floor((ms % (60 * 60 * 1000)) / (1000 * 60));
-        const secs = Math.floor((ms % (60 * 1000)) / 1000);
-
-        if (days > 0) {
-            return `${days}d ${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-        return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-
-    setInterval(updateTrackingStation, 1000);
-    updateTrackingStation();
-</script>
+<!-- Writing Progress Updater -->
+<script src="/assets/scripts/progress-updater.js"></script>

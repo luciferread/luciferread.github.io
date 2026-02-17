@@ -18,10 +18,57 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Open Graph Image -->
-    <!-- Sets to default (set in _config.yml) if not otherwise specified by page with og_image: -->
-    <meta property="og:image" content="{{ page.og_image | default: site.og_image }}">
+
+
+    <!-- Open Graph / Social Media Preview Images -->
+    <!-- Basic SEO -->
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="{{ site.author | default: 'Lucifer Read' }}">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL (prevents duplicate content issues) -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+    <!-- Open Graph - covers Facebook, LinkedIn, Discord, WhatsApp, Slack, Bluesky -->
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_AU">
+    {% if page.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image }}">
+    {% elsif site.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ site.og_image }}">
+    {% endif %}
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter/X - needs its own tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site.social.twitter }}">
+    <meta name="twitter:creator" content="@{{ site.social.twitter }}">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    {% if page.og_image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ page.og_image }}">
+    {% elsif site.og_image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ site.og_image }}">
+    {% endif %}
+
+    <!-- Facebook Page -->
+    <meta property="article:publisher" content="https://www.facebook.com/luciferread">
+
+    <!-- OG Image (per-page or site default) -->
+    {% if page.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image }}">
+    {% elsif site.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ site.og_image }}">
+    {% endif %}
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
 
     <!-- FAVICON: The little icon in the browser tab -->
     <!-- Place your image named 'favicon.png' in the 'assets/images/' folder -->
@@ -37,6 +84,9 @@
 
     <!-- Link to our main stylesheet -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- Link to progress tracker stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/progress-tracker.css' | relative_url }}">
 </head>
 
 <body>
@@ -89,51 +139,126 @@
        Appears at the bottom of every page.
     -->
     <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name | default: site.author | default: "Lucifer Read" }}. All rights reserved.</p>
         <p>Epic Science Fiction from the <em>Éskhatos Kósmos</em>.</p>
 
-        <div style="margin-top: 2rem; font-size: 0.7rem; opacity: 0.7;">
+        <p><div style="margin-top: 2rem; font-size: 0.7rem; opacity: 0.7;">
             <a href="{{ '/privacy.html' | relative_url }}"
                 style="color: var(--color-text-muted); text-decoration: underline; margin: 0 10px;">Privacy Policy</a>
             |
             <span style="margin: 0 10px;">Built on <a href="https://pages.github.com/" target="_blank"
-                    style="color: var(--color-text-muted); text-decoration: underline;">GitHub Pages</a></span>
-            <br>
-            <span style="margin: 0 10px;">Design inspired by original cover art from <a href="https://adamfyda.com/"
-                target="_blank" style="color: var(--color-text-muted); text-decoration: underline;">Adam Fyda</a>
-                <!-- Link icon (aria-label is for screen readers) -->
-                <a href="https://adamfyda.com/" target="_blank" aria-label="Adam Fyda's website">
-                    <i class="fa-solid fa-link"></i></a>
-                <!-- Instagram icon -->
-                <a href="https://instagram.com/adam_fyda_art/" target="_blank" aria-label="Adam Fyda's Instagram">
-                    <i class="fa-brands fa-instagram"></i></a>
-                
+                    rel="noopener noreferrer" style="color: var(--color-text-muted); text-decoration: underline;">GitHub
+                    Pages</a></span>
+        </div></p>
+        <!-- Social media -->
+        <div class="footer-social-container">
+            <div class="footer-social-links">
+                <!-- PRIMARY -->
+                <!-- Substack -->
+                <div class="footer-social-item">
+                    <a href="https://luciferread.substack.com" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's Substack">
+                        <!-- Substack SVG -->
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                        </svg>
+                    </a>
+                    <span class="footer-social-handle">luciferread</span>
+                </div>
+
+                <!-- Facebook -->
+                <div class="footer-social-item">
+                    <a href="https://www.facebook.com/luciferread/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <span class="footer-social-handle">luciferread</span>
+                </div>
+
+                <!-- Instagram -->
+                 <div class="footer-social-item">
+                    <a href="#" onclick="openInstagram('lucifer.read'); return false;"
+                        aria-label="Lucifer Read's Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <span class="footer-social-handle">@lucifer.read</span>
+                </div>
+
+                <!-- Blueskey -->
+                 <div class="footer-social-item">
+                    <a href="https://bsky.app/profile/luciferread.bsky.social" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's Bluesky">
+                        <i class="fa-brands fa-bluesky"></i>
+                    </a>
+                    <span class="footer-social-handle">luciferread</span>
+                </div>
+
+                <!-- Github -->
+                 <div class="footer-social-item">
+                    <a href="https://github.com/luciferread" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <span class="footer-social-handle">luciferread</span>
+                </div>
+
+                <!-- DIVIDER -->
+                <!-- <span class="footer-social-divider">|</span> -->
+
+                <!-- SECONDARY -->
+                <!-- Youtube -->
+                 <!-- <div class="footer-social-item footer-social-secondary">
+                    <a href="https://www.youtube.com/@lucifer.read.author" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <span class="footer-social-handle">@lucifer.read.author</span>
+                </div> -->
+
+                <!-- Tiktok -->
+                 <!-- <div class="footer-social-item footer-social-secondary">
+                    <a href="https://www.tiktok.com/@lucifer.read" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's TikTok">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    <span class="footer-social-handle">@lucifer.read</span>
+                </div> -->
+
+                <!-- Twitter -->
+                 <!-- <div class="footer-social-item footer-social-secondary">
+                    <a href="https://x.com/LuciferRead" target="_blank" rel="noopener noreferrer"
+                        aria-label="Lucifer Read's X/Twitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <span class="footer-social-handle">@LuciferRead</span>
+                </div> -->
+            </div>
         </div>
+        
+        <!-- Adam's details -->
+        <span style="margin: 0 10px;">Design inspired by original cover art from 
+            <a href="https://adamfyda.com/" target="_blank" rel="noopener noreferrer"
+                style="color: var(--color-text-muted); text-decoration: underline;">Adam Fyda</a>
+            <!-- Link icon -->
+            <a href="https://adamfyda.com/" target="_blank" rel="noopener noreferrer"
+                aria-label="Adam Fyda's website" style="margin-left: 0.3rem;">
+                <i class="fa-solid fa-link"></i>
+            </a>
+            <!-- Instagram icon with handle -->
+            <a href="#" onclick="openInstagram('adam_fyda_art'); return false;"
+                aria-label="Adam Fyda's Instagram" style="margin-left: 0.3rem;">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <span style="font-size: 0.65rem; opacity: 0.5; margin-left: 0.2rem;">@adam_fyda_art</span>
+        </span>
+
     </footer>
 
-    <!-- Script for hamburger menu link when running on phone -->
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-            navLinks.classList.remove('active');
-            }
-        });
-    </script>
+    <!-- SITE SCRIPTS -->
+    <!-- Hamburger menu for phones -->
+    <script src="{{ '/assets/scripts/hamburger-menu.js' | relative_url }}"></script>
+    <!-- Instagram deep link -->
+    <script src="{{ '/assets/scripts/instagram-deeplink.js' | relative_url }}"></script>
 
 </body>
 
