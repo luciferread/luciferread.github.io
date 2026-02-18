@@ -19,6 +19,10 @@ const earthEvents = [
     { date: "2043-04-09T15:00:00Z", duration: "4m 57s", loc: "Russia / Asia" },
     { date: "2044-08-23T02:00:00Z", duration: "2m 04s", loc: "Canada / Greenland" },
     { date: "2045-08-12T19:00:00Z", duration: "6m 06s", loc: "USA / Caribbean" },
+    { date: "2046-02-05T16:00:00Z", duration: "2m 26s", loc: "Pacific / Antarctica" },
+    { date: "2048-06-11T03:00:00Z", duration: "3m 21s", loc: "Pacific / S. America" },
+    { date: "2049-05-31T14:00:00Z", duration: "3m 58s", loc: "Indonesia / Pacific" },
+    { date: "2050-05-20T19:00:00Z", duration: "4m 34s", loc: "S. Atlantic / Africa" }
     // Add more through 2100+ from NASA's catalog
 ];
 
@@ -73,7 +77,7 @@ function updateTrackingStation() {
             // Use test mode timing
             updateCard('earth', testMode.startTime, testMode.duration);
             positionMoon('earth', testMode.startTime, testMode.duration, 27.3 * 24 * 60 * 60 * 1000);
-            } else {
+        } else {
             updateCard('earth', nextEarthDate, earthDuration);
             positionMoon('earth', nextEarthDate, earthDuration, 27.3 * 24 * 60 * 60 * 1000); // Earth orbit ref
         }
@@ -227,14 +231,10 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
         const knownNewMoon = new Date("2026-02-17T12:01:00Z");
         const lunarCycle = 29.53059 * 24 * 60 * 60 * 1000;
         
-        let timeSinceNewMoon = now - knownNewMoon;
-        while (timeSinceNewMoon < 0) {
-            timeSinceNewMoon += lunarCycle;
-        }
+        const timeSinceNewMoon = now - knownNewMoon;
+        const cycleProgress = ((timeSinceNewMoon % lunarCycle) + lunarCycle) % lunarCycle / lunarCycle;
         
-        const cycleProgress = (timeSinceNewMoon % lunarCycle) / lunarCycle;
-        
-        // Convert phase to angle:
+        // Convert to angle: 0 = new moon (top), 0.5 = full moon (bottom)
         // 0 = new moon (top, -90° in our coordinate system)
         // 0.25 = first quarter (right, 0°)
         // 0.5 = full moon (bottom, 90°)
@@ -245,7 +245,7 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
         if (eventOngoing) {
             angle = -90;
         }
-    
+        
     } else {
         // FOR MARS AND JUPITER: Use predicted eclipse timing
         if (eventOngoing) {
@@ -262,14 +262,14 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
 
     // Update moon phase for Earth
     if (sector === 'earth') {
-        updateMoonPhase(angle);
+        updateMoonPhase();
     }
 }
 
 // Update moon phase visualization for Earth
-function updateMoonPhase(angle) {
-    const moonDarkPath = document.getElementById('earth-moon-dark-side');
-    if (!moonDarkPath) return;
+function updateMoonPhase() {
+    const darkOverlay = document.getElementById('earth-moon-dark-overlay');
+    if (!darkOverlay) return;
 
     // Calculate moon phase based on angle
     // 0° (top) = New Moon (fully dark)
@@ -282,63 +282,39 @@ function updateMoonPhase(angle) {
     // New moon: Feb 17, 2026 at 12:01 UTC (from timeanddate.com)
     const knownNewMoon = new Date("2026-02-17T12:01:00Z");
     const lunarCycle = 29.53059 * 24 * 60 * 60 * 1000; // 29.53 days
-    
-    // Calculate time since/until new moon
-    let timeSinceNewMoon = now - knownNewMoon;
-    
-    // Handle dates before the reference new moon
-    while (timeSinceNewMoon < 0) {
-        timeSinceNewMoon += lunarCycle;
-    }
-    
-    const cycleProgress = (timeSinceNewMoon % lunarCycle) / lunarCycle;
-    const illumination = cycleProgress;
-    // 0 = new moon, 0.5 = full moon
-    
-    // Waxing (0 to 0.5): Right side lit, dark on left shrinking
-    // Waning (0.5 to 1): Left side lit, dark on right growing
-    
-    // The phase rendering stays the same, but now it matches position!
-    if (illumination < 0.5) {
-        // Waxing phase (new moon to full moon)
-        // Dark on left side, shrinking
-        const darkAmount = 1 - (illumination * 2); // 1 to 0
-        if (darkAmount > 0.99) {
-            // Nearly new moon - fully dark
-            moonDarkPath.setAttribute('d', `M 90 46 A 4 4 0 0 1 90 54 A 4 4 0 0 1 90 46`);
-        } else {
-            const curvature = darkAmount * 4;
-            moonDarkPath.setAttribute('d', `M 90 46 A ${curvature} 4 0 0 0 90 54 A 4 4 0 0 1 90 46`);
-        }
+
+    const timeSinceNewMoon = now - knownNewMoon;
+    // Ensure positive value and wrap within cycle
+    const cycleProgress = ((timeSinceNewMoon % lunarCycle) + lunarCycle) % lunarCycle / lunarCycle;
+
+    // cycleProgress: 0 = new moon, 0.25 = first quarter, 0.5 = full, 0.75 = last quarter
+
+    if (cycleProgress < 0.5) {
+        // WAXING: Fading out the dark overlay
+        const darkness = 1 - (cycleProgress * 2); // 1 → 0
+        darkOverlay.setAttribute('opacity', darkness);
     } else {
-        // Waning phase (full moon to new moon)
-        // Dark on right side, growing
-        const darkAmount = (illumination - 0.5) * 2; // 0 to 1
-        if (darkAmount < 0.01) {
-            // Nearly full moon - no dark
-            moonDarkPath.setAttribute('d', '');
-        } else {
-            const curvature = darkAmount * 4;
-            moonDarkPath.setAttribute('d', `M 90 46 A 4 4 0 0 1 90 54 A ${curvature} 4 0 0 1 90 46`);
-        }
+        // WANING: Fading in the dark overlay
+        const darkness = (cycleProgress - 0.5) * 2; // 0 → 1
+        darkOverlay.setAttribute('opacity', darkness);
     }
 
     // Adaptive glow + size during crescent (stronger during crescent phases)
     const moonPhaseCircle = document.querySelector('.moon-phase');
     if (moonPhaseCircle) {
         let glowIntensity, moonRadius;
-        if (illumination < 0.15 || illumination > 0.85) {
-            // Thin crescent - HUGE glow + slightly bigger
-            glowIntensity = 'drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 15px rgba(236, 240, 241, 0.7))';
-            moonRadius = 5; // Increase from 4 to 5
-        } else if (illumination > 0.35 && illumination < 0.65) {
-            // Full or nearly full
-            glowIntensity = 'drop-shadow(0 0 3px rgba(236, 240, 241, 0.7))';
+        if (cycleProgress < 0.15 || cycleProgress > 0.85) {
+            // Thin crescent - moderate glow, no size change
+            glowIntensity = 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 3px rgba(236, 240, 241, 0.4))';
+            moonRadius = 4;
+        } else if (cycleProgress > 0.35 && cycleProgress < 0.65) {
+            // Full moon - minimal glow
+            glowIntensity = 'drop-shadow(0 0 1px rgba(236, 240, 241, 0.5))';
             moonRadius = 4;
         } else {
-            // Quarter phases
-            glowIntensity = 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 8px rgba(236, 240, 241, 0.6))';
-            moonRadius = 4.5;
+            // Quarter phases - subtle glow
+            glowIntensity = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 4px rgba(236, 240, 241, 0.3))';
+            moonRadius = 4;
         }
         moonPhaseCircle.style.filter = glowIntensity;
         moonPhaseCircle.setAttribute('r', moonRadius);

@@ -217,12 +217,6 @@ stories of extinction, survival, and immortality."
             <!-- SVG ORBITAL MAP -->
             <svg class="orbital-map" viewBox="0 0 100 100">
                 <!-- Moon phase mask -->
-                <defs>
-                    <mask id="earth-moon-phase">
-                        <circle cx="90" cy="50" r="4" fill="white" />
-                        <path id="earth-moon-dark-side" d="M 90 46 A 4 4 0 0 1 90 54 A 4 4 0 0 0 90 46" fill="black" />
-                    </mask>
-                </defs>
                 
                 <!-- Earth look -->
                 <defs>
@@ -257,7 +251,10 @@ stories of extinction, survival, and immortality."
                 
                 <g id="earth-orbit-group">
                     <!-- Moon with phase rendering -->
-                    <circle class="moon-phase" cx="90" cy="50" r="4" mask="url(#earth-moon-phase)" />
+                    <!-- Moon: white base circle -->
+                    <circle class="moon-phase" cx="90" cy="50" r="4" fill="#ffffff" />
+                    <!-- Moon: dark overlay that changes with phase -->
+                    <circle id="earth-moon-dark-overlay" cx="90" cy="50" r="4" fill="#000000" opacity="0" />
                 </g>
             </svg>
 
@@ -336,6 +333,7 @@ stories of extinction, survival, and immortality."
         </div>
     </div>
 </section>
+
 
 <!-- DEEP SPACE TRANSMISSION (Dynamic Astronomy Fact) -->
 <section class="transmission-section">
