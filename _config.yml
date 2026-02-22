@@ -20,7 +20,7 @@ description: "Lucifer Read - Science Fiction Author | Epic sci-fi novels includi
 
 # Add default OG (open graph) image for website/webpage previews
 # Optimal size: 1200x630px
-og_image: "/assets/images/og_image_default_80pc.jpg"
+og_image: "/assets/images/og_image_default.jpg"
 
 # --- URL SETTINGS ---
 # The base URL of your site. 
