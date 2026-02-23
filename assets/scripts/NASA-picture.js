@@ -29,7 +29,7 @@ async function fetchTransmission() {
         let explanation = data.explanation;
         // Sanitize: NASA often appends promotional links like "Jigsaw Galaxy" or "Astronomy Puzzle" to the end.
         // We trim these to keep the focus on the actual astronomical fact.
-        const promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie'];
+        const promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise'];
         for (const phrase of promoPhrases) {
             const index = explanation.indexOf(phrase);
             if (index !== -1) {
