@@ -28,7 +28,7 @@ const earthEvents = [
 
 // Indefinite Mathematical Anchors (i.e., orbital periods)
 const phobosPeriod = 7 * 60 * 60 * 1000 + 39 * 60 * 1000; // 7h 39m
-const ioPeriod = 1 * 24 * 60 * 60 * 1000 + 18 * 60 * 60 * 1000 + 47 * 60 * 1000; // ~1.769 days
+const ioPeriod = 1 * 24 * 60 * 60 * 1000 + 18 * 60 * 60 * 1000 + 27 * 60 * 1000 + 33 * 1000; // 1.769138 days (NASA)
 
 let currentEarthEventIndex = 0;  // 'let' can be reassigned, 'const' cannot
 
@@ -224,100 +224,97 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
     const diff = targetDate - now;
     const eventOngoing = (diff <= 0 && diff > -durationMs);
 
-    let angle; // Declare angle here so it's available for Earth moon phase
-
     if (sector === 'earth') {
-        // FOR EARTH: Position based on real lunar phase, not predicted eclipse timing
+        // EARTH: Directly set moon cx/cy rather than rotating the group,
+        // so the clipPath phase mask always aligns with the moon's actual position.
         const knownNewMoon = new Date("2026-02-17T12:01:00Z");
         const lunarCycle = 29.53059 * 24 * 60 * 60 * 1000;
         
         const timeSinceNewMoon = now - knownNewMoon;
         const cycleProgress = ((timeSinceNewMoon % lunarCycle) + lunarCycle) % lunarCycle / lunarCycle;
         
-        // Convert to angle: 0 = new moon (top), 0.5 = full moon (bottom)
-        // 0 = new moon (top, -90° in our coordinate system)
-        // 0.25 = first quarter (right, 0°)
-        // 0.5 = full moon (bottom, 90°)
-        // 0.75 = last quarter (left, 180°)
-        angle = (cycleProgress * 360) - 90;
-        
-        // During eclipse, freeze at top
-        if (eventOngoing) {
-            angle = -90;
+        // -90° = 12 o'clock (new moon / top), increases clockwise
+        let orbitAngleDeg = cycleProgress * 360 - 90;
+        if (eventOngoing) orbitAngleDeg = -90; // freeze at transit position
+
+        const orbitAngleRad = orbitAngleDeg * Math.PI / 180;
+        const orbitRadius = 40; // must match SVG orbit-path r="40"
+
+        // Calculate moon screen position
+        const moonX = 50 + orbitRadius * Math.cos(orbitAngleRad);
+        const moonY = 50 + orbitRadius * Math.sin(orbitAngleRad);
+
+        // Move moon circles to calculated position
+        const moonBase = group.querySelector('.moon-phase');
+        const moonDark = document.getElementById('earth-moon-dark-half');
+        if (moonBase) { moonBase.setAttribute('cx', moonX); moonBase.setAttribute('cy', moonY); }
+        if (moonDark)  { moonDark.setAttribute('cx', moonX);  moonDark.setAttribute('cy', moonY); }
+
+        // Reposition clipPath rects to match the moon's new location
+        const r = 4;
+        const clipLeftRect  = document.querySelector('#moon-clip-left rect');
+        const clipRightRect = document.querySelector('#moon-clip-right rect');
+        if (clipLeftRect) {
+            clipLeftRect.setAttribute('x', moonX - r);
+            clipLeftRect.setAttribute('y', moonY - r);
+            clipLeftRect.setAttribute('width', r);
+            clipLeftRect.setAttribute('height', r * 2);
         }
-        
+        if (clipRightRect) {
+            clipRightRect.setAttribute('x', moonX);
+            clipRightRect.setAttribute('y', moonY - r);
+            clipRightRect.setAttribute('width', r);
+            clipRightRect.setAttribute('height', r * 2);
+        }
+
+        // No group rotation needed — we set cx/cy directly
+        group.style.transform = 'none';
+
+        updateMoonPhase(cycleProgress);
+        return;
+    }
+
+    // MARS & JUPITER: Rotate the orbit group
+    let angle;
+    if (eventOngoing) {
+        angle = -90;
     } else {
-        // FOR MARS AND JUPITER: Use predicted eclipse timing
-        if (eventOngoing) {
-            angle = -90;
-        } else {
-            let progress = (diff % periodMs) / periodMs;
-            if (progress < 0) progress += 1;
-            angle = (progress * 360) + 90 - 180; // Adjusted for correct starting position
-        }
+        let progress = (diff % periodMs) / periodMs;
+        if (progress < 0) progress += 1;
+        angle = (1 - progress) * 360 - 90;
     }
-
-    group.style.transformOrigin = "50px 50px";
-    group.style.transform = `rotate(${angle}deg)`;
-
-    // Update moon phase for Earth
-    if (sector === 'earth') {
-        updateMoonPhase();
-    }
+    group.removeAttribute('style'); // clear any leftover CSS transform
+    group.setAttribute('transform', `rotate(${angle}, 50, 50)`);
+    
 }
 
 // Update moon phase visualization for Earth
-function updateMoonPhase() {
-    const darkOverlay = document.getElementById('earth-moon-dark-overlay');
-    if (!darkOverlay) return;
+function updateMoonPhase(cycleProgress) {
+    const darkHalf = document.getElementById('earth-moon-dark-half');
+    if (!darkHalf) return;
 
-    // Calculate moon phase based on angle
-    // 0° (top) = New Moon (fully dark)
-    // 90° (right) = First Quarter (right half lit)
-    // 180° (bottom) = Full Moon (fully lit)
-    // 270° (left) = Last Quarter (left half lit)
-
-    // Calculate actual moon phase based on real lunar cycle
-    const now = new Date();
-    // New moon: Feb 17, 2026 at 12:01 UTC (from timeanddate.com)
-    const knownNewMoon = new Date("2026-02-17T12:01:00Z");
-    const lunarCycle = 29.53059 * 24 * 60 * 60 * 1000; // 29.53 days
-
-    const timeSinceNewMoon = now - knownNewMoon;
-    // Ensure positive value and wrap within cycle
-    const cycleProgress = ((timeSinceNewMoon % lunarCycle) + lunarCycle) % lunarCycle / lunarCycle;
-
-    // cycleProgress: 0 = new moon, 0.25 = first quarter, 0.5 = full, 0.75 = last quarter
-
+    // Waxing (0–0.5): right half lit → clip the LEFT half dark (D-shape)
+    // Waning (0.5–1): left half lit → clip the RIGHT half dark (C-shape)
     if (cycleProgress < 0.5) {
-        // WAXING: Fading out the dark overlay
-        const darkness = 1 - (cycleProgress * 2); // 1 → 0
-        darkOverlay.setAttribute('opacity', darkness);
+        darkHalf.setAttribute('clip-path', 'url(#moon-clip-left)');
     } else {
-        // WANING: Fading in the dark overlay
-        const darkness = (cycleProgress - 0.5) * 2; // 0 → 1
-        darkOverlay.setAttribute('opacity', darkness);
+        darkHalf.setAttribute('clip-path', 'url(#moon-clip-right)');
     }
 
-    // Adaptive glow + size during crescent (stronger during crescent phases)
+    // Glow intensity by phase
     const moonPhaseCircle = document.querySelector('.moon-phase');
     if (moonPhaseCircle) {
-        let glowIntensity, moonRadius;
+        let glowIntensity;
         if (cycleProgress < 0.15 || cycleProgress > 0.85) {
-            // Thin crescent - moderate glow, no size change
+            // Near new moon: thin crescent
             glowIntensity = 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 3px rgba(236, 240, 241, 0.4))';
-            moonRadius = 4;
-        } else if (cycleProgress > 0.35 && cycleProgress < 0.65) {
-            // Full moon - minimal glow
-            glowIntensity = 'drop-shadow(0 0 1px rgba(236, 240, 241, 0.5))';
-            moonRadius = 4;
+        } else if (cycleProgress > 0.4 && cycleProgress < 0.6) {
+            // Near full moon: brighter glow
+            glowIntensity = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 5px rgba(236, 240, 241, 0.5))';
         } else {
-            // Quarter phases - subtle glow
             glowIntensity = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 4px rgba(236, 240, 241, 0.3))';
-            moonRadius = 4;
         }
         moonPhaseCircle.style.filter = glowIntensity;
-        moonPhaseCircle.setAttribute('r', moonRadius);
     }
 }
 
