@@ -1,130 +1,529 @@
 ---
-layout: default
+layout: none
 title: "Download The Radiants Sample | Lucifer Read"
-description: "Download your free sample chapters of The Radiants by Lucifer Read. Available in EPUB, PDF, and MOBI
-formats."
+description: "Download your free sample chapters of The Radiants by Lucifer Read. Available in EPUB, PDF, and MOBI formats."
 permalink: /download.html
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Download The Radiants Sample | Lucifer Read</title>
+    <meta name="description" content="Download your free sample chapters of The Radiants by Lucifer Read.">
+    <meta name="robots" content="noindex, nofollow">
 
-<section style="padding: 4rem 10%; max-width: 800px; margin: 0 auto; text-align: center;">
-    <h1
-        style="font-family: var(--font-header); color: var(--color-accent); font-size: 2.5rem; letter-spacing: 3px; margin-bottom: 1rem;">
-        THANK YOU!
-    </h1>
+    <style>
+        @font-face {
+            font-display: swap;
+            font-family: 'Orbitron';
+            font-style: normal;
+            font-weight: 400;
+            src: url('/assets/fonts/orbitron-v35-latin-regular.woff2') format('woff2');
+        }
+        @font-face {
+            font-display: swap;
+            font-family: 'Orbitron';
+            font-style: normal;
+            font-weight: 700;
+            src: url('/assets/fonts/orbitron-v35-latin-700.woff2') format('woff2');
+        }
 
-    <p style="font-size: 1.2rem; color: var(--color-text-muted); margin-bottom: 3rem;">
-        Welcome to the Éskhatos Kósmos Chronicles
-    </p>
+        /* ── RESET & BASE ─────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- BOOK COVER PREVIEW -->
-    <div style="max-width: 300px; margin: 0 auto 3rem auto;">
-        <img src="{{ '/assets/images/radiant_cover_800w.webp' | relative_url }}" srcset="{{ '/assets/images/radiant_cover_400w.webp' | relative_url }} 400w,
-                     {{ '/assets/images/radiant_cover_800w.webp' | relative_url }} 800w"
-            sizes="(max-width: 600px) 90vw, 300px" alt="The Radiants Book Cover"
-            style="width: 100%; border-radius: 8px; box-shadow: 0 0 30px rgba(201, 176, 55, 0.3);">
-    </div>
+        :root {
+            --color-bg:           #0F100A;
+            --color-bg-card:      rgba(20, 21, 14, 0.95);
+            --color-accent:       #C9B037;
+            --color-accent-hover: #D4AF37;
+            --color-accent-dim:   rgba(201, 176, 55, 0.15);
+            --color-accent-glow:  rgba(201, 176, 55, 0.08);
+            --color-text:         #F4F1D6;
+            --color-text-muted:   #A39634;
+            --color-border:       rgba(201, 176, 55, 0.25);
+            --font-header:        'Orbitron', sans-serif;
+            --font-body:          system-ui, -apple-system, sans-serif;
+        }
 
-    <h2 style="font-family: var(--font-header); color: var(--color-text-main); font-size: 1.8rem; margin-bottom: 2rem;">
-        Download Your Free Sample
-    </h2>
+        html, body {
+            min-height: 100vh;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
 
-    <p style="max-width: 600px; margin: 0 auto 3rem auto; line-height: 1.8;">
-        Your sample of <strong style="color: var(--color-accent);">THE RADIANTS</strong> is ready.
-        Choose your preferred format below and start reading today.
-    </p>
+        /* ── STARFIELD ────────────────────────────────── */
+        body { position: relative; overflow-x: hidden; }
 
-    <!-- DOWNLOAD BUTTONS -->
-    <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto 4rem auto;">
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-        <!-- EPUB Download -->
-        <a href="{{ '/assets/downloads/the_radiants_sample.epub' | relative_url }}" download class="btn"
-            style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2rem; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);">
-            <span style="font-size: 1.2rem;">📱</span>
-            <span>DOWNLOAD EPUB</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">(Most E-readers)</span>
-        </a>
+        .stars::before,
+        .stars::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 15% 20%, rgba(244,241,214,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 72% 8%,  rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 38% 55%, rgba(244,241,214,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 88% 42%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 5%  80%, rgba(244,241,214,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 60% 75%, rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 28% 90%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 95% 65%, rgba(244,241,214,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 50% 35%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 80% 90%, rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 42% 12%, rgba(201,176,55,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 78% 55%, rgba(201,176,55,0.3) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 20% 70%, rgba(201,176,55,0.3) 0%, transparent 100%);
+        }
 
-        <!-- PDF Download -->
-        <a href="{{ '/assets/downloads/the_radiants_sample.pdf' | relative_url }}" download class="btn"
-            style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2rem;">
-            <span style="font-size: 1.2rem;">📄</span>
-            <span>DOWNLOAD PDF</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">(Universal)</span>
-        </a>
+        .stars::after {
+            background-image:
+                radial-gradient(1px 1px at 33% 3%,  rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 67% 18%, rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 10% 45%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 55% 62%, rgba(244,241,214,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 90% 25%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 3%  95%, rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 76% 82%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 22% 38%, rgba(244,241,214,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 48% 88%, rgba(244,241,214,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 85% 10%, rgba(244,241,214,0.5) 0%, transparent 100%);
+        }
 
-        <!-- MOBI Download -->
-        <a href="{{ '/assets/downloads/the_radiants_sample.mobi' | relative_url }}" download class="btn"
-            style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2rem;">
-            <span style="font-size: 1.2rem;">📚</span>
-            <span>DOWNLOAD MOBI</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">(Kindle)</span>
-        </a>
-    </div>
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 60%, rgba(201,176,55,0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 50% 100%, rgba(201,176,55,0.06) 0%, transparent 60%);
+        }
 
-    <!-- WHAT'S INCLUDED -->
-    <div
-        style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(201, 176, 55, 0.3); border-radius: 8px; padding: 2rem; margin-bottom: 3rem;">
-        <h3
-            style="font-family: var(--font-header); color: var(--color-accent); font-size: 1.2rem; margin-bottom: 1rem;">
-            WHAT'S INCLUDED
-        </h3>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 0.5rem;">✨ Chapters 1-3</li>
-            <li style="margin-bottom: 0.5rem;">📖 Approximately 30 pages</li>
-            <li style="margin-bottom: 0.5rem;">🌅 Your first glimpse into a world that has never known night</li>
-        </ul>
-    </div>
+        /* ── LAYOUT ───────────────────────────────────── */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem 4rem;
+        }
 
-    <!-- CLOSING MESSAGE -->
-    <div style="max-width: 600px; margin: 0 auto;">
-        <p style="line-height: 1.8; margin-bottom: 2rem;">
-            I hope you enjoy this first glimpse into the Heliopaides saga.
-            You'll receive monthly updates about the writing journey, behind-the-scenes insights,
-            and sneak peeks of what's coming next.
-        </p>
+        /* ── BRAND LINK ───────────────────────────────── */
+        .brand {
+            font-family: var(--font-header);
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .brand:hover { opacity: 1; color: var(--color-accent); }
 
-        <p style="color: var(--color-text-muted); font-style: italic;">
-            Welcome aboard the journey through the Éskhatos Kósmos.
-        </p>
+        /* ── MAIN CARD ────────────────────────────────── */
+        .card {
+            width: 100%;
+            max-width: 860px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            box-shadow:
+                0 0 60px rgba(201, 176, 55, 0.06),
+                0 2px 40px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(201,176,55,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            animation: fadeUp 0.8s ease both;
+        }
 
-        <p style="margin-top: 2rem;">
-            <a href="{{ '/' | relative_url }}" class="btn" style="display: inline-block;">
-                ← BACK TO HOME
-            </a>
-        </p>
-    </div>
-</section>
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-<!-- Optional: Add reading tips -->
-<section
-    style="padding: 3rem 10%; background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--color-text-muted);">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <h3
-            style="font-family: var(--font-header); color: var(--color-accent); text-align: center; margin-bottom: 2rem;">
-            READING TIPS
-        </h3>
+        /* ── LEFT PANEL — BOOK ────────────────────────── */
+        .panel-book {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(160deg, rgba(201,176,55,0.05) 0%, transparent 60%);
+            border-right: 1px solid var(--color-border);
+        }
 
-        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-            <div style="flex: 1; min-width: 250px; text-align: center;">
-                <h4 style="color: var(--color-text-main); margin-bottom: 0.5rem;">📱 EPUB</h4>
-                <p style="font-size: 0.9rem; color: var(--color-text-muted);">
-                    Works with Apple Books, Google Play Books, Kobo, Nook, and most e-reader apps
-                </p>
+        .panel-book::before,
+        .panel-book::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--color-accent);
+            border-style: solid;
+            opacity: 0.4;
+        }
+        .panel-book::before { top: 1rem; left: 1rem; border-width: 1px 0 0 1px; }
+        .panel-book::after  { bottom: 1rem; right: 1rem; border-width: 0 1px 1px 0; }
+
+        .thank-you-badge {
+            font-family: var(--font-header);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--color-bg);
+            background: var(--color-accent);
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        }
+
+        .book-cover-wrap {
+            position: relative;
+            width: 180px;
+            filter: drop-shadow(0 8px 32px rgba(201,176,55,0.25)) drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+        .book-cover-wrap:hover {
+            transform: translateY(-4px) rotate(1deg);
+            filter: drop-shadow(0 16px 40px rgba(201,176,55,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+        }
+
+        .book-cover {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+        }
+
+        /* Included items list under cover */
+        .included-list {
+            margin-top: 1.5rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .included-list li {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .included-list li::before {
+            content: '▸';
+            color: var(--color-accent);
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        /* ── RIGHT PANEL — DOWNLOAD ───────────────────── */
+        .panel-download {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem 2.5rem;
+            gap: 1.25rem;
+        }
+
+        .eyebrow {
+            font-family: var(--font-header);
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+        }
+
+        .headline {
+            font-family: var(--font-header);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1.3;
+            letter-spacing: 1px;
+        }
+
+        .pitch {
+            font-size: 0.95rem;
+            color: var(--color-text);
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .pitch em {
+            color: var(--color-accent);
+            font-style: normal;
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 0.25rem 0;
+        }
+
+        /* ── DOWNLOAD BUTTONS ─────────────────────────── */
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .dl-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.1rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-accent-dim);
+            color: var(--color-text);
+            text-decoration: none;
+            font-family: var(--font-header);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .dl-btn:hover {
+            background: rgba(201, 176, 55, 0.22);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .dl-btn.primary {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .dl-btn.primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+            color: var(--color-bg);
+        }
+
+        .dl-btn .btn-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .dl-btn .btn-label {
+            flex: 1;
+        }
+
+        .dl-btn .btn-sub {
+            font-size: 0.6rem;
+            opacity: 0.65;
+            letter-spacing: 1px;
+        }
+
+        /* Format tips */
+        .format-tips {
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .format-tips span {
+            color: var(--color-accent);
+            opacity: 0.9;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-header);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            margin-top: 0.25rem;
+        }
+        .back-link:hover { color: var(--color-accent); }
+
+        /* ── FOOTER ───────────────────────────────────── */
+        .page-footer {
+            margin-top: 2.5rem;
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        .page-footer a {
+            color: var(--color-text-muted);
+            text-decoration: underline;
+        }
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 640px) {
+            .card { grid-template-columns: 1fr; }
+
+            .panel-book {
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+                padding: 2.5rem 1.5rem;
+            }
+
+            .panel-download { padding: 2rem 1.5rem; }
+
+            .book-cover-wrap { width: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="ambient"></div>
+
+<div class="page-wrap">
+
+    <a href="/" class="brand">Lucifer Read</a>
+
+    <div class="card">
+
+        <!-- LEFT: Book Cover + What's Included -->
+        <div class="panel-book">
+
+            <div class="thank-you-badge">Welcome Aboard</div>
+
+            <div class="book-cover-wrap">
+                <img
+                    src="/assets/images/radiant_cover_800w.webp"
+                    srcset="/assets/images/radiant_cover_400w.webp 400w,
+                            /assets/images/radiant_cover_800w.webp 800w"
+                    sizes="(max-width: 640px) 140px, 180px"
+                    alt="The Radiants Book Cover"
+                    class="book-cover"
+                >
             </div>
 
-            <div style="flex: 1; min-width: 250px; text-align: center;">
-                <h4 style="color: var(--color-text-main); margin-bottom: 0.5rem;">📄 PDF</h4>
-                <p style="font-size: 0.9rem; color: var(--color-text-muted);">
-                    Universal format - open on any device with a PDF reader
-                </p>
+            <ul class="included-list">
+                <li>Chapters 1–3</li>
+                <li>Approximately 30 pages</li>
+                <li>Your first glimpse into a world that has never known night</li>
+            </ul>
+
+        </div>
+
+        <!-- RIGHT: Download options -->
+        <div class="panel-download">
+
+            <p class="eyebrow">Your download is ready</p>
+
+            <h1 class="headline">Welcome to the<br>Éskhatos Kósmos</h1>
+
+            <p class="pitch">
+                Choose your format below and begin reading
+                <em>The Radiants</em> today. You'll also receive monthly
+                updates, behind-the-scenes insights, and sneak peeks
+                as the saga unfolds.
+            </p>
+
+            <hr class="divider">
+
+            <div class="download-buttons">
+
+                <a href="/assets/downloads/the_radiants_sample.epub"
+                   download
+                   class="dl-btn primary"
+                   data-format="epub">
+                    <span class="btn-icon">📱</span>
+                    <span class="btn-label">Download EPUB</span>
+                    <span class="btn-sub">Most e-readers</span>
+                </a>
+
+                <a href="/assets/downloads/the_radiants_sample.pdf"
+                   download
+                   class="dl-btn"
+                   data-format="pdf">
+                    <span class="btn-icon">📄</span>
+                    <span class="btn-label">Download PDF</span>
+                    <span class="btn-sub">Universal</span>
+                </a>
+
+                <a href="/assets/downloads/the_radiants_sample.mobi"
+                   download
+                   class="dl-btn"
+                   data-format="mobi">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-label">Download MOBI</span>
+                    <span class="btn-sub">Kindle</span>
+                </a>
+
             </div>
 
-            <div style="flex: 1; min-width: 250px; text-align: center;">
-                <h4 style="color: var(--color-text-main); margin-bottom: 0.5rem;">📚 MOBI</h4>
-                <p style="font-size: 0.9rem; color: var(--color-text-muted);">
-                    For older Kindle devices - use "Send to Kindle" or transfer via USB
-                </p>
-            </div>
+            <p class="format-tips">
+                <span>EPUB</span> · Apple Books, Kobo, Nook, Google Play Books<br>
+                <span>MOBI</span> · Older Kindle devices via USB or Send to Kindle
+            </p>
+
+            <hr class="divider">
+
+            <a href="/" class="back-link">← Return to site</a>
+
         </div>
     </div>
-</section>
+
+    <!-- <footer class="page-footer">
+        &copy; 2026 Lucifer Read &nbsp;·&nbsp;
+        <a href="/">Return to site</a>
+    </footer> -->
+
+</div>
+
+<!-- DOWNLOAD TRACKING -->
+<!-- Each button click fires a lightweight event to your analytics provider. -->
+
+<!-- GoatCounter page tracking -->
+<script data-goatcounter="https://luciferread.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+<!-- Download button event tracking -->
+<script>
+document.querySelectorAll('.dl-btn[data-format]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const format = btn.dataset.format;
+
+        if (typeof goatcounter !== 'undefined') {
+            goatcounter.count({
+                path:  `download-${format}`,
+                title: `Ebook Download: ${format.toUpperCase()}`,
+                event: true
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

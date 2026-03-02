@@ -270,7 +270,7 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
         // No group rotation needed — we set cx/cy directly
         group.style.transform = 'none';
 
-        updateMoonPhase(cycleProgress);
+        updateMoonPhase(cycleProgress, moonX, moonY);
         return;
     }
 
@@ -289,33 +289,46 @@ function positionMoon(sector, targetDate, durationMs, periodMs) {
 }
 
 // Update moon phase visualization for Earth
-function updateMoonPhase(cycleProgress) {
-    const darkHalf = document.getElementById('earth-moon-dark-half');
-    if (!darkHalf) return;
+function updateMoonPhase(cycleProgress, moonX, moonY) {
+    const moonPath = document.getElementById('earth-moon-path');
+    const moonBg   = document.getElementById('earth-moon-bg');
+    if (!moonPath || !moonBg) return;
 
-    // Waxing (0–0.5): right half lit → clip the LEFT half dark (D-shape)
-    // Waning (0.5–1): left half lit → clip the RIGHT half dark (C-shape)
+    const r = 4;
+
+    // Move the dark background disc to match the moon's position
+    moonBg.setAttribute('cx', moonX);
+    moonBg.setAttribute('cy', moonY);
+
+    // Build the lit crescent/gibbous path using an elliptical terminator
+    // phase 0=new, 0.25=first quarter, 0.5=full, 0.75=last quarter
+    const cosPhase = Math.cos(cycleProgress * 2 * Math.PI);
+    const rx = Math.abs(cosPhase) * r; // terminator ellipse x-radius
+    const top = [moonX, moonY - r];
+    const bot = [moonX, moonY + r];
+
+    let d;
     if (cycleProgress < 0.5) {
-        darkHalf.setAttribute('clip-path', 'url(#moon-clip-left)');
+        // Waxing: lit side is RIGHT
+        // Right semicircle (clockwise), then terminator back to top
+        // crescent (0–0.25): cosPhase>0, terminator sweeps right (ccw, sweep=0)
+        // gibbous (0.25–0.5): cosPhase<0, terminator sweeps left (cw, sweep=1)
+        const tSweep = cosPhase >= 0 ? 0 : 1;
+        d = `M ${top[0]} ${top[1]} A ${r} ${r} 0 0 1 ${bot[0]} ${bot[1]} A ${rx} ${r} 0 0 ${tSweep} ${top[0]} ${top[1]} Z`;
     } else {
-        darkHalf.setAttribute('clip-path', 'url(#moon-clip-right)');
+        // Waning: lit side is LEFT
+        // Left semicircle (counter-clockwise), then terminator back to top
+        // gibbous (0.5–0.75): cosPhase<0, sweep=1
+        // crescent (0.75–1): cosPhase>0, sweep=0
+        const tSweep = cosPhase <= 0 ? 1 : 0;
+        d = `M ${top[0]} ${top[1]} A ${r} ${r} 0 0 0 ${bot[0]} ${bot[1]} A ${rx} ${r} 0 0 ${tSweep} ${top[0]} ${top[1]} Z`;
     }
+    moonPath.setAttribute('d', d);
 
-    // Glow intensity by phase
-    const moonPhaseCircle = document.querySelector('.moon-phase');
-    if (moonPhaseCircle) {
-        let glowIntensity;
-        if (cycleProgress < 0.15 || cycleProgress > 0.85) {
-            // Near new moon: thin crescent
-            glowIntensity = 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 3px rgba(236, 240, 241, 0.4))';
-        } else if (cycleProgress > 0.4 && cycleProgress < 0.6) {
-            // Near full moon: brighter glow
-            glowIntensity = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 5px rgba(236, 240, 241, 0.5))';
-        } else {
-            glowIntensity = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 4px rgba(236, 240, 241, 0.3))';
-        }
-        moonPhaseCircle.style.filter = glowIntensity;
-    }
+    // Glow varies by phase — brightest near full moon
+    const illumination = (1 - Math.cos(cycleProgress * 2 * Math.PI)) / 2;
+    const glow = illumination * 4;
+    moonPath.style.filter = `drop-shadow(0 0 ${glow.toFixed(1)}px rgba(255,255,255,${(0.3 + illumination * 0.5).toFixed(2)}))`;
 }
 
 function formatTime(ms) {
