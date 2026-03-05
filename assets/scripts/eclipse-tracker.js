@@ -81,7 +81,7 @@ function updateTrackingStation() {
             updateCard('earth', nextEarthDate, earthDuration);
             positionMoon('earth', nextEarthDate, earthDuration, 27.3 * 24 * 60 * 60 * 1000); // Earth orbit ref
         }
-        document.getElementById('earth-status').innerText = `Location: ${nextEarth.loc} | Dur: ${nextEarth.duration}`;
+        document.getElementById('earth-status').innerText = `Location: ${nextEarth.loc}\nDur: ${nextEarth.duration}`;
     } else {
         // No more eclipses in our list
         const timerEl = document.getElementById('earth-timer');
@@ -320,7 +320,7 @@ function updateMoonPhase(cycleProgress, moonX, moonY) {
         // Left semicircle (counter-clockwise), then terminator back to top
         // gibbous (0.5–0.75): cosPhase<0, sweep=1
         // crescent (0.75–1): cosPhase>0, sweep=0
-        const tSweep = cosPhase <= 0 ? 1 : 0;
+        const tSweep = cosPhase <= 0 ? 0 : 1;
         d = `M ${top[0]} ${top[1]} A ${r} ${r} 0 0 0 ${bot[0]} ${bot[1]} A ${rx} ${r} 0 0 ${tSweep} ${top[0]} ${top[1]} Z`;
     }
     moonPath.setAttribute('d', d);

@@ -38,12 +38,17 @@ async function fetchTransmission() {
         }
 
         document.getElementById('nasa-title').innerText = data.title;
-        document.getElementById('nasa-explanation').innerText = explanation;
+        document.getElementById('nasa-explanation').innerText = 
+            explanation.replace(/^Explanation:\\s*/i, '').trim();
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
         // Handle Copyright if provided
         if (data.copyright) {
-            copyrightEl.innerText = '© ' + data.copyright;
+            const credit = data.copyright
+                .replace(/\\n+/g, ' · ')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+            copyrightEl.innerText = '© ' + credit;
             copyrightEl.style.display = 'block';
         } else {
             copyrightEl.style.display = 'none';
