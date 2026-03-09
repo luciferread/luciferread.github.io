@@ -81,7 +81,8 @@ function updateTrackingStation() {
             updateCard('earth', nextEarthDate, earthDuration);
             positionMoon('earth', nextEarthDate, earthDuration, 27.3 * 24 * 60 * 60 * 1000); // Earth orbit ref
         }
-        document.getElementById('earth-status').innerText = `Location: ${nextEarth.loc}\nDuration: ${nextEarth.duration}`;
+        // document.getElementById('earth-status').innerText = `Location: ${nextEarth.loc}\nDuration: ${nextEarth.duration}`;
+        document.getElementById('earth-status').innerText = 'Location: ' + nextEarth.loc + '\nDuration: ' + nextEarth.duration;
     } else {
         // No more eclipses in our list
         const timerEl = document.getElementById('earth-timer');

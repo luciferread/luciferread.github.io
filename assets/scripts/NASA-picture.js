@@ -27,6 +27,14 @@ async function fetchTransmission() {
         }
 
         let explanation = data.explanation;
+        // Strip leading "Explanation: " prefix if present
+        if (explanation.startsWith('Explanation: ')) {
+            explanation = explanation.slice('Explanation: '.length);
+        } else if (explanation.startsWith('Explanation:')) {
+            explanation = explanation.slice('Explanation:'.length);
+        }
+        explanation = explanation.trim();
+
         // Sanitize: NASA often appends promotional links like "Jigsaw Galaxy" or "Astronomy Puzzle" to the end.
         // We trim these to keep the focus on the actual astronomical fact.
         const promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise'];
@@ -37,22 +45,51 @@ async function fetchTransmission() {
             }
         }
 
+        // Extract "Text: ..." credit buried at end of explanation, e.g.:
+        // "...great distances. \n Text:\nKeighley Rockcliffe\n(NASA GSFC...)"
+        let textCredit = '';
+        let embeddedImageCredit = '';
+
+        // Extract "Image Credit: ..." if embedded in explanation
+        const imageCreditIndex = explanation.search(/\n\s*Image Credit:/i);
+        if (imageCreditIndex !== -1) {
+            const raw = explanation.slice(imageCreditIndex).trim();
+            explanation = explanation.slice(0, imageCreditIndex).trim();
+            embeddedImageCredit = raw
+                .split('\n')
+                .map(function(s) { return s.trim(); })
+                .filter(function(s) { return s.length > 0; })
+                .join(' ');
+        }
+
         document.getElementById('nasa-title').innerText = data.title;
-        document.getElementById('nasa-explanation').innerText = 
-            explanation.replace(/^Explanation:\\s*/i, '').trim();
+        document.getElementById('nasa-explanation').innerText = explanation;
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
-        // Handle Copyright if provided
+        // Build credit line: image credit + optional text credit
+        const parts = [];
+
         if (data.copyright) {
-            const credit = data.copyright
-                .replace(/\\n+/g, ' · ')
-                .replace(/\s{2,}/g, ' ')
-                .trim();
-            copyrightEl.innerText = '© ' + credit;
-            copyrightEl.style.display = 'block';
+            // Named photographer/artist credit
+            const imageCredit = data.copyright
+                .split('\n')
+                .map(function(s) { return s.trim(); })
+                .filter(function(s) { return s.length > 0; })
+                .join(' ');
+            parts.push('Image: ' + imageCredit);
         } else {
-            copyrightEl.style.display = 'none';
+            // NASA/ESA public domain images — no copyright field in API,
+            // but still need attribution
+            parts.push('Image: NASA / ESA / STScI');
         }
+
+        if (textCredit) {
+            parts.push(textCredit);
+        }
+
+        // Always show credits
+        copyrightEl.innerText = parts.join(' · ');
+        copyrightEl.style.display = 'block';
 
         if (data.media_type === 'image') {
             img.src = data.url;
