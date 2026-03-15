@@ -1,33 +1,25 @@
 // <!-- NASA Astronomy Picture of the Day (APOD) Integration -->
 
 async function fetchTransmission() {
-    const loading = document.getElementById('nasa-loading');
-    const card = document.getElementById('nasa-transmission');
-    const img = document.getElementById('nasa-image');
-    const videoContainer = document.getElementById('nasa-video-container');
-    const videoFrame = document.getElementById('nasa-video');
-    const copyrightEl = document.getElementById('nasa-copyright');
+    var loading = document.getElementById('nasa-loading');
+    var card = document.getElementById('nasa-transmission');
+    var img = document.getElementById('nasa-image');
+    var videoContainer = document.getElementById('nasa-video-container');
+    var videoFrame = document.getElementById('nasa-video');
+    var copyrightEl = document.getElementById('nasa-copyright');
 
     try {
-        // Using the user's personal NASA API key
-        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=idnQSUVorcc9PskcWyfc4WgZUKXbrDke2UCwMeoZ');
-
-        if (!response.ok) {
-            if (response.status === 429) {
-                throw new Error('RATE_LIMIT_EXCEEDED');
-            }
+        // 1. Fetch today's APOD data from NASA API
+        var apiResponse = await fetch('https://api.nasa.gov/planetary/apod?api_key=idnQSUVorcc9PskcWyfc4WgZUKXbrDke2UCwMeoZ');
+        if (!apiResponse.ok) {
+            if (apiResponse.status === 429) throw new Error('RATE_LIMIT_EXCEEDED');
             throw new Error('NETWORK_ERROR');
         }
+        var data = await apiResponse.json();
+        if (!data || !data.title) throw new Error('INVALID_DATA');
 
-        const data = await response.json();
-
-        // Validate data presence
-        if (!data || !data.title) {
-            throw new Error('INVALID_DATA');
-        }
-
-        let explanation = data.explanation;
-        // Strip leading "Explanation: " prefix if present
+        // 2. Clean up explanation text
+        var explanation = data.explanation;
         if (explanation.startsWith('Explanation: ')) {
             explanation = explanation.slice('Explanation: '.length);
         } else if (explanation.startsWith('Explanation:')) {
@@ -35,62 +27,88 @@ async function fetchTransmission() {
         }
         explanation = explanation.trim();
 
-        // Sanitize: NASA often appends promotional links like "Jigsaw Galaxy" or "Astronomy Puzzle" to the end.
-        // We trim these to keep the focus on the actual astronomical fact.
-        const promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise'];
-        for (const phrase of promoPhrases) {
-            const index = explanation.indexOf(phrase);
-            if (index !== -1) {
-                explanation = explanation.substring(0, index).trim();
+        // Remove promotional phrases NASA sometimes appends
+        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise'];
+        for (var i = 0; i < promoPhrases.length; i++) {
+            var idx = explanation.indexOf(promoPhrases[i]);
+            if (idx !== -1) {
+                explanation = explanation.substring(0, idx).trim();
             }
         }
 
-        // Extract "Text: ..." credit buried at end of explanation, e.g.:
-        // "...great distances. \n Text:\nKeighley Rockcliffe\n(NASA GSFC...)"
-        let textCredit = '';
-        let embeddedImageCredit = '';
-
-        // Extract "Image Credit: ..." if embedded in explanation
-        const imageCreditIndex = explanation.search(/\n\s*Image Credit:/i);
-        if (imageCreditIndex !== -1) {
-            const raw = explanation.slice(imageCreditIndex).trim();
-            explanation = explanation.slice(0, imageCreditIndex).trim();
-            embeddedImageCredit = raw
-                .split('\n')
-                .map(function(s) { return s.trim(); })
-                .filter(function(s) { return s.length > 0; })
-                .join(' ');
-        }
-
+        // 3. Set title, explanation, date
         document.getElementById('nasa-title').innerText = data.title;
         document.getElementById('nasa-explanation').innerText = explanation;
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
-        // Build credit line: image credit + optional text credit
-        const parts = [];
+        // 4. Credits
+        // Named photographer images: API provides data.copyright
+        // NASA/ESA public domain images: data.copyright is absent.
+        //   The credit lives only on the HTML page, so we fetch it via
+        //   a CORS proxy (browsers block direct cross-origin requests to apod.nasa.gov)
+        var creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
-            // Named photographer/artist credit
-            const imageCredit = data.copyright
+            var cleaned = data.copyright
                 .split('\n')
                 .map(function(s) { return s.trim(); })
                 .filter(function(s) { return s.length > 0; })
                 .join(' ');
-            parts.push('Image: ' + imageCredit);
+            creditText = 'Image Credit & Copyright: ' + cleaned;
         } else {
-            // NASA/ESA public domain images — no copyright field in API,
-            // but still need attribution
-            parts.push('Image: NASA / ESA / STScI');
+            // Build the APOD page URL for today's date e.g. "2026-03-14" -> ap260314.html
+            var parts = data.date.split('-');
+            var apodUrl = 'https://apod.nasa.gov/apod/ap' + parts[0].slice(2) + parts[1] + parts[2] + '.html';
+            var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
+
+            try {
+                var pageResponse = await fetch(proxyUrl);
+                if (pageResponse.ok) {
+                    var json = await pageResponse.json();
+                    var html = json.contents;
+
+                    // Find any "...Credit:" label in the page
+                    var creditIdx = html.indexOf('Credit:');
+                    if (creditIdx !== -1) {
+                        // Walk back to start of that line to include the label (e.g. "Image Credit:" or "Artist Illustration Credit:")
+                        var lineStart = html.lastIndexOf('\n', creditIdx);
+                        if (lineStart === -1) lineStart = 0;
+
+                        // Find the closing </b> of the label, then grab text until Explanation
+                        var afterB = html.indexOf('</b>', creditIdx);
+                        if (afterB !== -1) {
+                            afterB += 4;
+                            var endIdx = html.indexOf('<b>Explanation', afterB);
+                            if (endIdx === -1) endIdx = afterB + 400;
+
+                            var raw = html.slice(lineStart, endIdx);
+
+                            // Strip tags and collapse whitespace
+                            var extracted = raw
+                                .replace(/<[^>]+>/g, '')
+                                .replace(/&amp;/g, '&')
+                                .replace(/&lt;/g, '<')
+                                .replace(/&gt;/g, '>')
+                                .replace(/&#[0-9]+;/g, '')
+                                .replace(/\s+/g, ' ')
+                                .trim();
+
+                            if (extracted.length > 0) {
+                                creditText = extracted;
+                            }
+                        }
+                    }
+                }
+            } catch (pageErr) {
+                console.warn('Could not fetch APOD page credit:', pageErr);
+                // creditText stays as fallback "Image Credit: NASA"
+            }
         }
 
-        if (textCredit) {
-            parts.push(textCredit);
-        }
-
-        // Always show credits
-        copyrightEl.innerText = parts.join(' · ');
+        copyrightEl.innerText = creditText;
         copyrightEl.style.display = 'block';
 
+        // 5. Show image or video
         if (data.media_type === 'image') {
             img.src = data.url;
             img.style.display = 'block';
@@ -107,12 +125,11 @@ async function fetchTransmission() {
     } catch (error) {
         console.error('Transmission failed:', error);
         if (error.message === 'RATE_LIMIT_EXCEEDED') {
-            loading.innerHTML = 'SENSOR OVERLOAD: NASA API rate limit exceeded. <br><small>Please try again later or configure a personal API key.</small>';
+            loading.innerHTML = 'SENSOR OVERLOAD: NASA API rate limit exceeded.<br><small>Please try again later.</small>';
         } else {
             loading.innerText = 'SIGNAL LOST: Sector currently unreachable.';
         }
     }
 }
 
-// Run when page loads
 window.addEventListener('load', fetchTransmission);
