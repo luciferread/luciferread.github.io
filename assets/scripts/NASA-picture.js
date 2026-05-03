@@ -28,7 +28,7 @@ async function fetchTransmission() {
         explanation = explanation.trim();
 
         // Remove promotional phrases NASA sometimes appends
-        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise', 'Almost Hyperspace', 'Celebrate'];
+        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise', 'Almost Hyperspace', 'Celebrate', 'Explore the Universe'];
         for (var i = 0; i < promoPhrases.length; i++) {
             var idx = explanation.indexOf(promoPhrases[i]);
             if (idx !== -1) {
