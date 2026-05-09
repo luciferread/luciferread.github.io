@@ -30,38 +30,38 @@ async function fetchTransmission() {
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
         // 4. Credits
-        let creditText = 'Image Credit: NASA'; // fallback
+        var creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
             creditText = 'Image Credit & Copyright: ' + data.copyright
-            .split('\n')
-            .map(s => s.trim())
-            .filter(Boolean)
-            .join(' ');
+                .split('\n')
+                .map(s => s.trim())
+                .filter(Boolean)
+                .join(' ');
         } else {
             // Build APOD page URL
-            const parts = data.date.split('-');
-            const apodUrl = `https://apod.nasa.gov/apod/ap${parts[0].slice(2)}${parts[1]}${parts[2]}.html`;
-            const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
+            var parts = data.date.split('-');
+            var apodUrl = 'https://apod.nasa.gov/apod/ap' + parts[0].slice(2) + parts[1] + parts[2] + '.html';
+            var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
 
             try {
-                const pageResponse = await fetch(proxyUrl);
+                var pageResponse = await fetch(proxyUrl);
                 if (pageResponse.ok) {
-                    const json = await pageResponse.json();
-                    const html = json.contents;
+                    var json = await pageResponse.json();
+                    var html = json.contents;
 
                     // Search for "Credit:" and grab text until Explanation
-                    const creditIdx = html.indexOf('Credit:');
+                    var creditIdx = html.indexOf('Credit:');
                     if (creditIdx !== -1) {
                         // Grab text from Credit: up to "<b>Explanation" or end of nearby 500 chars
-                        const afterB = html.indexOf('</b>', creditIdx) + 4 || creditIdx;
-                        const explanationIdx = html.indexOf('<b>Explanation', afterB);
-                        const endIdx = explanationIdx !== -1 ? explanationIdx : afterB + 500;
+                        var afterB = html.indexOf('</b>', creditIdx) + 4 || creditIdx;
+                        var explanationIdx = html.indexOf('<b>Explanation', afterB);
+                        var endIdx = explanationIdx !== -1 ? explanationIdx : afterB + 500;
 
-                        let raw = html.slice(creditIdx, endIdx);
+                        var raw = html.slice(creditIdx, endIdx);
 
                         // Remove any HTML tags, collapse whitespace, and strip trailing "Explanation:" if present
-                        let extracted = raw.replace(/<[^>]+>/g, '')
+                        var extracted = raw.replace(/<[^>]+>/g, '')
                                    .replace(/&amp;/g, '&')
                                    .replace(/&lt;/g, '<')
                                    .replace(/&gt;/g, '>')
