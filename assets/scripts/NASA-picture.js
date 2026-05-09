@@ -1,83 +1,87 @@
 // <!-- NASA Astronomy Picture of the Day (APOD) Integration -->
 
 async function fetchTransmission() {
-    var loading = document.getElementById('nasa-loading');
-    var card = document.getElementById('nasa-transmission');
-    var img = document.getElementById('nasa-image');
-    var videoContainer = document.getElementById('nasa-video-container');
-    var videoFrame = document.getElementById('nasa-video');
-    var copyrightEl = document.getElementById('nasa-copyright');
+    const loading = document.getElementById('nasa-loading');
+    const card = document.getElementById('nasa-transmission');
+    const img = document.getElementById('nasa-image');
+    const videoContainer = document.getElementById('nasa-video-container');
+    const videoFrame = document.getElementById('nasa-video');
+    const copyrightEl = document.getElementById('nasa-copyright');
 
     try {
         // 1. Fetch today's APOD data from NASA API
-        var apiResponse = await fetch('https://api.nasa.gov/planetary/apod?api_key=idnQSUVorcc9PskcWyfc4WgZUKXbrDke2UCwMeoZ');
+        const apiResponse = await fetch('https://api.nasa.gov/planetary/apod?api_key=idnQSUVorcc9PskcWyfc4WgZUKXbrDke2UCwMeoZ');
         if (!apiResponse.ok) {
             if (apiResponse.status === 429) throw new Error('RATE_LIMIT_EXCEEDED');
             throw new Error('NETWORK_ERROR');
         }
-        var data = await apiResponse.json();
+        const data = await apiResponse.json();
         if (!data || !data.title) throw new Error('INVALID_DATA');
 
         // 2. Clean up explanation text
-        var explanation = data.explanation || '';
-        if (explanation.startsWith('Explanation: ')) {
-            explanation = explanation.slice('Explanation: '.length);
-        } else if (explanation.startsWith('Explanation:')) {
-            explanation = explanation.slice('Explanation:'.length);
-        }
-        explanation = explanation.trim();
+        let explanation = data.explanation.replace(/^Explanation: ?/, '').trim();
 
         // Keep only the first paragraph for display
-        var mainText = explanation.split(/\n\s*\n/)[0].trim();
+        const mainText = explanation.split(/\n\s*\n/)[0].trim();
 
         // 3. Set title, explanation, date
         document.getElementById('nasa-title').innerText = data.title;
-        document.getElementById('nasa-explanation').innerText = mainText;
+        document.getElementById('nasa-explanation').innerText = explanation;
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
         // 4. Credits
-        var creditText = 'Image Credit: NASA'; // fallback
+        let creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
-            creditText = 'Image Credit & Copyright: ' + data.copyright;
-        } else if (location.hostname !== 'localhost') { // Skip proxy fetch on localhost
-            var parts = data.date.split('-');
-            var apodUrl = 'https://apod.nasa.gov/apod/ap' + parts[0].slice(2) + parts[1] + parts[2] + '.html';
-            var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
+            // Named photographer or institution provided in API
+            creditText = 'Image Credit & Copyright: ' + data.copyright.split('\n').map(s => s.trim()).filter(Boolean).join(' ');
+        } else {
+            // Build APOD page URL
+            const parts = data.date.split('-');
+            const apodUrl = `https://apod.nasa.gov/apod/ap${parts[0].slice(2)}${parts[1]}${parts[2]}.html`;
+            const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
 
             try {
-                var pageResponse = await fetch(proxyUrl);
+                const pageResponse = await fetch(proxyUrl);
                 if (pageResponse.ok) {
-                    var json = await pageResponse.json();
-                    var html = json.contents;
+                    const json = await pageResponse.json();
+                    const html = json.contents;
 
-                    // Search all <center>, <b>, and <p> blocks for credit info
-                    var creditBlocks = [];
-                    ['center','b','p'].forEach(tag => {
-                        var matches = html.match(new RegExp('<' + tag + '>([\\s\\S]*?)</' + tag + '>', 'gi')) || [];
-                        creditBlocks = creditBlocks.concat(matches);
-                    });
+                    // Search for "Credit:" and grab text until Explanation
+                    const creditIdx = html.indexOf('Credit:');
+                    if (creditIdx !== -1) {
+                        const lineStart = html.lastIndexOf('\n', creditIdx) || 0;
+                        const afterB = html.indexOf('</b>', creditIdx) + 4 || creditIdx;
+                        const endIdx = html.indexOf('<b>Explanation', afterB) !== -1
+                            ? html.indexOf('<b>Explanation', afterB)
+                            : afterB + 500; // slightly larger window for long credits
 
-                    for (var block of creditBlocks) {
-                        block = block.replace(/<\/?(center|b|p)>/gi, '')   // remove outer tags
-                                    .replace(/<br\s*\/?>/gi, '\n')        // convert <br> to newline
-                                    .replace(/<[^>]+>/g,'');              // remove remaining HTML
+                        let raw = html.slice(lineStart, endIdx);
 
-                        var lines = block.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-                        for (var line of lines) {
-                            if (/Credit|Copyright/i.test(line)) {
-                                creditText = line;  // Keep the full line, no APOD URL appended
-                                break;
-                            }
+                        // Strip tags and clean up
+                        let extracted = raw.replace(/<[^>]+>/g, '')
+                                           .replace(/&amp;/g, '&')
+                                           .replace(/&lt;/g, '<')
+                                           .replace(/&gt;/g, '>')
+                                           .replace(/&#[0-9]+;/g, '')
+                                           .replace(/\s+/g, ' ')
+                                           .trim();
+
+                        if (extracted.length > 0) {
+                            creditText = extracted;
                         }
-                        if (creditText !== 'Image Credit: NASA') break;
+                    } else {
+                        // fallback shows APOD link if credit not found
+                        creditText += ' — see APOD page: ' + apodUrl;
                     }
                 }
-            } catch(e) {
+            } catch (e) {
                 console.warn('Failed to fetch APOD credits:', e);
+                // fallback creditText stays as 'Image Credit: NASA'
             }
         }
 
+        // Update DOM
         copyrightEl.innerText = creditText;
         copyrightEl.style.display = 'block';
 
