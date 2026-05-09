@@ -19,7 +19,7 @@ async function fetchTransmission() {
         if (!data || !data.title) throw new Error('INVALID_DATA');
 
         // 2. Clean up explanation text
-        var explanation = data.explanation;
+        var explanation = data.explanation || '';
         if (explanation.startsWith('Explanation: ')) {
             explanation = explanation.slice('Explanation: '.length);
         } else if (explanation.startsWith('Explanation:')) {
@@ -27,36 +27,20 @@ async function fetchTransmission() {
         }
         explanation = explanation.trim();
 
-        // Remove promotional phrases NASA sometimes appends
-        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise', 'Almost Hyperspace', 'Celebrate', 'Explore the Universe'];
-        for (var i = 0; i < promoPhrases.length; i++) {
-            var idx = explanation.indexOf(promoPhrases[i]);
-            if (idx !== -1) {
-                explanation = explanation.substring(0, idx).trim();
-            }
-        }
+        // Keep only the first paragraph for display
+        var mainText = explanation.split(/\n\s*\n/)[0].trim();
 
         // 3. Set title, explanation, date
         document.getElementById('nasa-title').innerText = data.title;
-        document.getElementById('nasa-explanation').innerText = explanation;
+        document.getElementById('nasa-explanation').innerText = mainText;
         document.getElementById('nasa-date').innerText = 'STARDATE: ' + data.date;
 
         // 4. Credits
-        // Named photographer images: API provides data.copyright
-        // NASA/ESA public domain images: data.copyright is absent.
-        //   The credit lives only on the HTML page, so we fetch it via
-        //   a CORS proxy (browsers block direct cross-origin requests to apod.nasa.gov)
         var creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
-            var cleaned = data.copyright
-                .split('\n')
-                .map(function(s) { return s.trim(); })
-                .filter(function(s) { return s.length > 0; })
-                .join(' ');
-            creditText = 'Image Credit & Copyright: ' + cleaned;
-        } else {
-            // Build the APOD page URL for today's date e.g. "2026-03-14" -> ap260314.html
+            creditText = 'Image Credit & Copyright: ' + data.copyright;
+        } else if (location.hostname !== 'localhost') { // Skip proxy fetch on localhost
             var parts = data.date.split('-');
             var apodUrl = 'https://apod.nasa.gov/apod/ap' + parts[0].slice(2) + parts[1] + parts[2] + '.html';
             var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apodUrl);
@@ -67,41 +51,28 @@ async function fetchTransmission() {
                     var json = await pageResponse.json();
                     var html = json.contents;
 
-                    // Find any "...Credit:" label in the page
-                    var creditIdx = html.indexOf('Credit:');
-                    if (creditIdx !== -1) {
-                        // Walk back to start of that line to include the label (e.g. "Image Credit:" or "Artist Illustration Credit:")
-                        var lineStart = html.lastIndexOf('\n', creditIdx);
-                        if (lineStart === -1) lineStart = 0;
+                    // Search <center>, <b>, or <p> blocks for credit info
+                    var creditBlocks = html.match(/<center>([\s\S]*?)<\/center>/gi)
+                                      || html.match(/<b>([\s\S]*?)<\/b>/gi)
+                                      || html.match(/<p>([\s\S]*?)<\/p>/gi) || [];
 
-                        // Find the closing </b> of the label, then grab text until Explanation
-                        var afterB = html.indexOf('</b>', creditIdx);
-                        if (afterB !== -1) {
-                            afterB += 4;
-                            var endIdx = html.indexOf('<b>Explanation', afterB);
-                            if (endIdx === -1) endIdx = afterB + 400;
+                    for (var block of creditBlocks) {
+                        block = block.replace(/<\/?(center|b|p)>/gi, '')   // remove tags
+                                     .replace(/<br\s*\/?>/gi, '\n')        // convert <br> to newline
+                                     .replace(/<[^>]+>/g,'');              // remove remaining HTML
 
-                            var raw = html.slice(lineStart, endIdx);
-
-                            // Strip tags and collapse whitespace
-                            var extracted = raw
-                                .replace(/<[^>]+>/g, '')
-                                .replace(/&amp;/g, '&')
-                                .replace(/&lt;/g, '<')
-                                .replace(/&gt;/g, '>')
-                                .replace(/&#[0-9]+;/g, '')
-                                .replace(/\s+/g, ' ')
-                                .trim();
-
-                            if (extracted.length > 0) {
-                                creditText = extracted;
+                        var lines = block.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                        for (var line of lines) {
+                            if (/Credit|Copyright/i.test(line)) {
+                                creditText = line + ' — see APOD page: ' + apodUrl;
+                                break;
                             }
                         }
+                        if (creditText !== 'Image Credit: NASA') break;
                     }
                 }
-            } catch (pageErr) {
-                console.warn('Could not fetch APOD page credit:', pageErr);
-                // creditText stays as fallback "Image Credit: NASA"
+            } catch(e) {
+                console.warn('Failed to fetch APOD credits:', e);
             }
         }
 
