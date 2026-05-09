@@ -51,20 +51,22 @@ async function fetchTransmission() {
                     var json = await pageResponse.json();
                     var html = json.contents;
 
-                    // Search <center>, <b>, or <p> blocks for credit info
-                    var creditBlocks = html.match(/<center>([\s\S]*?)<\/center>/gi)
-                                      || html.match(/<b>([\s\S]*?)<\/b>/gi)
-                                      || html.match(/<p>([\s\S]*?)<\/p>/gi) || [];
+                    // Search all <center>, <b>, and <p> blocks for credit info
+                    var creditBlocks = [];
+                    ['center','b','p'].forEach(tag => {
+                        var matches = html.match(new RegExp('<' + tag + '>([\\s\\S]*?)</' + tag + '>', 'gi')) || [];
+                        creditBlocks = creditBlocks.concat(matches);
+                    });
 
                     for (var block of creditBlocks) {
-                        block = block.replace(/<\/?(center|b|p)>/gi, '')   // remove tags
-                                     .replace(/<br\s*\/?>/gi, '\n')        // convert <br> to newline
-                                     .replace(/<[^>]+>/g,'');              // remove remaining HTML
+                        block = block.replace(/<\/?(center|b|p)>/gi, '')   // remove outer tags
+                                    .replace(/<br\s*\/?>/gi, '\n')        // convert <br> to newline
+                                    .replace(/<[^>]+>/g,'');              // remove remaining HTML
 
                         var lines = block.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                         for (var line of lines) {
                             if (/Credit|Copyright/i.test(line)) {
-                                creditText = line + ' — see APOD page: ' + apodUrl;
+                                creditText = line;  // Keep the full line, no APOD URL appended
                                 break;
                             }
                         }
