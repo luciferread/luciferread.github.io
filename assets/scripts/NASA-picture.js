@@ -33,8 +33,11 @@ async function fetchTransmission() {
         let creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
-            // Named photographer or institution provided in API
-            creditText = 'Image Credit & Copyright: ' + data.copyright.split('\n').map(s => s.trim()).filter(Boolean).join(' ');
+            creditText = 'Image Credit & Copyright: ' + data.copyright
+            .split('\n')
+            .map(s => s.trim())
+            .filter(Boolean)
+            .join(' ');
         } else {
             // Build APOD page URL
             const parts = data.date.split('-');
@@ -50,22 +53,22 @@ async function fetchTransmission() {
                     // Search for "Credit:" and grab text until Explanation
                     const creditIdx = html.indexOf('Credit:');
                     if (creditIdx !== -1) {
-                        const lineStart = html.lastIndexOf('\n', creditIdx) || 0;
+                        // Grab text from Credit: up to "<b>Explanation" or end of nearby 500 chars
                         const afterB = html.indexOf('</b>', creditIdx) + 4 || creditIdx;
-                        const endIdx = html.indexOf('<b>Explanation', afterB) !== -1
-                            ? html.indexOf('<b>Explanation', afterB)
-                            : afterB + 500; // slightly larger window for long credits
+                        const explanationIdx = html.indexOf('<b>Explanation', afterB);
+                        const endIdx = explanationIdx !== -1 ? explanationIdx : afterB + 500;
 
-                        let raw = html.slice(lineStart, endIdx);
+                        let raw = html.slice(creditIdx, endIdx);
 
-                        // Strip tags and clean up
+                        // Remove any HTML tags, collapse whitespace, and strip trailing "Explanation:" if present
                         let extracted = raw.replace(/<[^>]+>/g, '')
-                                           .replace(/&amp;/g, '&')
-                                           .replace(/&lt;/g, '<')
-                                           .replace(/&gt;/g, '>')
-                                           .replace(/&#[0-9]+;/g, '')
-                                           .replace(/\s+/g, ' ')
-                                           .trim();
+                                   .replace(/&amp;/g, '&')
+                                   .replace(/&lt;/g, '<')
+                                   .replace(/&gt;/g, '>')
+                                   .replace(/&#[0-9]+;/g, '')
+                                   .replace(/\s+/g, ' ')
+                                   .trim()
+                                   .replace(/\s*Explanation:.*$/i, ''); // <-- remove appended Explanation
 
                         if (extracted.length > 0) {
                             creditText = extracted;
