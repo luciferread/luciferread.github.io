@@ -29,9 +29,7 @@ permalink: /news.html
         {% endfor %}
     </div>
 
-    <!-- SUBSTACK EMBED -->
-        <iframe 
-            src="https://luciferread.substack.com/embed" width="100%" height="320" 
-            style="border: 1px solid var(--color-accent); background: transparent; max-width: 500px; display: block; margin: 0 auto;" 
-            frameborder="0" scrolling="no"></iframe>
+    <!-- NEWSLETTER SUBSCRIPTION EMBED -->
+        <div class="newsletter-widget"></div>
+        
 </section>

@@ -1,0 +1,260 @@
+/* --- MINIMAL LAYOUT — SHARED COMPONENTS --- */
+
+/* ── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+:root {
+  /* --- COLOR PALETTE (Extracted from your book cover) --- */
+
+  /* Deep, warm black background */
+  --color-bg: #0F100A;
+
+  /* Primary Gold/Amber Accent - used for Buttons and determining borders */
+  --color-accent: #C9B037;
+
+  /* Hover state for buttons - slightly brighter */
+  --color-accent-hover: #D4AF37;
+
+  /* Main text color - Pale Cream (easier on eyes than pure white) */
+  --color-text-main: #F4F1D6;
+
+  /* Secondary text/borders - Muted Olive Gold */
+  --color-text-muted: #A39634;
+
+  /* Special color for Direct Sales buttons (e.g., a nice Teal or Blue to contrast) */
+  --color-direct-buy: #37C9B0;
+  --color-direct-buy-hover: #37E0C0;
+
+  /* Additional computed colors */
+  --color-card-bg: rgba(30, 30, 30, 0.85);
+  --color-border-subtle: rgba(201, 176, 55, 0.3);
+  --color-timer-green: #00ff00;
+  --color-alert-red: #ff4444;
+  --color-accent-dim:   rgba(201, 176, 55, 0.15);
+  --color-border:      rgba(201, 176, 55, 0.25);
+  --color-bg-card:      rgba(20, 21, 14, 0.95);
+
+  /* --- FONTS --- */
+  /* 'Orbitron' is our sci-fi header font */
+  --font-header: 'Orbitron Bold', sans-serif;
+
+  /* Simple sans-serif for readable body text */
+  --font-body: system-ui, -apple-system, sans-serif;
+}
+
+/* ── NEWSLETTER ─────────────────────────────── */
+/* Page-specific adjustments for newsletter.html */
+.newsletter-page .newsletter-widget {
+    background: none; /* remove dark background */
+    border: none;     /* remove border */
+    padding: 0;       /* remove extra spacing */
+    max-width: 700px; /* optional: make wider if you like */
+}
+
+/* ── STARFIELD BACKGROUND ─────────────────────────────────────── */
+.stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stars::before,
+.stars::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(244,241,214,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 8%,  rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 55%, rgba(244,241,214,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 42%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5%  80%, rgba(244,241,214,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 75%, rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 28% 90%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 65%, rgba(244,241,214,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 35%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 90%, rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 42% 12%, rgba(201,176,55,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 78% 55%, rgba(201,176,55,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 20% 70%, rgba(201,176,55,0.3) 0%, transparent 100%);
+}
+
+.stars::after {
+    background-image:
+        radial-gradient(1px 1px at 33% 3%,  rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 67% 18%, rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 45%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 62%, rgba(244,241,214,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 25%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 3%  95%, rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 76% 82%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 38%, rgba(244,241,214,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 48% 88%, rgba(244,241,214,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 10%, rgba(244,241,214,0.5) 0%, transparent 100%);
+}
+
+/* Subtle ambient glow */
+.ambient {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 60%, rgba(201,176,55,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 100%, rgba(201,176,55,0.06) 0%, transparent 60%);
+}
+
+/* ── PAGE STRUCTURE ───────────────────────────────────────────── */
+.page-wrap {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+}
+
+/* ── BRAND LINK ───────────────────────────────────────────────── */
+.brand {
+    font-family: var(--font-header);
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.brand:hover {
+    opacity: 1;
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+/* ── MAIN CARD ────────────────────────────────────────────────── */
+.card {
+    width: 100%;
+    max-width: 860px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    box-shadow:
+        0 0 60px rgba(201, 176, 55, 0.06),
+        0 2px 40px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(201,176,55,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── PANEL LEFT — SHARED BASE ─────────────────────────────────── */
+.panel-book {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(160deg, rgba(201,176,55,0.05) 0%, transparent 60%);
+    border-right: 1px solid var(--color-border);
+}
+
+/* Corner decorations */
+.panel-book::before,
+.panel-book::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    opacity: 0.4;
+}
+.panel-book::before { top: 1rem;    left: 1rem;  border-width: 1px 0 0 1px; }
+.panel-book::after  { bottom: 1rem; right: 1rem; border-width: 0 1px 1px 0; }
+
+/* ── SHARED TYPOGRAPHY ────────────────────────────────────────── */
+.eyebrow {
+    font-family: var(--font-header);
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+.headline {
+    font-family: var(--font-header);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1.3;
+    letter-spacing: 1px;
+}
+
+.pitch {
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.pitch em {
+    color: var(--color-accent);
+    font-style: normal;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0.25rem 0;
+}
+
+/* ── MINIMAL PAGE FOOTER ──────────────────────────────────────── */
+.page-footer {
+    margin-top: 2.5rem;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+    text-align: center;
+}
+
+.page-footer a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-book {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding: 2.5rem 1.5rem;
+    }
+}

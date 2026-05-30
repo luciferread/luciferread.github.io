@@ -26,7 +26,7 @@ permalink: /privacy.html
         </p>
         <p>
             <strong>Newsletters:</strong> If you sign up for our newsletter, your email address is collected and managed 
-            by <a href="https://substack.com/ccpa?utm_source=embed_publication#personal-data-collected" target="_blank" rel="noopener noreferrer">Substack</a>, a third-party platform. We do not store your email on this website's server. 
+            by <a href="https://www.mailerlite.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">MailerLite</a>, a third-party platform. We do not store your email on this website's server. 
             You can unsubscribe at any time via the link in any newsletter email.
         </p>
 

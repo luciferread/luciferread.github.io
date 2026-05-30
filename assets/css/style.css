@@ -4,11 +4,11 @@
    I have set up "variables" at the top so you can easily change colors later.
 */
 
-/* LOAD ORBITRON FONT */
+/* LOAD FONTS */
 /* orbitron-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Orbitron';
+  font-family: 'Orbitron Regular';
   font-style: normal;
   font-weight: 400;
   src: url('/assets/fonts/orbitron-v35-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
@@ -16,17 +16,26 @@
 /* orbitron-700 - latin */
 @font-face {
   font-display: swap; 
-  font-family: 'Orbitron';
+  font-family: 'Orbitron Bold';
   font-style: normal;
   font-weight: 700;
   src: url('/assets/fonts/orbitron-v35-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* Libre Baskerville Italic */
+@font-face {
+  font-family: 'Libre Baskerville Italic';
+  src: url('/assets/fonts/LibreBaskerville-Italic-VariableFont_wght.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
 }
 
 :root {
   /* --- COLOR PALETTE (Extracted from your book cover) --- */
 
   /* Deep, warm black background */
-  --color-bg-dark: #0F100A;
+  --color-bg: #0F100A;
 
   /* Primary Gold/Amber Accent - used for Buttons and determining borders */
   --color-accent: #C9B037;
@@ -49,10 +58,13 @@
   --color-border-subtle: rgba(201, 176, 55, 0.3);
   --color-timer-green: #00ff00;
   --color-alert-red: #ff4444;
+  --color-accent-dim:   rgba(201, 176, 55, 0.15);
+  --color-border:      rgba(201, 176, 55, 0.25);
+  --color-bg-card:      rgba(20, 21, 14, 0.95);
 
   /* --- FONTS --- */
   /* 'Orbitron' is our sci-fi header font */
-  --font-header: 'Orbitron', sans-serif;
+  --font-header: 'Orbitron Bold', sans-serif;
 
   /* Simple sans-serif for readable body text */
   --font-body: system-ui, -apple-system, sans-serif;
@@ -61,7 +73,7 @@
 /* --- GLOBAL STYLES --- */
 
 body {
-  background-color: var(--color-bg-dark);
+  background-color: var(--color-bg);
   color: var(--color-text-main);
   font-family: var(--font-body);
   margin: 0;
@@ -126,7 +138,7 @@ a:hover {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: var(--color-bg-dark);
+  background-color: var(--color-bg);
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
   z-index: 1000;
@@ -234,6 +246,21 @@ a:hover {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* --- PRIVACY TEXT --- */
+.newsletter .privacy-text, .privacy-text {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.privacy-text a {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+}
+
 /* --- HERO-NEWSLETTER ALIGNMENT --- */
 .hero-content {
   width: 100%;
@@ -251,7 +278,7 @@ a:hover {
 }
 
 /* --- NEWSLETTER BOX (The specific request) --- */
-.newsletter-box-minimal {
+/* .newsletter-box-minimal {
   background: transparent;
   padding: 2rem 0;
   border: none;
@@ -270,7 +297,8 @@ a:hover {
   margin-top: 0rem;
   color: var(--color-accent);
   text-align: center;
-}
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+} */
 
 
 /* --- BUTTONS --- */
@@ -764,6 +792,39 @@ footer {
         margin-top: 1rem;
         padding-top: 1rem;
     }
+}
+
+
+
+/* --- FORMS --- */
+.form-panel {
+    background: rgba(15,16,10,0.5);
+    padding: 2rem;
+    border: 1px solid var(--color-text-muted);
+    border-radius: 5px;
+}
+
+.form-label {
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    margin-bottom: 0.4rem;
+}
+
+.form-input {
+    padding: 10px;
+    background: #000;
+    border: 1px solid var(--color-text-muted);
+    color: #fff;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
 }
 
 
@@ -1321,10 +1382,6 @@ footer {
     /* margin-top: 10rem; */
   }
 
-  .newsletter-box-minimal h3{
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-  }
-
   
   /* Writing progress bar */
 .progress-container-featured {
@@ -1445,3 +1502,4 @@ footer {
     background-size: cover;
   }
 }
+

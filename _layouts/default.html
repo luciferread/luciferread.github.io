@@ -76,6 +76,9 @@
 
     <!-- Link to our main stylesheet -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <!-- Link to css file for newsletters -->
+    <link rel="stylesheet" href="{{ '/assets/css/newsletter.css' | relative_url }}">
 
 </head>
 
@@ -110,6 +113,25 @@
 
             <a href="{{ '/news.html' | relative_url }}">News</a>
             <a href="{{ '/about.html' | relative_url }}">About</a>
+            
+            <!-- TOOLS DROPDOWN -->
+            <div class="dropdown">
+                <a href="{{ '/tools.html' | relative_url }}">Tools</a>
+                <div class="dropdown-content">
+                    <a href="{{ '/eclipse-tracker.html' | relative_url }}">Eclipse Tracker</a>
+                    
+                    <!-- To enable: <a href="{{ '/lit-LLM.html' | relative_url }}">LLM Literary Agent</a> -->
+                    <a href="#" style="pointer-events: none; opacity: 0.6;">LLM Literary Agent (WIP)</a>
+                    
+                    <!-- To enable: <a href="{{ '/magic-eye.html' | relative_url }}">Magic Eye</a> -->
+                    <a href="#" style="pointer-events: none; opacity: 0.6;">Magic Eye Generator (WIP)</a>
+                    
+                    <!-- To enable: <a href="{{ '/voice-mod.html' | relative_url }}">Voice Modifier</a> -->
+                    <a href="#" style="pointer-events: none; opacity: 0.6;">Voice Modifier (WIP)</a>
+                    
+                </div>
+            </div>
+            
             <a href="{{ '/contact.html' | relative_url }}">Contact</a>
         </div>
     </nav>
@@ -273,6 +295,8 @@
     <!-- GoatCounter -->
     <script data-goatcounter="https://luciferread.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+    <!-- Newsletter -->
+    <script src="{{ '/assets/scripts/newsletter.js' | relative_url }}" defer></script>
 
 </body>
 

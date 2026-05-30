@@ -15,25 +15,8 @@ stories of extinction, survival, and immortality."
         <p class="hero-tagline">Science Fiction | Planet-Scale Stories | Éskhatos Kósmos</p>
 
         <!-- NEWSLETTER BOX -->
-        <div class="newsletter-box-minimal">
-            <h3 style="text-align: center; margin-bottom: 0.5rem;">Join the newsletter</h3>
-            <!-- <p style="color: #ccc; margin-bottom: 1rem;">Discover the <em>Heliopaides</em> saga</p> -->
+        <div class="newsletter-widget"></div>
 
-            <!-- SUBSTACK EMBED -->
-            <iframe id="substack-embed" src="" width="100%" height="320"
-                style="border: 1px solid var(--color-accent); background: transparent;"
-                frameborder="0" scrolling="no" loading="lazy"></iframe>
-            
-            <!-- Load substack after page is ready -->
-            <script>
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    document.getElementById('substack-embed').src = 'https://luciferread.substack.com/embed';
-                }, 500);
-            });
-            </script>
-            
-        </div>
     </div>
 </header>
 
@@ -45,7 +28,7 @@ stories of extinction, survival, and immortality."
     <h2 style="font-family: var(--font-header); color: var(--color-accent);">THE JOURNEY BEGINS</h2>
     <p style="max-width: 800px; margin: 0 auto 2rem auto;">
         On a world that has never known night, the coming eclipse will spark a
-        fight for survival — and expose the truth buried in its own shadow.
+        fight for survival—and expose the truth buried in its own shadow.
         Discover the debut novel that readers are calling "fresh and unique."
     </p>
     <a href="{{ '/books.html' | relative_url }}" class="btn">VIEW THE RADIANTS</a>
@@ -58,16 +41,16 @@ stories of extinction, survival, and immortality."
         <h2>WRITING PROGRESS</h2>
     </div>
     <div class="progress-meta">
-        <span class="progress-meta-item">Last Updated: <strong>April 30, 2026</strong></span>
+        <span class="progress-meta-item">Last Updated: <strong>May 31, 2026</strong></span>
         <span class="progress-meta-separator">•</span>
-        <span class="progress-meta-item">Next Update: <strong>End of May</strong></span>
+        <span class="progress-meta-item">Next Update: <strong>End of June</strong></span>
     </div>
 
     <div class="progress-container-featured">
         <!-- FEATURED BOOK 1 -->
         <div class="book-progress-card featured">
             <div class="book-cover-container">
-                <div class="book-cover-progress" data-progress="94"></div>
+                <div class="book-cover-progress" data-progress="95"></div>
                 <img src="/assets/images/radiant_cover_400w.webp" alt="The Radiants Cover" class="book-cover">
                 <div class="progress-marker">
                     <span class="progress-percentage-overlay"></span>
@@ -80,11 +63,11 @@ stories of extinction, survival, and immortality."
                 <div class="progress-details">
                     <div class="progress-status">
                         <div class="progress-label">Current Status</div>
-                        <div class="progress-value">Copyediting & Proofreading</div>
+                        <div class="progress-value">Incorporating (Final) Feedback</div>
                     </div>
                     <div class="progress-next">
                         <div class="progress-label">Next Step</div>
-                        <div class="progress-value">Incorporating Feedback</div>
+                        <div class="progress-value">Formatting</div>
                     </div>
                 </div>
 
@@ -144,194 +127,6 @@ stories of extinction, survival, and immortality."
 </section>
 
 
-<!-- PLANETARY ECLIPSE TRACKING STATION -->
-<section class="tracker-section">
-    <div style="margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-        <p
-            style="font-style: italic; font-size: 1.2rem; line-height: 1.6; color: var(--color-accent); margin-bottom: 0.5rem;">
-            "Their sun had never set - until now. The eclipse will last 200 generations, ending all life."
-        </p>
-        <p
-            style="font-size: 0.8rem; color: var(--color-text-muted); opacity: 0.8; text-transform: uppercase; letter-spacing: 2px;">
-            Novel Data Reference Hub - Synchronising with Sector Events
-        </p>
-    </div>
-
-    <h2 style="font-family: var(--font-header); color: var(--color-accent); letter-spacing: 4px;">ORBITAL TRACKING
-        STATION
-    </h2>
-    <p style="color: var(--color-text-muted); font-size: 0.9rem;">MONITORING EXTRATERRESTRIAL OCCULTATION EVENTS</p>
-
-    <div class="radar-dashboard">
-        <!-- MARS TRACKER -->
-        <div class="radar-card" id="mars-card">
-            <div class="radar-scan"></div>
-            <!-- SVG ORBITAL MAP -->
-            <svg class="orbital-map" viewBox="0 0 100 100">
-                <!-- Mars look -->
-                <defs>
-                    <!-- Shadow gradient for the beam -->
-                    <radialGradient id="mars-shadowGradient" cx="50%" cy="20%">
-                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
-                    </radialGradient>
-
-                    <!-- Mars radial gradient -->
-                    <radialGradient id="mars-surface">
-                        <stop offset="0%" style="stop-color:#e27b58" />
-                        <stop offset="50%" style="stop-color:#cd5c5c" />
-                        <stop offset="100%" style="stop-color:#a0342c" />
-                    </radialGradient>
-                </defs>
-                
-                <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" id="mars-sun" cx="50" cy="5" r="8" />
-
-                <circle class="orbit-path" cx="50" cy="50" r="30" />
-                <!-- <circle class="planet-core" cx="50" cy="50" r="10" style="fill: #cd5c5c;" /> -->
-                <circle class="planet-core" cx="50" cy="50" r="10" style="fill: url(#mars-surface);" />
-                
-                <!-- Dark spot on planet (appears during eclipse) -->
-                <circle class="planet-shadow" id="mars-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
-                
-                <!-- Eclipse shadow beam -->
-                <g class="eclipse-shadow" id="mars-shadow">
-                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#mars-shadowGradient)" opacity="0.6"/>
-                </g>
-                
-                <!-- Add colour to Phobos -->
-                <g id="mars-orbit-group">
-                    <circle class="moon-orbiter" cx="80" cy="50" r="3" style="fill: #8B7355; filter: drop-shadow(0 0 1px #5c4a3a);" />
-                </g>
-            </svg>
-
-            <h3>SECTOR: MARS</h3>
-            <p class="event-details">Next Phobos Shadow Transit</p>
-            <div class="countdown-timer" id="mars-timer">00:00:00:00</div>
-            <p class="event-details" id="mars-status">Est. Duration: 30s</p>
-        </div>
-        
-        <!-- EARTH TRACKER -->
-        <div class="radar-card" id="earth-card">
-            <div class="radar-scan" style="animation-delay: 1s;"></div>
-            <!-- SVG ORBITAL MAP -->
-            <svg class="orbital-map" viewBox="0 0 100 100">
-                <!-- Moon phase mask -->
-                
-                <!-- Earth look -->
-                <defs>
-                    <!-- Shadow gradient for the beam -->
-                    <radialGradient id="earth-shadowGradient" cx="50%" cy="20%">
-                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
-                    </radialGradient>
-
-                    <!-- Earth radial gradient -->
-                    <radialGradient id="earth-surface">
-                        <stop offset="20%" style="stop-color:#5fa3d7" />
-                        <stop offset="60%" style="stop-color:#4a90e2" />
-                        <stop offset="100%" style="stop-color:#2c5f8d" />
-                    </radialGradient>
-                </defs>
-                
-                <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" id="earth-sun" cx="50" cy="5" r="8" />
-
-                <circle class="orbit-path" cx="50" cy="50" r="40" />
-                <!-- <circle class="planet-core" cx="50" cy="50" r="12" style="fill: #4a90e2;" /> -->
-                <circle class="planet-core" cx="50" cy="50" r="12" style="fill: url(#earth-surface);" />
-                
-                <!-- Dark spot on planet (appears during eclipse) -->
-                <circle class="planet-shadow" id="earth-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
-                
-                <!-- Eclipse shadow beam -->
-                <g class="eclipse-shadow" id="earth-shadow">
-                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#earth-shadowGradient)" opacity="0.6"/>
-                </g>
-                
-                <g id="earth-orbit-group">
-                    <circle id="earth-moon-bg" cx="90" cy="50" r="4" fill="#1a1a2e" />
-                    <path id="earth-moon-path" fill="#ecf0f1" />
-                </g>
-            </svg>
-
-            <h3>SECTOR: EARTH</h3>
-            <p class="event-details">Next Total Solar Eclipse</p>
-            <div class="countdown-timer" id="earth-timer">00:00:00:00</div>
-            <p class="event-details" id="earth-status">Location: Spain/Arctic</p>
-        </div>
-
-        <!-- JUPITER TRACKER -->
-        <div class="radar-card" id="jupiter-card">
-            <div class="radar-scan" style="animation-delay: 2s;"></div>
-            <!-- SVG ORBITAL MAP -->
-            <svg class="orbital-map" viewBox="0 0 100 100">
-                <!-- Jupiter look -->
-                <defs>
-                    <!-- Shadow gradient for the beam -->
-                    <radialGradient id="jupiter-shadowGradient" cx="50%" cy="20%">
-                        <stop offset="0%" style="stop-color:#000000; stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
-                    </radialGradient>
-
-                    <!-- Jupiter radial gradient -->
-                    <radialGradient id="jupiter-surface">
-                        <stop offset="0%" style="stop-color:#e8c89f" />
-                        <stop offset="40%" style="stop-color:#d4a574" />
-                        <stop offset="80%" style="stop-color:#b8895a" />
-                    </radialGradient>
-                </defs>
-                
-                <line class="alignment-axis" x1="50" y1="0" x2="50" y2="100" />
-                <circle class="sun-reference" id="jupiter-sun" cx="50" cy="5" r="8" />
-
-                <circle class="orbit-path" cx="50" cy="50" r="35" />
-                <!-- <circle class="planet-core" cx="50" cy="50" r="15" style="fill: #d4a574;" /> -->
-                <circle class="planet-core" cx="50" cy="50" r="15" style="fill: url(#jupiter-surface);" />
-                
-                <!-- Dark spot on planet (appears during eclipse) -->
-                <circle class="planet-shadow" id="jupiter-dark-spot" cx="50" cy="42" r="6" style="fill: #000000; opacity: 0;" />
-                
-                <!-- Eclipse shadow beam -->
-                <g class="eclipse-shadow" id="jupiter-shadow">
-                    <ellipse cx="50" cy="30" rx="8" ry="25" fill="url(#jupiter-shadowGradient)" opacity="0.6"/>
-                </g>
-                
-                <!-- Add colour to Io -->
-                <g id="jupiter-orbit-group">
-                    <circle class="moon-orbiter" cx="85" cy="50" r="4" style="fill: #F4D03F; filter: drop-shadow(0 0 2px #d4a520);" />
-                </g>
-            </svg>
-
-            <h3>SECTOR: JUPITER</h3>
-            <p class="event-details" id="jupiter-event-name">Next Shadow Transit</p>
-            <div class="countdown-timer" id="jupiter-timer">00:00:00:00</div>
-            <p class="event-details" id="jupiter-status">Transit Duration: 135m</p>
-        </div>
-    </div>
-
-    <!-- SYSTEM DESCRIPTION & DATA CITATION -->
-    <div style="margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-        <!-- Description -->
-        <div style="background: rgba(201, 176, 55, 0.05); padding: 1.5rem; border-left: 3px solid var(--color-accent); margin-bottom: 2rem;">
-            <p style="font-size: 0.85rem; color: var(--color-text-main); line-height: 1.6; margin: 0 0 1rem 0;">
-                <strong style="color: var(--color-accent);">What You're Seeing:</strong>
-                Real-time tracking of eclipse events across three worlds. Each visualisation shows the moon's orbital
-                position, countdown to the next transit, and—during an eclipse—the shadow cast on the planet's surface.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--color-text-main); line-height: 1.6; margin: 0;">
-                <strong style="color: var(--color-accent);">How It Works:</strong> Earth's moon displays accurate
-                phases based on the current lunar cycle (synced with Feb 17, 2026 new moon). Mars's Phobos and Jupiter's
-                Io follow their real orbital periods—7h 39m and 42.5h respectively. Eclipse timing and durations use
-                <a href="https://eclipse.gsfc.nasa.gov/eclipse.html" target="_blank" rel="noopener noreferrer" style="color: var(--color-text-muted); text-decoration: underline;">NASA Eclipse Web Service</a>
-                and <a href="https://www.projectpluto.com/ephem.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-text-muted); text-decoration: underline;">Project Pluto Digital Ephemeris</a>
-                data to illustrate the scale of planetary transits.
-            </p>
-        </div>
-    </div>
-</section>
-
-
 <!-- DEEP SPACE TRANSMISSION (Dynamic Astronomy Fact) -->
 <section class="transmission-section">
     <div id="nasa-loading">INITIALISING SENSORS... SCANNING DEEP SPACE...</div>
@@ -364,12 +159,9 @@ stories of extinction, survival, and immortality."
 </section>
 
 
-<!-- SCRIPTS -->
-<!-- Plantary eclipse tracker logic v4.0 -->
-<script src="/assets/scripts/eclipse-tracker.js"></script>
-
 <!-- NASA Astronomy Picture of the Day (APOD) Integration -->
 <script src="/assets/scripts/NASA-picture.js"></script>
 
 <!-- Writing Progress Updater -->
 <script src="/assets/scripts/progress-updater.js"></script>
+
