@@ -30,6 +30,6 @@ permalink: /news.html
     </div>
 
     <!-- NEWSLETTER SUBSCRIPTION EMBED -->
-        <div class="newsletter-widget"></div>
+    <div class="newsletter-widget"></div>
         
 </section>
