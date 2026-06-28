@@ -45,11 +45,6 @@ newsletter_page: true
 <style>
     /* ── NEWSLETTER-ONLY VARIABLES ────────────────────
 
-    /* ── BASE OVERRIDES ───────────────────────────────
-        style.css sets background-color, color, font-family,
-        line-height on body — only newsletter-specific
-        layout needs are added here.                         */
-
     /* ── RIGHT PANEL — SUBSCRIBE ──────────────────── */
     .panel-subscribe {
         display: flex;
@@ -81,44 +76,6 @@ newsletter_page: true
         color: var(--color-accent);
         flex-shrink: 0;
         margin-top: 0.05em;
-    }
-
-    /* Substack embed */
-    .substack-wrap {
-        width: 100%;
-    }
-
-    .substack-wrap iframe {
-        width: 100%;
-        height: 180px;
-        border: 1px solid var(--color-border);
-        background: transparent;
-    }
-
-    .privacy-note {
-        font-size: 0.7rem;
-        color: var(--color-text-muted);
-        opacity: 0.7;
-        text-align: center;
-    }
-
-    .privacy-note a {
-        color: var(--color-text-muted);
-        text-decoration: underline;
-    }
-
-    /* ── FOOTER ───────────────────────────────────── */
-    .page-footer {
-        margin-top: 2.5rem;
-        font-size: 0.7rem;
-        color: var(--color-text-muted);
-        opacity: 0.5;
-        text-align: center;
-    }
-
-    .page-footer a {
-        color: var(--color-text-muted);
-        text-decoration: underline;
     }
 
     /* ── RESPONSIVE ───────────────────────────────── */

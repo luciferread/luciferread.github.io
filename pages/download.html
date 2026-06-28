@@ -59,7 +59,7 @@ permalink: /download.html
 
                 <a href="/assets/downloads/the_radiants_sample.epub"
                    download
-                   class="dl-btn primary"
+                   class="btn btn-primary dl-btn"
                    data-format="epub">
                     <span class="btn-icon">📱</span>
                     <span class="btn-label">Download EPUB</span>
@@ -68,7 +68,7 @@ permalink: /download.html
 
                 <a href="/assets/downloads/the_radiants_sample.pdf"
                    download
-                   class="dl-btn"
+                   class="btn btn-dim dl-btn"
                    data-format="pdf">
                     <span class="btn-icon">📄</span>
                     <span class="btn-label">Download PDF</span>
@@ -77,7 +77,7 @@ permalink: /download.html
 
                 <a href="/assets/downloads/the_radiants_sample.mobi"
                    download
-                   class="dl-btn"
+                   class="btn btn-dim dl-btn"
                    data-format="mobi">
                     <span class="btn-icon">📚</span>
                     <span class="btn-label">Download MOBI</span>
@@ -185,39 +185,9 @@ permalink: /download.html
     }
 
     .dl-btn {
-        display: flex;
-        align-items: center;
         gap: 0.75rem;
         padding: 0.75rem 1.1rem;
-        border: 1px solid var(--color-border);
-        background: var(--color-accent-dim);
-        color: var(--color-text-main);
-        text-decoration: none;
-        font-family: var(--font-header);
         font-size: 0.65rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        transition: background 0.2s, border-color 0.2s, color 0.2s;
-        cursor: pointer;
-    }
-
-    .dl-btn:hover {
-        background: rgba(201, 176, 55, 0.22);
-        border-color: var(--color-accent);
-        color: var(--color-accent);
-        text-decoration: none;
-    }
-
-    .dl-btn.primary {
-        background: var(--color-accent);
-        border-color: var(--color-accent);
-        color: var(--color-bg);
-    }
-
-    .dl-btn.primary:hover {
-        background: var(--color-accent-hover);
-        border-color: var(--color-accent-hover);
-        color: var(--color-bg);
     }
 
     .dl-btn .btn-icon  { font-size: 1rem; flex-shrink: 0; }
