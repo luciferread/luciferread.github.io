@@ -1,0 +1,432 @@
+---
+layout: default
+title: "Literary Agent LLM"
+description: "Use local LLM to run a literary analysis on your novel."
+permalink: /lit-LLM.html
+---
+
+<!-- Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+<style>
+/* Adjust layout for LLM tool to fit standard container */
+.llm-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 176, 55, 0.3);
+    border-radius: 8px;
+}
+
+.llm-container header h1 {
+    font-family: var(--font-header);
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+}
+
+.how-it-works {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 4px;
+}
+
+.setting-group {
+    margin-bottom: 1.5rem;
+}
+
+.upload-zone {
+    border: 2px dashed var(--color-text-muted);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-zone:hover {
+    border-color: var(--color-accent);
+    background: rgba(201, 176, 55, 0.05);
+}
+
+.text-input, textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-text-muted);
+    color: var(--color-text-main);
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-family: var(--font-body);
+}
+
+.text-input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-text-muted);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: var(--font-header);
+    text-transform: uppercase;
+}
+
+.tab-btn.active {
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    height: 10px;
+    background: var(--color-accent);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.restore-banner {
+    background: #E8E8D8;
+    color: #1A1A1A;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+    border: 2px solid #C9B037;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+.restore-banner .btn {
+    background: #1A1A1A;
+    color: #E8E8D8;
+    border: 1px solid #1A1A1A;
+}
+.restore-banner .btn:hover {
+    background: #C9B037;
+    color: #1A1A1A;
+}
+
+.hidden { display: none !important; }
+</style>
+    <!-- Session Recovery Banner -->
+    <div id="restore-banner" class="restore-banner hidden">
+        <span style="font-size: 1.1rem;">💾 You have a previous session saved. Want to load it?</span>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <button onclick="restoreSession()" class="btn btn-primary">Restore Session</button>
+            <button onclick="clearSession()" class="btn btn-outline">Dismiss</button>
+        </div>
+    </div>
+
+    <div class="llm-container">
+        <header>
+            <h1 class="gradient-text">Literary Analyst</h1>
+            <p>100% Private. Your novel never leaves your device. <br><span id="model-version-text" style="font-size: 0.85em; color: #94a3b8;">
+                Powered by <a href="https://webllm.mlc.ai/" target="_blank" rel="noopener noreferrer">WebLLM</a></span></p>
+        </header>
+
+        <!-- Collapsible How It Works -->
+        <details class="how-it-works">
+            <summary>ℹ️ How it works, tips &amp; privacy</summary>
+            <div class="how-body">
+                <p><strong>Privacy &amp; Offline:</strong> Everything runs locally in your browser using
+                    <a href="https://webllm.mlc.ai/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">WebLLM</a>.
+                    Your novel is never uploaded to any server. Once the model is downloaded you can safely
+                    disconnect from the internet.
+                    <em>Do not close this tab or let your computer sleep during analysis — the browser
+                    will pause the process.</em></p>
+
+                <ol>
+                    <li><strong>Upload your novel</strong> (.txt or .docx). Optionally add a glossary of
+                        world-specific terms to reduce hallucinations.</li>
+                    <li><strong>The AI reads your novel</strong> in chunks (~6,000 characters) and writes a
+                        short summary of each.</li>
+                    <li><strong>The summaries are condensed</strong> into a single master plot document.</li>
+                    <li><strong>A literary agent persona</strong> analyses the master plot and produces each
+                        chosen output in its own dedicated AI call — so nothing gets cut off.</li>
+                    <li><strong>An author map</strong> is generated, anchored to your comparable authors
+                        and expanded to a wider literary landscape.</li>
+                </ol>
+
+                <p><strong>💡 Suggested use</strong></p>
+                <ul style="margin:6px 0 10px 20px;">
+                    <li><strong>Start with a synopsis.</strong> If you have a 1–3 page synopsis or query-letter
+                        summary, run that instead of the full novel — it's much faster, and the analysis is
+                        often just as useful for marketing purposes. Use "Pre-summarized Text" mode and paste
+                        it in directly.</li>
+                    <li><strong>Results are a starting point, not a verdict.</strong> A 3B local model is
+                        impressive for what it is, but it will sometimes suggest authors that aren't quite right,
+                        write a blurb that needs polish, or place authors oddly on the map. Use the output as
+                        raw material to react to, not as finished copy.</li>
+                    <li><strong>Re-run sections you want to explore.</strong> Because each section is a separate
+                        AI call, you can re-run the whole analysis with a different temperature or slightly
+                        tweaked "Additional Context" to get a fresh take. The Author Map in particular benefits
+                        from a few runs at different temperatures to see which comps keep appearing.</li>
+                    <li><strong>Save your intermediate files.</strong> Download the Condensed Plot after the
+                        first run. On future runs you can paste it straight in as "Condensed Plot" mode and
+                        skip the long summarisation step entirely.</li>
+                </ul>
+
+                <p><strong>Skipping steps:</strong> If you have already run the pipeline, use
+                    "Pre-summarized Text" or "Condensed Plot" below to jump straight to the analysis
+                    without re-reading the novel. You can also select "Chat Only" to talk directly to the LLM without analyzing any text.</p>
+            </div>
+        </details>
+
+        <main id="setup-panel">
+            <!-- Top-level Mode Toggle -->
+            <div class="tabs" style="margin-bottom: 1.5rem;" id="main-mode-tabs">
+                <button type="button" class="tab-btn active" id="tab-book-analysis" data-mainmode="analysis">Book Analysis Mode</button>
+                <button type="button" class="tab-btn" id="tab-chat-only" data-mainmode="chat">Standalone Chat Mode</button>
+            </div>
+            
+            <div id="analysis-setup-container">
+                <!-- Starting Point Selector -->
+                <div class="setting-group" id="start-mode-group">
+                    <label>Starting Point</label>
+                    <div class="segmented-control">
+                        <input type="radio" name="start-mode" id="mode-novel" value="novel" checked>
+                        <label for="mode-novel">Full Novel</label>
+                        <input type="radio" name="start-mode" id="mode-presummary" value="presummary">
+                        <label for="mode-presummary">Pre-summarized Text</label>
+                        <input type="radio" name="start-mode" id="mode-condensed" value="condensed">
+                        <label for="mode-condensed">Condensed Plot</label>
+                        <input type="radio" name="start-mode" id="mode-chat" value="chat" style="display:none;" disabled>
+                    </div>
+                    <p class="sub-text" id="mode-hint">Upload your full novel file below. The AI will read and summarize it in chunks.</p>
+                </div>
+
+                <!-- Novel Upload (shown for "Full Novel") -->
+                <div id="novel-upload-section">
+                    <div class="upload-zone" id="drop-zone">
+                        <p>Drag &amp; Drop your novel here</p>
+                        <p class="sub-text">Supported: .txt, .docx</p>
+                        <input type="file" id="file-input" accept=".txt,.docx" hidden>
+                        <button id="browse-btn" class="btn btn-outline">Browse Files</button>
+                    </div>
+                    <div id="file-info" class="hidden">
+                        <p>Selected File: <span id="file-name" class="highlight"></span></p>
+                    </div>
+                </div>
+
+            <!-- Pre-summarized / Condensed input (shown for other modes) -->
+            <div id="paste-input-section" class="hidden">
+                <label id="paste-label">Paste or upload your pre-summarized text</label>
+                <div class="upload-zone small-zone" id="paste-drop-zone">
+                    <p id="paste-upload-hint">Drop .txt/.docx file or click to browse</p>
+                    <input type="file" id="paste-file-input" accept=".txt,.docx" hidden>
+                </div>
+                <div id="paste-file-info" class="hidden">
+                    <p>Loaded: <span id="paste-file-name" class="highlight"></span></p>
+                </div>
+                <textarea id="paste-text" placeholder="Or paste your text directly here..."
+                    style="margin-top:8px; min-height: 140px;"></textarea>
+            </div>
+            
+            </div> <!-- End of analysis-setup-container -->
+
+            <!-- Chat Only Setup (shown for chat mode) -->
+            <div id="chat-setup-section" class="hidden" style="margin-bottom: 20px;">
+                <div class="setting-group">
+                    <label for="chat-persona-select">Agent Persona</label>
+                    <select id="chat-persona-select" class="text-input" style="margin-bottom: 10px;">
+                        <option value="agent">Literary Agent (Default)</option>
+                        <option value="grammar">Grammar & Style Editor</option>
+                        <option value="marketing">Marketing & Ad Copy Expert</option>
+                        <option value="custom">Custom Persona...</option>
+                    </select>
+                    <textarea id="chat-persona-custom" class="text-input hidden" style="min-height: 80px;"
+                        placeholder="Define the AI's role and behavior..."></textarea>
+                </div>
+                <!-- Chat specific temperature control -->
+                <div class="setting-group" style="margin-top: 15px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+                        <label for="chat-temp" style="font-size:0.87rem;font-weight:600;color:var(--text-primary);margin-bottom:0;">Chat Temperature</label>
+                        <span style="display:flex;align-items:center;gap:6px;">
+                            <input type="number" id="chat-temp-num" value="0.60" min="0.10" max="1.00" step="0.05"
+                                   style="width:62px;background:rgba(15,23,42,0.7);border:1px solid var(--glass-border);
+                                          border-radius:6px;color:var(--accent);font-size:0.88rem;font-weight:700;
+                                          text-align:center;padding:4px 2px;cursor:text;">
+                        </span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:0.75rem;color:var(--text-secondary);white-space:nowrap;">Precise</span>
+                        <input type="range" id="chat-temp" min="0.10" max="1.00" step="0.05" value="0.60"
+                               style="flex:1;accent-color:var(--accent);cursor:pointer;">
+                        <span style="font-size:0.75rem;color:var(--text-secondary);white-space:nowrap;">Creative</span>
+                    </div>
+                    <p style="font-size:0.75rem;color:var(--text-secondary);margin-top:3px;line-height:1.5;">
+                        Controls how focused vs. creative the chat replies are. 0.6 is balanced.
+                    </p>
+                </div>
+            </div>
+
+            <div id="extra-setup-container">
+            <!-- Glossary -->
+            <div id="glossary-container" class="glossary-section">
+                <label>Optional Glossary File (Limits Hallucinations)</label>
+                <div class="upload-zone small-zone" id="glossary-drop-zone">
+                    <p>Drop Glossary (.txt, .docx) or click to browse</p>
+                    <p class="sub-text">Format one term per line, e.g.&nbsp;&nbsp;<em>Radiant: A winged alien
+                            species</em></p>
+                    <input type="file" id="glossary-file-input" accept=".txt,.docx" hidden>
+                </div>
+                <div id="glossary-file-info" class="hidden">
+                    <p>Glossary Loaded: <span id="glossary-file-name" class="highlight"></span></p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="setting-group">
+                    <label for="additional-instructions">Additional Context (Optional)</label>
+                    <textarea id="additional-instructions" class="text-input"
+                        placeholder="e.g. 'This is a Sci-Fi novel absent of human characters. Do not suggest human-focused comp authors.'"></textarea>
+                </div>
+
+                <div class="setting-group" id="chapter-sep-group">
+                    <label for="chapter-separator">Chapter Separator (Optional)</label>
+                    <input type="text" id="chapter-separator" placeholder="e.g. *** or Chapter" class="text-input">
+                    <p class="sub-text">Leave blank to use 6,000-character chunks with overlap.</p>
+                </div>
+
+                <div class="setting-group">
+                    <label>Output Analysis Sections</label>
+                    <div class="checkbox-grid">
+                        <label><input type="checkbox" value="Analysis & Brainstorming" checked> Brainstorming</label>
+                        <label><input type="checkbox" value="Comparable Authors" checked> Comparable Authors</label>
+                        <label><input type="checkbox" value="Genres & Subgenres" checked> Genres &amp; Subgenres</label>
+                        <label><input type="checkbox" value="Amazon Keywords" checked> Amazon Keywords</label>
+                        <label><input type="checkbox" value="Back-Cover Blurb" checked> Back-Cover Blurb</label>
+                        <label><input type="checkbox" value="Elevator Pitch" checked> Elevator Pitch</label>
+                    </div>
+                </div>
+            </div> <!-- End settings-section -->
+            </div> <!-- End extra-setup-container -->
+
+            <button id="start-btn" class="btn btn-primary" disabled>Start Analysis</button>
+        </main>
+
+        <section id="loading-panel" class="hidden">
+            <div class="status-box">
+                <h2 id="engine-status">Initializing AI Engine...</h2>
+                <p id="engine-subtext">Downloading weights (This only happens the first time)</p>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="init-progress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="status-box hidden" id="analysis-status-box">
+                <h2 id="analysis-status">Summarizing Chunks...</h2>
+                <p id="analysis-subtext">Reading Chunk 1 of 12</p>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="analysis-progress" style="width: 0%"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="results-panel" class="hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-text-muted); margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
+                <div class="tabs" style="border-bottom: none; margin-bottom: 0;">
+                    <button class="tab-btn active" data-target="analysis-content">Literary Analysis</button>
+                    <button class="tab-btn" data-target="map-content">Author Map</button>
+                    <button class="tab-btn" data-target="plot-content">Plot Summary</button>
+                    <button class="tab-btn" data-target="chat-content">Agent Chat</button>
+                </div>
+                <button id="back-to-setup-btn" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.85em; margin-bottom: 0.5rem;">← Back to Settings</button>
+            </div>
+
+            <div id="analysis-content" class="tab-content active">
+                <button class="btn btn-outline" onclick="downloadAnalysis()">⬇ Download Analysis (.txt)</button>
+                <div id="analysis-output" class="markdown-body">
+                    <!-- LLM Output goes here -->
+                </div>
+            </div>
+
+            <div id="map-content" class="tab-content">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div class="axes-info" id="axes-info">Loading axes...</div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-outline" onclick="downloadChart()">⬇ PNG</button>
+                        <button class="btn btn-outline" onclick="downloadChartHtml()">⬇ HTML (Interactive)</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="authorChart"></canvas>
+                </div>
+                <!-- Axis legend: populated by renderAxisLegend(), also baked into PNG -->
+                <div id="axis-legend" class="axis-legend hidden"></div>
+            </div>
+
+            <div id="plot-content" class="tab-content">
+                <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                    <button class="btn btn-outline" onclick="downloadPlotSummary()">⬇ Condensed Plot (.txt)</button>
+                    <button class="btn btn-outline" onclick="downloadPreSummary()">⬇ Pre-Summary / Abridged (.txt)</button>
+                </div>
+                <p class="sub-text" style="margin-bottom:12px;">The <strong>Condensed Plot</strong> is the final compact
+                    version the AI used for analysis. The <strong>Pre-Summary</strong> is the longer joined
+                    chunk-summaries before condensation — equivalent to the abridged novel.</p>
+                <div id="plot-output" class="markdown-body"
+                    style="white-space: pre-wrap; font-size: 0.9rem; line-height: 1.8;">
+                    <!-- Master plot goes here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat tab content -->
+        <div id="chat-content" class="tab-content">
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <p class="sub-text">Discuss your book, blurbs, and genres with the agent.</p>
+                    <button class="btn btn-outline" onclick="downloadChat()">⬇ Download Chat (.txt)</button>
+                </div>
+                
+                <div id="chat-history" style="background: rgba(0,0,0,0.3); border: 1px solid var(--color-text-muted); border-radius: 4px; padding: 1rem; height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; font-size: 0.95rem;">
+                    <div style="color: var(--color-accent); font-style: italic;">Agent: I've finished reading your novel. What would you like to discuss?</div>
+                </div>
+
+                <div style="display:flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <textarea id="chat-input" placeholder="Ask about tropes, blurb improvements, or genre..." style="flex: 1; min-height: 60px; padding: 0.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--color-accent); color: white; border-radius: 4px; resize: vertical;"></textarea>
+                    <button id="chat-send-btn" class="btn btn-primary" style="height: fit-content; align-self: flex-end;" onclick="sendChatMessage()">Send</button>
+                </div>
+                <p id="chat-status" class="sub-text hidden">Agent is typing...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Logic -->
+    <script type="module" src="../assets/scripts/lit-LLLM.js"></script>
