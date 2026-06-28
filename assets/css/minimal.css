@@ -5,55 +5,8 @@
 
 html, body {
     min-height: 100vh;
-    background-color: var(--color-bg);
-    color: var(--color-text-main);
-    font-family: var(--font-body);
-    line-height: 1.6;
 }
 
-body {
-    position: relative;
-    overflow-x: hidden;
-}
-
-:root {
-  /* --- COLOR PALETTE (Extracted from your book cover) --- */
-
-  /* Deep, warm black background */
-  --color-bg: #0F100A;
-
-  /* Primary Gold/Amber Accent - used for Buttons and determining borders */
-  --color-accent: #C9B037;
-
-  /* Hover state for buttons - slightly brighter */
-  --color-accent-hover: #D4AF37;
-
-  /* Main text color - Pale Cream (easier on eyes than pure white) */
-  --color-text-main: #F4F1D6;
-
-  /* Secondary text/borders - Muted Olive Gold */
-  --color-text-muted: #A39634;
-
-  /* Special color for Direct Sales buttons (e.g., a nice Teal or Blue to contrast) */
-  --color-direct-buy: #37C9B0;
-  --color-direct-buy-hover: #37E0C0;
-
-  /* Additional computed colors */
-  --color-card-bg: rgba(30, 30, 30, 0.85);
-  --color-border-subtle: rgba(201, 176, 55, 0.3);
-  --color-timer-green: #00ff00;
-  --color-alert-red: #ff4444;
-  --color-accent-dim:   rgba(201, 176, 55, 0.15);
-  --color-border:      rgba(201, 176, 55, 0.25);
-  --color-bg-card:      rgba(20, 21, 14, 0.95);
-
-  /* --- FONTS --- */
-  /* 'Orbitron' is our sci-fi header font */
-  --font-header: 'Orbitron Bold', sans-serif;
-
-  /* Simple sans-serif for readable body text */
-  --font-body: system-ui, -apple-system, sans-serif;
-}
 
 /* ── NEWSLETTER ─────────────────────────────── */
 /* Page-specific adjustments for newsletter.html */
@@ -177,7 +130,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 2rem;
+    /* padding: 3rem 2rem; */
     background: linear-gradient(160deg, rgba(201,176,55,0.05) 0%, transparent 60%);
     border-right: 1px solid var(--color-border);
 }
@@ -230,20 +183,6 @@ body {
     border: none;
     border-top: 1px solid var(--color-border);
     margin: 0.25rem 0;
-}
-
-/* ── MINIMAL PAGE FOOTER ──────────────────────────────────────── */
-.page-footer {
-    margin-top: 2.5rem;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
-    opacity: 0.5;
-    text-align: center;
-}
-
-.page-footer a {
-    color: var(--color-text-muted);
-    text-decoration: underline;
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
