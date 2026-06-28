@@ -26,6 +26,7 @@ widgets.forEach((widget, index) => {
                 <input
                     type="email"
                     id="${uid}-email"
+                    class="email"
                     placeholder="Enter your email"
                     required>
 
@@ -39,7 +40,7 @@ widgets.forEach((widget, index) => {
                 <button
                     type="submit"
                     id="${uid}-button"
-                    class="subscribe-btn">
+                    class="btn btn-primary subscribe-btn">
                     Subscribe
                 </button>
             </form>
