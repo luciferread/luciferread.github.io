@@ -1,8 +1,9 @@
 // <!-- NEWSLETTER -->
 
-// Define worker for Cloudflare (which contains relevant APIs)
-const WORKER_URL =
-    "https://mailerlite-subscribe.lucifer-read.workers.dev/";
+// Kit (formerly ConvertKit) public form endpoint — no API key needed,
+// this is the same endpoint Kit's own embed widget posts to.
+const KIT_FORM_ACTION =
+    "https://app.kit.com/forms/9715220/subscriptions";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -64,6 +65,7 @@ widgets.forEach((widget, index) => {
 });
 
 });
+
 function initialiseNewsletter(uid) {
 
 const form =
@@ -97,6 +99,13 @@ form.addEventListener(
 
         event.preventDefault();
 
+        // Honeypot check stays client-side only — Kit's endpoint
+        // has no concept of this field, so a filled honeypot just
+        // quietly stops the request from going out at all.
+        if (honeypotInput.value) {
+            return;
+        }
+
         button.disabled = true;
 
         button.textContent =
@@ -104,50 +113,56 @@ form.addEventListener(
 
         try {
 
+            const formData = new FormData();
+            formData.append(
+                "email_address",
+                emailInput.value
+            );
+
             const response =
                 await fetch(
-                    WORKER_URL,
+                    KIT_FORM_ACTION,
                     {
                         method: "POST",
                         headers: {
-                            "Content-Type":
-                                "application/json"
+                            Accept: "application/json"
                         },
-                        body: JSON.stringify({
-                            email:
-                                emailInput.value,
-                            website:
-                                honeypotInput.value
-                        })
+                        body: formData
                     }
                 );
 
-            const result =
-                await response.json();
+            let result = {};
+            try {
+                result = await response.json();
+            } catch (parseError) {
+                // Endpoint didn't return JSON — fall back to
+                // treating a 2xx HTTP status as success.
+                result = {};
+            }
 
-            if (result.success) {
+            const failed =
+                result.error === true ||
+                (!response.ok && Object.keys(result).length === 0);
 
-                form.reset();
-
-                button.textContent =
-                    "Subscribed";
-
-                button.classList.add(
-                    "success"
-                );
-
-                success.classList.add(
-                    "show"
-                );
-
-            } else {
-
+            if (failed) {
                 throw new Error(
                     result.message ||
                     "Subscription failed"
                 );
-
             }
+
+            form.reset();
+
+            button.textContent =
+                "Subscribed";
+
+            button.classList.add(
+                "success"
+            );
+
+            success.classList.add(
+                "show"
+            );
 
         } catch (error) {
 
@@ -186,4 +201,3 @@ form.addEventListener(
 );
 
 }
-
