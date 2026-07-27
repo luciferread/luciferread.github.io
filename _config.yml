@@ -33,6 +33,9 @@ baseurl: ""
 # NOTE: The 'sitemap.xml' will only be generated when this contains a value.
 url: "https://luciferread.com/"
 
+# For blog posts to not have the .html ending to them
+permalink: /:year/:month/:day/:title/
+
 # --- SOCIAL MEDIA HANDLES ---
 # Social Media
 social:

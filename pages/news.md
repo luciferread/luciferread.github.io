@@ -2,7 +2,9 @@
 layout: default
 title: "News & Updates | Lucifer Read | Latest Posts"
 description: "Latest news from science fiction author Lucifer Read. Updates on The Radiants, the Heliopaides saga, and upcoming Éskhatos Kósmos releases."
-permalink: /news.html
+permalink: /news/
+redirect_from:
+  - /news.html
 ---
 
 <section style="padding: 4rem 10%;">

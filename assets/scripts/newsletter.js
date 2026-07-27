@@ -54,7 +54,7 @@ widgets.forEach((widget, index) => {
 
             <p class="privacy-text">
                 Unsubscribe anytime.
-                <a href="/privacy.html"> Privacy Policy</a>
+                <a href="/privacy/"> Privacy Policy</a>
             </p>
 
         </section>

@@ -2,7 +2,9 @@
 layout: default
 title: "Lucifer Read's Privacy Policy"
 description: "Privacy policy of Lucifer Read's website and how we handle your personal data."
-permalink: /privacy.html
+permalink: /privacy/
+redirect_from:
+  - /privacy.html
 ---
 
 <section style="padding: 4rem 10%; max-width: 800px; margin: 0 auto;">
@@ -55,7 +57,7 @@ permalink: /privacy.html
 
         <h3>5. Contact</h3>
         <p>
-            If you have any questions about this Privacy Policy, please reach out via our <a href="{{ '/contact.html' | relative_url }}">contact page</a>
+            If you have any questions about this Privacy Policy, please reach out via our <a href="{{ '/contact/' | relative_url }}">contact page</a>
         </p>
     </div>
 </section>
