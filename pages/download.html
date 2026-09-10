@@ -1,9 +1,9 @@
 ---
 layout: minimal
 title: "Download The Radiants Sample | Lucifer Read"
-description: "Download your free sample chapters of The Radiants by Lucifer Read. Available in EPUB, PDF, and MOBI formats."
+description: "Download your free sample chapters of The Radiants by Lucifer Read."
 robots: "noindex, nofollow"
-permalink: /download.html
+permalink: /download/
 ---
 
 <div class="stars"></div>
@@ -13,18 +13,19 @@ permalink: /download.html
 
     <a href="/" class="brand">Lucifer Read</a>
 
+    <!-- ── PRIMARY CARD: cover + download action ────────────────── -->
     <div class="card">
 
         <!-- LEFT: Book Cover + What's Included -->
-        <div class="panel-book">
+        <div class="panel-book panel-book--top">
 
             <div class="thank-you-badge">Welcome Aboard</div>
 
             <div class="book-cover-wrap">
                 <img
-                    src="/assets/images/radiant_cover_800w.webp"
-                    srcset="/assets/images/radiant_cover_400w.webp 400w,
-                            /assets/images/radiant_cover_800w.webp 800w"
+                    src="/assets/images/preview_radiant_cover_800w.webp"
+                    srcset="/assets/images/preview_radiant_cover_400w.webp,
+                            /assets/images/preview_radiant_cover_800w.webp"
                     sizes="(max-width: 640px) 140px, 180px"
                     alt="The Radiants Book Cover"
                     class="book-cover"
@@ -32,63 +33,38 @@ permalink: /download.html
             </div>
 
             <ul class="included-list">
-                <li>Chapters 1–3</li>
-                <li>Approximately 30 pages</li>
-                <li>Your first glimpse into a world that has never known night</li>
+                <li>Part I + opening of Part II</li>
+                <li>A world that has never known night</li>
+                <li>Four perspectives, one unravelling truth</li>
             </ul>
 
         </div>
 
-        <!-- RIGHT: Download options -->
+        <!-- RIGHT: Download action -->
         <div class="panel-download">
 
-            <p class="eyebrow">Your download is ready</p>
+            <p class="eyebrow">Your free book is ready</p>
 
-            <h1 class="headline">Welcome to the<br>Éskhatos Kósmos</h1>
+            <h1 class="headline">Start reading<br><em>The Radiants</em></h1>
 
-            <p class="pitch">
-                Choose your format below and begin reading
-                <em>The Radiants</em> today. You'll also receive monthly
-                updates, behind-the-scenes insights, and sneak peeks
-                as the saga unfolds.
-            </p>
+            <p class="device-hint" id="device-hint" aria-live="polite"></p>
 
-            <hr class="divider">
+            <a href="/assets/downloads/the_radiants_sample.epub"
+               download
+               data-goatcounter-click="download-epub"
+               data-goatcounter-title="Download EPUB Radiants Sample"
+               class="btn btn-primary dl-btn"
+               data-format="epub">
+                <span class="btn-icon">⬇</span>
+                <span class="btn-label">Download Free Sample</span>
+                <span class="btn-sub">EPUB · works on all major readers</span>
+            </a>
 
-            <div class="download-buttons">
-
-                <a href="/assets/downloads/the_radiants_sample.epub"
-                   download
-                   class="btn btn-primary dl-btn"
-                   data-format="epub">
-                    <span class="btn-icon">📱</span>
-                    <span class="btn-label">Download EPUB</span>
-                    <span class="btn-sub">Most e-readers</span>
-                </a>
-
-                <a href="/assets/downloads/the_radiants_sample.pdf"
-                   download
-                   class="btn btn-dim dl-btn"
-                   data-format="pdf">
-                    <span class="btn-icon">📄</span>
-                    <span class="btn-label">Download PDF</span>
-                    <span class="btn-sub">Universal</span>
-                </a>
-
-                <a href="/assets/downloads/the_radiants_sample.mobi"
-                   download
-                   class="btn btn-dim dl-btn"
-                   data-format="mobi">
-                    <span class="btn-icon">📚</span>
-                    <span class="btn-label">Download MOBI</span>
-                    <span class="btn-sub">Kindle</span>
-                </a>
-
-            </div>
-
-            <p class="format-tips">
-                <span>EPUB</span> · Apple Books, Kobo, Nook, Google Play Books<br>
-                <span>MOBI</span> · Older Kindle devices via USB or Send to Kindle
+            <p class="kindle-note">
+                Reading on a <strong>Kindle?</strong>
+                After downloading, visit
+                <a href="https://www.amazon.com/sendtokindle" target="_blank" rel="noopener">amazon.com/sendtokindle</a>
+                and upload the file — it appears in your library in seconds.
             </p>
 
             <hr class="divider">
@@ -98,15 +74,103 @@ permalink: /download.html
         </div>
     </div>
 
+    <!-- ── DEVICE GUIDES: full-width below the card ─────────────── -->
+    <div class="guides-section" id="guides-section">
+
+        <p class="guides-title">How to open your book</p>
+
+        <div class="guides-grid">
+
+            <details id="guide-ios">
+                <summary>
+                    <span class="guide-icon">📱</span>
+                    <span>iPhone &amp; iPad</span>
+                    <span class="guide-arrow">▸</span>
+                </summary>
+                <ol class="guide-steps">
+                    <li>Tap <strong>Download Free Sample</strong> above.</li>
+                    <li>When prompted, tap <strong>Open in Books</strong> — it opens Apple Books immediately.</li>
+                    <li>No prompt? Open the <strong>Files</strong> app → Downloads → tap the file → <strong>Share</strong> → <strong>Copy to Books</strong>.</li>
+                </ol>
+            </details>
+
+            <details id="guide-android">
+                <summary>
+                    <span class="guide-icon">🤖</span>
+                    <span>Android</span>
+                    <span class="guide-arrow">▸</span>
+                </summary>
+                <ol class="guide-steps">
+                    <li>Install <strong>Google Play Books</strong> (free) if you don't have it.</li>
+                    <li>Tap <strong>Download Free Sample</strong> above and save the file.</li>
+                    <li>Open Google Play Books → tap <strong>+</strong> → <strong>Upload from device</strong> → select the file.</li>
+                    <li>Or open your Downloads folder, tap the file, and choose <strong>Open with Play Books</strong>.</li>
+                </ol>
+            </details>
+
+            <details id="guide-kindle">
+                <summary>
+                    <span class="guide-icon">📖</span>
+                    <span>Kindle</span>
+                    <span class="guide-arrow">▸</span>
+                </summary>
+                <ol class="guide-steps">
+                    <li>Download the file using the button above.</li>
+                    <li>Visit <a href="https://www.amazon.com/sendtokindle" target="_blank" rel="noopener">amazon.com/sendtokindle</a> in any browser.</li>
+                    <li>Sign in to Amazon, then drag or upload the downloaded file.</li>
+                    <li>Select your Kindle from the list — the book appears in your library within seconds.</li>
+                </ol>
+            </details>
+
+            <details id="guide-desktop">
+                <summary>
+                    <span class="guide-icon">💻</span>
+                    <span>Desktop &amp; Laptop</span>
+                    <span class="guide-arrow">▸</span>
+                </summary>
+                <ol class="guide-steps">
+                    <li>Click <strong>Download Free Sample</strong> — the file saves to your Downloads folder.</li>
+                    <li>Open it with your preferred reader:
+                        <ul class="guide-subnotes">
+                            <li><strong>Mac</strong> — double-click to open in Apple Books (built in)</li>
+                            <li><strong>Windows / Linux</strong> — <a href="https://calibre-ebook.com" target="_blank" rel="noopener">Calibre</a> (free)</li>
+                            <li><strong>Any browser</strong> — <a href="https://thorium.apps.edrlab.org" target="_blank" rel="noopener">Thorium Reader</a> (free)</li>
+                        </ul>
+                    </li>
+                </ol>
+            </details>
+
+            <details id="guide-kobo">
+                <summary>
+                    <span class="guide-icon">📚</span>
+                    <span>Kobo</span>
+                    <span class="guide-arrow">▸</span>
+                </summary>
+                <ol class="guide-steps">
+                    <li>Download the file using the button above.</li>
+                    <li>Connect your Kobo to your computer with a USB cable.</li>
+                    <li>Your Kobo appears as a drive — drag the file into the <strong>Books</strong> folder.</li>
+                    <li>Eject the Kobo — the book appears in your library automatically.</li>
+                </ol>
+            </details>
+
+        </div>
+    </div>
+
 </div>
 
 <style>
     /* ── DOWNLOAD PAGE — SPECIFIC STYLES ONLY ─────────────────────
-       All shared styles (starfield, card, panel-book, brand, etc.)
-       live in style.css under MINIMAL LAYOUT — SHARED COMPONENTS.  */
+       Shared styles live in style.css.                            */
 
-    /* ── RESET & BASE ─────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── LEFT PANEL: top-aligned override ────────────────────────
+       Overrides the shared panel-book centering for this page.   */
+    .panel-book--top {
+        justify-content: flex-start;
+        padding-top: 2.5rem;
+    }
 
     /* ── BADGE ────────────────────────────────────────────────── */
     .thank-you-badge {
@@ -133,13 +197,7 @@ permalink: /download.html
         transform: translateY(-4px) rotate(1deg);
         filter: drop-shadow(0 16px 40px rgba(201,176,55,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.8));
     }
-
-    .book-cover {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 2px;
-    }
+    .book-cover { width: 100%; height: auto; display: block; border-radius: 2px; }
 
     /* ── INCLUDED LIST ────────────────────────────────────────── */
     .included-list {
@@ -151,7 +209,6 @@ permalink: /download.html
         width: 100%;
         max-width: 200px;
     }
-
     .included-list li {
         font-size: 0.75rem;
         color: var(--color-text-muted);
@@ -160,7 +217,6 @@ permalink: /download.html
         gap: 0.5rem;
         line-height: 1.4;
     }
-
     .included-list li::before {
         content: '▸';
         color: var(--color-accent);
@@ -173,39 +229,39 @@ permalink: /download.html
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 3rem 2.5rem;
-        gap: 1.25rem;
+        padding: 2.5rem 2.5rem;
+        gap: 1.1rem;
     }
 
-    /* ── DOWNLOAD BUTTONS ─────────────────────────────────────── */
-    .download-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.65rem;
+    /* ── DEVICE HINT ──────────────────────────────────────────── */
+    .device-hint {
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        min-height: 1.2em;
     }
+    .device-hint:empty { display: none; }
 
+    /* ── DOWNLOAD BUTTON ──────────────────────────────────────── */
     .dl-btn {
+        display: flex;
+        align-items: center;
         gap: 0.75rem;
-        padding: 0.75rem 1.1rem;
-        font-size: 0.65rem;
+        padding: 0.9rem 1.25rem;
+        font-size: 0.7rem;
     }
-
-    .dl-btn .btn-icon  { font-size: 1rem; flex-shrink: 0; }
-    .dl-btn .btn-label { flex: 1; }
+    .dl-btn .btn-icon  { font-size: 1.1rem; flex-shrink: 0; }
+    .dl-btn .btn-label { flex: 1; font-size: 0.72rem; }
     .dl-btn .btn-sub   { font-size: 0.6rem; opacity: 0.65; letter-spacing: 1px; }
 
-    /* ── FORMAT TIPS ──────────────────────────────────────────── */
-    .format-tips {
-        font-size: 0.72rem;
+    /* ── KINDLE NOTE ──────────────────────────────────────────── */
+    .kindle-note {
+        font-size: 0.75rem;
         color: var(--color-text-muted);
         line-height: 1.6;
-        opacity: 0.8;
     }
-
-    .format-tips span {
-        color: var(--color-accent);
-        opacity: 0.9;
-    }
+    .kindle-note a    { color: var(--color-accent); text-decoration: underline; }
+    .kindle-note strong { color: var(--color-text); }
 
     /* ── BACK LINK ────────────────────────────────────────────── */
     .back-link {
@@ -219,14 +275,101 @@ permalink: /download.html
         text-decoration: none;
         text-transform: uppercase;
         transition: color 0.2s;
-        margin-top: 0.25rem;
     }
     .back-link:hover { color: var(--color-accent); text-decoration: none; }
 
+    /* ── GUIDES SECTION ───────────────────────────────────────── */
+    .guides-section {
+        width: 100%;
+        max-width: 860px;
+        margin-top: 1.5rem;
+        animation: fadeUp 0.8s ease 0.15s both;
+    }
+
+    .guides-title {
+        font-family: var(--font-header);
+        font-size: 0.58rem;
+        letter-spacing: 3px;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        opacity: 0.7;
+    }
+
+    .guides-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        align-items: start;
+    }
+
+    /* Kobo spans full width — least-common device, natural footer slot */
+    #guide-kobo { grid-column: 1 / -1; }
+
+    details {
+        border: 1px solid var(--color-border);
+        background: rgba(201,176,55,0.03);
+        transition: background 0.2s;
+    }
+    details[open] { background: rgba(201,176,55,0.06); }
+
+    summary {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.65rem 0.9rem;
+        cursor: pointer;
+        list-style: none;
+        font-size: 0.78rem;
+        color: var(--color-text);
+        user-select: none;
+        transition: color 0.2s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    details[open] summary, summary:hover { color: var(--color-accent); }
+
+    .guide-icon { font-size: 0.9rem; flex-shrink: 0; }
+    .guide-arrow {
+        margin-left: auto;
+        font-size: 0.6rem;
+        color: var(--color-text-muted);
+        transition: transform 0.2s;
+        flex-shrink: 0;
+    }
+    details[open] .guide-arrow { transform: rotate(90deg); }
+
+    .guide-steps {
+        padding: 0.5rem 0.9rem 0.9rem 2.3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+    }
+    .guide-steps li {
+        font-size: 0.78rem;
+        color: var(--color-text);
+        opacity: 0.85;
+        line-height: 1.55;
+    }
+    .guide-steps a       { color: var(--color-accent); text-decoration: underline; }
+    .guide-steps strong  { color: var(--color-text); }
+
+    .guide-subnotes {
+        margin-top: 0.4rem;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        list-style: disc;
+    }
+    .guide-subnotes li { font-size: 0.75rem; }
+
     /* ── RESPONSIVE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
-        .panel-download  { padding: 2rem 1.5rem; }
-        .book-cover-wrap { width: 140px; }
+        .panel-download         { padding: 2rem 1.5rem; }
+        .panel-book--top        { padding-top: 2rem; }
+        .book-cover-wrap        { width: 140px; }
+        .guides-grid            { grid-template-columns: 1fr; }
+        #guide-kobo             { grid-column: auto; }
     }
 </style>
 
@@ -234,18 +377,45 @@ permalink: /download.html
 <script data-goatcounter="https://luciferread.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
-<!-- Download button event tracking -->
+<!-- Device detection + GoatCounter event tracking -->
 <script>
-document.querySelectorAll('.dl-btn[data-format]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const format = btn.dataset.format;
-        if (typeof goatcounter !== 'undefined') {
-            goatcounter.count({
-                path:  `download-${format}`,
-                title: `Ebook Download: ${format.toUpperCase()}`,
-                event: true
-            });
-        }
+(function () {
+    const ua = navigator.userAgent || '';
+    const isIOS     = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    const isAndroid = /Android/.test(ua);
+    const isKindle  = /Kindle|Silk/.test(ua);
+
+    // Auto-expand the relevant guide
+    let activeGuide = 'guide-desktop';
+    if      (isKindle)  activeGuide = 'guide-kindle';
+    else if (isIOS)     activeGuide = 'guide-ios';
+    else if (isAndroid) activeGuide = 'guide-android';
+
+    const guideEl = document.getElementById(activeGuide);
+    if (guideEl) guideEl.open = true;
+
+    // Personalised hint above the download button
+    const hints = {
+        'guide-ios':     'Looks like you\'re on an iPhone or iPad — tap the button, then tap <strong>Open in Books</strong>.',
+        'guide-android': 'Looks like you\'re on Android — we recommend Google Play Books. See the guide below.',
+        'guide-kindle':  'Looks like you\'re on a Kindle — download the file then use <strong>Send to Kindle</strong> below.',
+        'guide-desktop': 'Downloading to a computer? Save the file and open it in Calibre or Apple Books.'
+    };
+    const hint = document.getElementById('device-hint');
+    if (hint && hints[activeGuide]) hint.innerHTML = hints[activeGuide];
+
+    // GoatCounter download event
+    document.querySelectorAll('.dl-btn[data-format]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const format = btn.dataset.format;
+            if (typeof goatcounter !== 'undefined') {
+                goatcounter.count({
+                    path:  'download-' + format,
+                    title: 'Ebook Download: ' + format.toUpperCase(),
+                    event: true
+                });
+            }
+        });
     });
-});
+})();
 </script>
