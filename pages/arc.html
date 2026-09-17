@@ -1,0 +1,416 @@
+---
+layout: minimal
+title: "Become an ARC Reader | Lucifer Read"
+description: "Sign up for an advance reader copy of The Radiants before it launches on Amazon Kindle Unlimited, November 5."
+robots: "noindex, nofollow"
+permalink: /arc/
+---
+
+<div class="stars"></div>
+<div class="ambient"></div>
+
+<div class="page-wrap">
+
+    <a href="/" class="brand">Lucifer Read</a>
+
+    <div class="card">
+
+        <!-- LEFT: Book facts -->
+        <div class="panel-book panel-book--top">
+
+            <div class="arc-badge">Advance Reader Copy</div>
+
+            <div class="book-cover-wrap">
+                <img
+                    src="/assets/images/radiant_cover_800w.webp"
+                    srcset="/assets/images/radiant_cover_400w.webp,
+                            /assets/images/radiant_cover_800w.webp"
+                    sizes="(max-width: 640px) 140px, 180px"
+                    alt="The Radiants Book Cover"
+                    class="book-cover"
+                >
+            </div>
+
+            <ul class="included-list">
+                <li>Full novel — ~110,000 words</li>
+                <li>Launches on Amazon Kindle Unlimited, Nov 5</li>
+                <li>Reserved for readers ready to post a review</li>
+            </ul>
+
+            <p class="deadline-note">Signups close October 5</p>
+
+        </div>
+
+        <!-- RIGHT: Signup form -->
+        <div class="panel-form">
+
+            <p class="eyebrow">Advance access</p>
+
+            <h1 class="headline">Read it before<br>everyone else</h1>
+
+            <p class="pitch">
+                A small number of readers get <em>The Radiants</em> ahead
+                of its Amazon KU launch. In exchange, we're asking for a
+                real commitment: an honest review on Amazon or Goodreads
+                within a week of release. If you're not sure you can
+                deliver that, the free preview will still be waiting for
+                you on launch day.
+            </p>
+
+            <details class="explainer">
+                <summary>
+                    <span>What's an ARC, exactly?</span>
+                    <span class="explainer-arrow">▸</span>
+                </summary>
+                <div class="explainer-body">
+                    <p>
+                        An ARC (Advance Reader Copy) is a free copy of the
+                        book sent out before its public release, in
+                        exchange for an honest review once it launches —
+                        no editing, no payment, just an early read and a
+                        real opinion.
+                    </p>
+                    <p>
+                        Since honesty is the whole point, this works best
+                        with readers who don't already know me personally.
+                        If you know someone who'd genuinely enjoy <em>The
+                        Radiants</em>, feel free to pass this page along —
+                        that's exactly how it's meant to spread.
+                    </p>
+                </div>
+            </details>
+
+            <form
+                action="https://formspree.io/f/xqpakjza"
+                method="POST"
+                class="arc-form"
+            >
+                <!-- Honeypot field — leave hidden from real visitors -->
+                <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="_subject" value="New ARC signup — The Radiants">
+
+                <label class="field">
+                    <span class="field-label">Name</span>
+                    <input type="text" name="name" required autocomplete="name">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Email</span>
+                    <input type="email" name="email" required autocomplete="email">
+                </label>
+
+                <fieldset class="field field-radio">
+                    <legend class="field-label">Have you read the free preview?</legend>
+                    <div class="radio-row">
+                        <label class="radio-option">
+                            <input type="radio" name="read_preview" value="Yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="read_preview" value="No, not yet">
+                            <span>Not yet</span>
+                        </label>
+                    </div>
+                    <p class="field-hint">
+                        Haven't read it? <a href="/download/">Grab the free preview first</a> —
+                        it's the best way to know if this is for you.
+                    </p>
+                </fieldset>
+
+                <label class="field field-checkbox">
+                    <input type="checkbox" name="review_commitment" value="Yes, I commit" required>
+                    <span>
+                        I understand this is an advance copy, and I commit to
+                        posting an honest review on Amazon or Goodreads within
+                        one week of the November 5 launch.
+                    </span>
+                </label>
+
+                <button type="submit" class="btn btn-primary submit-btn">
+                    Request an advance copy
+                </button>
+
+            </form>
+
+            <hr class="divider">
+
+            <a href="/" class="back-link">← Return to the chronicles</a>
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+    /* ── ARC PAGE — SPECIFIC STYLES ONLY ──────────────────────────
+       Shared styles live in style.css.                            */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .panel-book--top {
+        justify-content: flex-start;
+        padding-top: 2.5rem;
+    }
+
+    /* ── BADGE ────────────────────────────────────────────────── */
+    .arc-badge {
+        font-family: var(--font-header);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: var(--color-bg);
+        background: var(--color-accent);
+        padding: 0.3rem 0.9rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    /* ── BOOK COVER (shared look with /download/) ────────────── */
+    .book-cover-wrap {
+        position: relative;
+        width: 180px;
+        filter: drop-shadow(0 8px 32px rgba(201,176,55,0.25)) drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .book-cover-wrap:hover {
+        transform: translateY(-4px) rotate(1deg);
+        filter: drop-shadow(0 16px 40px rgba(201,176,55,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+    }
+    .book-cover { width: 100%; height: auto; display: block; border-radius: 2px; }
+
+    .included-list {
+        margin-top: 1.5rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        width: 100%;
+        max-width: 220px;
+    }
+    .included-list li {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        line-height: 1.4;
+    }
+    .included-list li::before {
+        content: '▸';
+        color: var(--color-accent);
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
+
+    .deadline-note {
+        margin-top: 1.5rem;
+        font-family: var(--font-header);
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        opacity: 0.7;
+    }
+
+    /* ── RIGHT PANEL ──────────────────────────────────────────── */
+    .panel-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2.5rem 2.5rem;
+        gap: 1rem;
+    }
+
+    .pitch { font-size: 0.85rem; line-height: 1.6; color: var(--color-text); }
+
+    /* ── ARC EXPLAINER ────────────────────────────────────────── */
+    .explainer {
+        border: 1px solid var(--color-border);
+        background: rgba(201,176,55,0.03);
+        transition: background 0.2s;
+    }
+    .explainer[open] { background: rgba(201,176,55,0.06); }
+
+    .explainer summary {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.65rem 0.9rem;
+        cursor: pointer;
+        list-style: none;
+        font-size: 0.78rem;
+        color: var(--color-text);
+        user-select: none;
+        transition: color 0.2s;
+    }
+    .explainer summary::-webkit-details-marker { display: none; }
+    .explainer[open] summary, .explainer summary:hover { color: var(--color-accent); }
+
+    .explainer-arrow {
+        margin-left: auto;
+        font-size: 0.6rem;
+        color: var(--color-text-muted);
+        transition: transform 0.2s;
+        flex-shrink: 0;
+    }
+    .explainer[open] .explainer-arrow { transform: rotate(90deg); }
+
+    .explainer-body {
+        padding: 0 0.9rem 0.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    .explainer-body p {
+        font-size: 0.76rem;
+        line-height: 1.6;
+        color: var(--color-text-muted);
+    }
+    .explainer-body em { color: var(--color-text); }
+
+    /* ── FORM ─────────────────────────────────────────────────── */
+    .arc-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        margin-top: 0.25rem;
+    }
+
+    .hp-field {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .field-label {
+        font-family: var(--font-header);
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .field input[type="text"],
+    .field input[type="email"] {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text);
+        font-size: 0.85rem;
+        padding: 0.5rem 0.1rem;
+        font-family: inherit;
+        transition: border-color 0.2s;
+    }
+    .field input[type="text"]:focus,
+    .field input[type="email"]:focus {
+        outline: none;
+        border-bottom-color: var(--color-accent);
+    }
+
+    .field-radio {
+        border: none;
+    }
+    .radio-row {
+        display: flex;
+        gap: 1.5rem;
+    }
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--color-text);
+        cursor: pointer;
+    }
+    .radio-option input[type="radio"] {
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .radio-option input[type="radio"]:checked {
+        border-color: var(--color-accent);
+    }
+    .radio-option input[type="radio"]:checked::after {
+        content: '';
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        background: var(--color-accent);
+    }
+    .field-hint {
+        font-size: 0.72rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        margin-top: 0.15rem;
+    }
+    .field-hint a { color: var(--color-accent); text-decoration: underline; }
+
+    .field-checkbox {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.65rem;
+    }
+    .field-checkbox input[type="checkbox"] {
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border: 1px solid var(--color-border);
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+        cursor: pointer;
+        position: relative;
+    }
+    .field-checkbox input[type="checkbox"]:checked {
+        border-color: var(--color-accent);
+        background: rgba(201,176,55,0.12);
+    }
+    .field-checkbox input[type="checkbox"]:checked::after {
+        content: '✓';
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        color: var(--color-accent);
+    }
+    .field-checkbox span {
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: var(--color-text-muted);
+    }
+
+    .submit-btn {
+        margin-top: 0.35rem;
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem 1.25rem;
+        font-size: 0.7rem;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+        .panel-form       { padding: 2rem 1.5rem; }
+        .panel-book--top  { padding-top: 2rem; }
+        .book-cover-wrap  { width: 140px; }
+        .radio-row        { gap: 1rem; }
+    }
+</style>
+
+<!-- GoatCounter page tracking -->
+<script data-goatcounter="https://luciferread.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>

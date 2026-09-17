@@ -17,7 +17,7 @@ widgets.forEach((widget, index) => {
     widget.innerHTML = `
         <section class="newsletter">
 
-            <h2>Join the newsletter</h2>
+            <h2>Sign up and receive a free preview of <em>The Radiants</em></h2>
 
             <p class="newsletter-description">
                 Updates from the <em>Heliopaides</em> saga and <em>Éskhatos Kósmos</em>
