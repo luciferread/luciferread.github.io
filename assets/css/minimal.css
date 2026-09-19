@@ -176,7 +176,7 @@ html, body {
 
 .pitch em {
     color: var(--color-accent);
-    font-style: normal;
+    font-style: italic;
 }
 
 .divider {
