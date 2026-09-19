@@ -7,6 +7,29 @@
     <meta name="description" content="{{ page.description }}">
     <!-- "robots" meta tag (with noindex, nofollow) prevents search engines from displaying it in searches -->
     <meta name="robots" content="{{ page.robots | default: 'index, follow' }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    {% if page.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image }}">
+    {% elsif site.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ site.og_image }}">
+    {% endif %}
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- CSS files -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/minimal.css">
     
@@ -17,5 +40,10 @@
 <!-- Add case to determine whether this is "newletter_page" which will then provide additional options -->
 <body class="{{ page.layout }} {% if page.newsletter_page %}newsletter-page{% endif %}">
     {{ content }}
+
+    <!-- GoatCounter -->
+    <script data-goatcounter="https://luciferread.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+        
 </body>
 </html>
