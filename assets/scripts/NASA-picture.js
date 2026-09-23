@@ -73,13 +73,12 @@ async function fetchTransmission() {
 
         } else {
             // NASA/ESA public domain — scrape credit from page via CORS proxy
-            var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://science.nasa.gov/apod/');
-
+            var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://science.nasa.gov/apod/');
+            
             try {
                 var pageResponse = await fetch(proxyUrl);
                 if (pageResponse.ok) {
-                    var json = await pageResponse.json();
-                    var html = json.contents;
+                    var html = await pageResponse.text();
 
                     // --- DEBUG: log what we received around "Credit" ---
                     var debugIdx = html.indexOf('Credit');
