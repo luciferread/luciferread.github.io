@@ -1,5 +1,87 @@
 // <!-- NASA Astronomy Picture of the Day (APOD) Integration -->
 
+// Tries multiple CORS proxies in sequence until one works.
+// Returns raw HTML string or null if all fail.
+async function fetchViaProxy(targetUrl) {
+    var proxies = [
+        {
+            build: function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
+            parse: async function(r) { return await r.text(); }
+        },
+        {
+            build: function(u) { return 'https://api.codetabs.com/v1/proxy/?quest=' + encodeURIComponent(u); },
+            parse: async function(r) { return await r.text(); }
+        },
+        {
+            build: function(u) { return 'https://api.allorigins.win/get?url=' + encodeURIComponent(u); },
+            parse: async function(r) { var j = await r.json(); return j.contents; }
+        }
+    ];
+
+    for (var i = 0; i < proxies.length; i++) {
+        try {
+            var proxyUrl = proxies[i].build(targetUrl);
+            console.log('[APOD] Trying proxy: ' + proxyUrl);
+            var response = await fetch(proxyUrl);
+            if (response.ok) {
+                var html = await proxies[i].parse(response);
+                if (html && html.length > 100) {
+                    console.log('[APOD] Proxy succeeded: ' + proxyUrl);
+                    return html;
+                }
+            } else {
+                console.warn('[APOD] Proxy returned status ' + response.status + ': ' + proxyUrl);
+            }
+        } catch (e) {
+            console.warn('[APOD] Proxy failed: ' + proxies[i].build(targetUrl), e.message);
+        }
+    }
+
+    console.warn('[APOD] All proxies failed.');
+    return null;
+}
+
+// Extracts credit text from APOD page HTML.
+// The credit lives in a table row: <th ...>Credit:</th><td ...>NASA/GSFC/...</td>
+function extractCreditFromHtml(html) {
+    var lowerHtml = html.toLowerCase();
+
+    // Old apod.nasa.gov format: <b>Image Credit:</b> or <b>Image Credit &amp; Copyright:</b>
+    var creditIdx = lowerHtml.indexOf('<b>image credit');
+    if (creditIdx === -1) creditIdx = lowerHtml.indexOf('<b>credit');
+
+    if (creditIdx === -1) {
+        console.log('[APOD] Credit label not found in HTML');
+        console.log('[APOD] First 500 chars: ' + html.substring(0, 500));
+        return null;
+    }
+
+    // Skip past the closing </b> tag
+    var afterB = html.indexOf('</b>', creditIdx);
+    if (afterB === -1) return null;
+    afterB += 4;
+
+    // Credit ends at the first <br> or start of Explanation section
+    var brIdx = html.indexOf('<br>', afterB);
+    var expIdx = lowerHtml.indexOf('<b>explanation', afterB);
+    var endIdx = afterB + 500; // safety cap
+    if (brIdx !== -1 && (expIdx === -1 || brIdx < expIdx)) endIdx = brIdx;
+    else if (expIdx !== -1) endIdx = expIdx;
+
+    var rawCredit = html.slice(afterB, endIdx);
+    var extracted = rawCredit
+        .replace(/<[^>]+>/g, '')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&#[0-9]+;/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    console.log('[APOD] Extracted credit: "' + extracted + '"');
+    return extracted.length > 0 ? extracted : null;
+}
+
 async function fetchTransmission() {
     var loading = document.getElementById('nasa-loading');
     var card = document.getElementById('nasa-transmission');
@@ -20,8 +102,6 @@ async function fetchTransmission() {
 
         // 2. Clean up explanation text
         var explanation = data.explanation;
-
-        // Strip leading "Explanation:" prefix
         if (explanation.startsWith('Explanation: ')) {
             explanation = explanation.slice('Explanation: '.length);
         } else if (explanation.startsWith('Explanation:')) {
@@ -29,17 +109,11 @@ async function fetchTransmission() {
         }
         explanation = explanation.trim();
 
-        // Strip NASA announcement text appended to explanation
-        // e.g. "APOD's email for image submissions has changed..."
-        // "APOD's main NASA site is moving..."
-        var apodAnnouncements = [
-            "APOD's email",
-            "APOD's main NASA site",
-            "APOD's submission"
-        ];
+        // Strip APOD announcement text sometimes appended to explanation
+        var apodAnnouncements = ["APOD's email", "APOD's main NASA site", "APOD's submission"];
         for (var a = 0; a < apodAnnouncements.length; a++) {
             var annIdx = explanation.indexOf(apodAnnouncements[a]);
-            if (annIdx > 50) { // only strip if not at very start (i.e. it's appended)
+            if (annIdx > 50) {
                 explanation = explanation.substring(0, annIdx).trim();
                 break;
             }
@@ -63,7 +137,7 @@ async function fetchTransmission() {
         var creditText = 'Image Credit: NASA'; // fallback
 
         if (data.copyright) {
-            // Named photographer — API provides copyright directly
+            // Named photographer — API provides this directly
             var cleaned = data.copyright
                 .split('\n')
                 .map(function(s) { return s.trim(); })
@@ -72,87 +146,8 @@ async function fetchTransmission() {
             creditText = 'Image Credit & Copyright: ' + cleaned;
 
         } else {
-            // NASA/ESA public domain — scrape credit from page via CORS proxy
-            var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://science.nasa.gov/apod/');
-            
-            try {
-                var pageResponse = await fetch(proxyUrl);
-                if (pageResponse.ok) {
-                    var html = await pageResponse.text();
-
-                    // --- DEBUG: log what we received around "Credit" ---
-                    var debugIdx = html.indexOf('Credit');
-                    if (debugIdx !== -1) {
-                        console.log('[APOD] Found "Credit" at index ' + debugIdx);
-                        console.log('[APOD] Context: ' + html.substring(debugIdx - 100, debugIdx + 300));
-                    } else {
-                        console.log('[APOD] "Credit" not found in proxy HTML');
-                        console.log('[APOD] First 500 chars: ' + html.substring(0, 500));
-                    }
-                    // --- END DEBUG ---
-
-                    // Try multiple search patterns to find the credit label
-                    var searchPatterns = [
-                        '>Credit:</th>',   // <th ...>Credit:</th>
-                        '>Credit:</td>',   // <td ...>Credit:</td>
-                        '>Credit:</b>',    // <b>Credit:</b>
-                        'Credit:</th>',
-                        'Credit:</b>',
-                        '>Image Credit<',
-                        '>Image Credit:'
-                    ];
-
-                    var creditLabelIdx = -1;
-                    for (var p = 0; p < searchPatterns.length; p++) {
-                        creditLabelIdx = html.indexOf(searchPatterns[p]);
-                        if (creditLabelIdx !== -1) {
-                            console.log('[APOD] Matched pattern: ' + searchPatterns[p]);
-                            break;
-                        }
-                    }
-
-                    if (creditLabelIdx !== -1) {
-                        // Find the next <td after the label (the value cell)
-                        var nextTd = html.indexOf('<td', creditLabelIdx);
-                        if (nextTd !== -1) {
-                            var tdOpen = html.indexOf('>', nextTd) + 1;
-                            var tdClose = html.indexOf('</td>', tdOpen);
-                            var rawCredit = html.slice(tdOpen, tdClose);
-
-                            var extracted = rawCredit
-                                .replace(/<[^>]+>/g, '')
-                                .replace(/&amp;/g, '&')
-                                .replace(/&lt;/g, '<')
-                                .replace(/&gt;/g, '>')
-                                .replace(/&#[0-9]+;/g, '')
-                                .replace(/\s+/g, ' ')
-                                .trim();
-
-                            console.log('[APOD] Extracted credit: ' + extracted);
-
-                            if (extracted.length > 0) {
-                                creditText = 'Image Credit: ' + extracted;
-                            }
-                        } else {
-                            // Label found but no <td after it — try grabbing text after </b>
-                            var afterLabel = html.indexOf('>', creditLabelIdx) + 1;
-                            var endLabel = html.indexOf('<', afterLabel);
-                            var rawCredit2 = html.slice(afterLabel, endLabel !== -1 ? endLabel : afterLabel + 300);
-                            var extracted2 = rawCredit2
-                                .replace(/&amp;/g, '&')
-                                .replace(/\s+/g, ' ')
-                                .trim();
-                            if (extracted2.length > 0) {
-                                creditText = 'Image Credit: ' + extracted2;
-                            }
-                        }
-                    }
-                } else {
-                    console.warn('[APOD] Proxy returned status: ' + pageResponse.status);
-                }
-            } catch (pageErr) {
-                console.warn('[APOD] Proxy fetch failed:', pageErr);
-            }
+            // Simplify the image crediting
+            creditText = 'Image Credit: NASA';
         }
 
         copyrightEl.innerText = creditText;
