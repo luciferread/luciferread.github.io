@@ -9,16 +9,19 @@ redirect_from:
 og_image: "/assets/images/og_images/og_image_book.jpg"
 ---
 
-<section style="padding: 4rem 10%;">
+<!-- PAGE HEADING -->
+<section style="padding: 4rem 10% 0.1rem;">
     <h1
         style="font-family: var(--font-header); color: var(--color-accent); border-bottom: 1px solid var(--color-text-muted); padding-bottom: 1rem;">
         BOOKS</h1>
+</section>
 
-    <!-- SINGLE BOOK LAYOUT -->
-    <div style="display: flex; flex-wrap: wrap; margin-top: 3rem; gap: 4rem; align-items: start;">
+<!-- BOOK LAYOUT -->
+<section style="padding: 0.1rem 10% 2rem;">
+    <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: start;">
 
         <!-- Book Cover Image -->
-        <div style="flex: 1; min-width: 300px;">
+        <div style="flex: 1; min-width: 300px; margin-top: 1rem;">
             <img src="{{ '/assets/images/radiant_cover_800w.webp' | relative_url }}" srcset="{{ '/assets/images/radiant_cover_400w.webp' | relative_url }} 400w,
                          {{ '/assets/images/radiant_cover_800w.webp' | relative_url }} 800w,
                          {{ '/assets/images/radiant_cover_1200w.webp' | relative_url }} 1200w"
@@ -32,57 +35,76 @@ og_image: "/assets/images/og_images/og_image_book.jpg"
         <!-- Book Details -->
         <div style="flex: 2; min-width: 300px;">
             <h2 style="font-family: var(--font-header); font-size: 2.5rem; margin-top: 0;">THE RADIANTS</h2>
-            <p style="color: var(--color-accent); font-weight: bold;">RELEASING 5 NOVEMBER 2026</p>
-
-            <div style="margin-bottom: 2rem;">
-                <p>
-                    <strong><i>On a world that has never known night, the coming eclipse will spark a fight for survival—and 
-                        expose the truth buried in its own shadow.</i></strong>
-                </p>
-                <p>
-                    <strong>Their sun had never set—until now.</strong><br>
-                    When the Mintaka discovers a moon orbiting their world, it may spell their doom: an eclipse that
-                    will last for millennia.
-                    But when their warnings are met with resistance, it becomes clear that the greatest threat to their
-                    survival may not come from above.<br>
-                    As rival families turn against one another, old loyalties fracture and new alliances form.
-                    A reluctant teacher and a young lumen are drawn into the ancient currents of a world that has
-                    forgotten how to face the dark.<br>
-                    As the shadow draws near, who will stand beneath the fading light—and who will survive to see what
-                    waits beyond?<br>
-                    <i>For readers of Frank Herbert and N. K. Jemisin, <b>The Radiants</b> is the first book in the
-                        <b>Heliopaides</b> saga—an epic tale of a civilisation built on sunlight, and the darkness
-                        waiting to reclaim it.</i>
-                </p>
-                <p>
-                    <!-- "A masterpiece of atmospheric storytelling." — <em>Reviewer Name</em> -->
-                </p>
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                <p style="color: var(--color-accent); font-weight: bold; margin: 0;">RELEASING 5 NOVEMBER 2026</p>
+                <a href="https://www.amazon.com/dp/B0HBTGDVNJ" class="btn btn-primary" target="_blank"
+                    rel="noopener noreferrer" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">PREORDER</a>
             </div>
 
-            <!-- BUY BUTTONS -->
-            <!-- <h3 style="font-family: var(--font-header); font-size: 1.2rem;">ORDER YOUR COPY:</h3> -->
-            
-            <div style="display: flex; gap: 1rem;">
-                <!-- Replace '#' with your actual Amazon link -->
-                <!-- <a href="#" class="btn btn-primary">AMAZON</a> -->
-            
-                <!-- NEWSLETTER SUBSCRIPTION EMBED -->
-                <div class="newsletter-widget"></div>
-
-                <!-- Additional store buttons can go here -->
-                <!-- <a href="#" class="btn btn-outline" style="filter: grayscale(100%);">BARNES & NOBLE</a> -->
-            </div>
-
-            <!-- 
-               DIRECT BUY BUTTONS (BookFunnel / BookVault)
-               These are currently hidden in the included file.
-               Open '_includes/direct-buy-buttons.html' to enable them.
-            -->
-            {% include direct-buy-buttons.html %}
+            <p>
+                <strong><i>On a world that has never known night, the coming eclipse will spark a fight for survival—and
+                    expose the truth buried in its own shadow.</i></strong>
+            </p>
+            <p>
+                <strong>Their sun had never set—until now.</strong><br>
+                When the Mintaka discovers a moon orbiting his world, it may spell doom for all radiants: an eclipse
+                that will last for millennia. But when his warnings are met with resistance, he must fight not only
+                to prove the eclipse is real, but to convince the radiants to prepare for it. As rival families turn
+                against one another, old loyalties fracture and new alliances form.<br>
+                Adham is a teacher caught between the family he left behind and the one that has taken him in.
+                When he is given an ancient journal to decipher, what begins as an intriguing task may hold the key
+                to surviving the coming eclipse.<br>
+                Nox is born beneath the threat of extinction. When tragedy tears her from her family, she is
+                forced to find another—only to discover that survival may mean becoming a pawn in a conflict she
+                barely understands.<br>
+                As the shadow draws near, who will stand beneath the fading light—and who will survive to see
+                what waits beyond?<br>
+                <i>For readers of N. K. Jemisin and Adrian Tchaikovsky, <b>The Radiants</b> is the first book in the
+                    <b>Heliopaides</b> saga—an epic tale of a civilisation built on sunlight, and the darkness
+                    waiting to reclaim it.</i>
+            </p>
         </div>
+    </div>
+</section>
 
+<!-- REVIEW QUOTE (own block, centred and larger) -->
+<section style="padding: 2rem 10%; text-align: center;">
+    <blockquote style="margin: 0 auto; max-width: 800px;">
+        <p style="font-family: var(--font-header); font-size: clamp(1.4rem, 2.5vw, 2.2rem); line-height: 1.3; font-style: italic; margin: 0 0 1rem;">
+            &ldquo;Fresh, imaginative, and wonderfully immersive&rdquo;
+        </p>
+        <footer style="font-size: 1.1rem; color: var(--color-text-muted);">
+            <strong>&mdash; P. J. Hoover, author of <em>The Hidden Code</em></strong>
+        </footer>
+    </blockquote>
+</section>
+
+<!-- PREORDER (centred, larger) -->
+<section style="padding: 2rem 10% 3rem; text-align: center;">
+    <h3 style="font-family: var(--font-header); font-size: 1.4rem; margin: 0 0 1.5rem;">PREORDER YOUR COPY:</h3>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://www.amazon.com/dp/B0HBTGDVNJ" class="btn btn-primary" target="_blank"
+            rel="noopener noreferrer" style="font-size: 1.3rem; padding: 1rem 3rem;">AMAZON</a>
+
+        <!-- Additional store buttons can go here -->
+        <!-- <a href="#" class="btn btn-outline" style="filter: grayscale(100%); font-size: 1.3rem; padding: 1rem 3rem;">BARNES & NOBLE</a> -->
     </div>
 
-    
+    <p><em>Also available on Kindle Unlimited</em></p>
 
+    <!--
+       DIRECT BUY BUTTONS (BookFunnel / BookVault)
+       These are currently hidden in the included file.
+       Open '_includes/direct-buy-buttons.html' to enable them.
+    -->
+    {% comment %}
+        {% include direct-buy-buttons.html %}
+    {% endcomment %}
 </section>
+
+<!-- NEWSLETTER SUBSCRIPTION EMBED -->
+<section style="padding: 0 10% 4rem;">
+    <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;" class="newsletter-widget"></div>
+</section>
+
