@@ -31,7 +31,7 @@ baseurl: ""
 # The full URL of your site (e.g., https://yourname.com).
 # Leave this empty while developing locally. Fill it in when you go live.
 # NOTE: The 'sitemap.xml' will only be generated when this contains a value.
-url: "https://luciferread.com/"
+url: "https://luciferread.com"
 
 # For blog posts to not have the .html ending to them
 permalink: /:year/:month/:day/:title/
