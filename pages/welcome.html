@@ -28,7 +28,6 @@ permalink: /welcome/
                                 <feMergeNode in="SourceGraphic"/>
                             </feMerge>
                         </filter>
-                        <!-- Soft halo behind the city outline -->
                         <filter id="cityGlow" x="-8%" y="-4%" width="116%" height="108%">
                             <feGaussianBlur stdDeviation="1.8" result="blur"/>
                             <feMerge>
@@ -39,11 +38,8 @@ permalink: /welcome/
                     </defs>
 
                     <!-- ── ECLIPSE ──────────────────────────── -->
-                    <!-- Outer glow ring -->
                     <circle cx="50" cy="50" r="44" stroke="#C9B037" stroke-width="0.3" opacity="0.15"/>
-                    <!-- Sun ring with pulse -->
                     <circle class="corona-ring" cx="50" cy="50" r="38" stroke="#C9B037" stroke-width="1.5" opacity="0.6"/>
-                    <!-- Primary corona rays -->
                     <line class="corona-ray" x1="50" y1="4"  x2="50" y2="13" stroke="#C9B037" stroke-width="1.2" opacity="0.5"/>
                     <line class="corona-ray" x1="50" y1="87" x2="50" y2="96" stroke="#C9B037" stroke-width="1.2" opacity="0.5"/>
                     <line class="corona-ray" x1="4"  y1="50" x2="13" y2="50" stroke="#C9B037" stroke-width="1.2" opacity="0.5"/>
@@ -52,7 +48,6 @@ permalink: /welcome/
                     <line class="corona-ray" x1="77" y1="77" x2="83" y2="83" stroke="#C9B037" stroke-width="1"   opacity="0.4"/>
                     <line class="corona-ray" x1="77" y1="17" x2="83" y2="11" stroke="#C9B037" stroke-width="1"   opacity="0.4"/>
                     <line class="corona-ray" x1="17" y1="83" x2="11" y2="77" stroke="#C9B037" stroke-width="1"   opacity="0.4"/>
-                    <!-- Secondary rays -->
                     <line class="corona-ray" x1="30" y1="6"  x2="32" y2="14" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
                     <line class="corona-ray" x1="70" y1="6"  x2="68" y2="14" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
                     <line class="corona-ray" x1="6"  y1="30" x2="14" y2="32" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
@@ -61,33 +56,12 @@ permalink: /welcome/
                     <line class="corona-ray" x1="94" y1="70" x2="86" y2="68" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
                     <line class="corona-ray" x1="30" y1="94" x2="32" y2="86" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
                     <line class="corona-ray" x1="70" y1="94" x2="68" y2="86" stroke="#C9B037" stroke-width="0.7" opacity="0.3"/>
-                    <!-- Eclipsing body -->
                     <circle cx="50" cy="50" r="32" fill="#0F100A"/>
-                    <!-- Inner rings -->
                     <circle cx="50" cy="50" r="32" stroke="#C9B037" stroke-width="0.5" opacity="0.35"/>
                     <circle cx="50" cy="50" r="24" stroke="#C9B037" stroke-width="0.3" opacity="0.12"/>
 
                     <!-- ── FLOATING MEGACITY ─────────────────── -->
-                    <!--
-                        Silhouette of the Heliopaides megacity.
-                        Peak of the central spire reaches the eclipse centre (50,50).
-                        Three towers each side, inner tallest, outer shortest.
-                        Torn floating landmass connects everything at the base.
-                        The whole group bobs gently on cityFloat.
-                    -->
                     <g class="city-group">
-
-                        <!-- City silhouette polygon
-                             Skyline (L→R):
-                               Outer-L tower (x 0-5, top y=84)
-                               Middle-L tower (x 9-14, top y=76)
-                               Inner-L  tower (x 19-24, top y=68)
-                               Triangle spire peak (50,50)
-                               Inner-R  tower (x 76-81, top y=68)
-                               Middle-R tower (x 86-91, top y=76)
-                               Outer-R  tower (x 95-100, top y=84)
-                             Torn base (R→L): irregular torn-land edge y≈119–140
-                        -->
                         <polygon
                             fill="#0F100A"
                             points="
@@ -103,8 +77,6 @@ permalink: /welcome/
                                 100,96  78,102  62,99  50,104  38,99  22,102  0,96
                             "
                         />
-
-                        <!-- City outline — same points, no fill, gold stroke, pulses with the peak -->
                         <polygon
                             class="city-outline"
                             fill="none"
@@ -125,15 +97,12 @@ permalink: /welcome/
                                 100,96  78,102  62,99  50,104  38,99  22,102  0,96
                             "
                         />
-
-                        <!-- Spire peak glow — the corona of the city, pulsing gold -->
                         <circle
                             class="peak-glow"
                             cx="50" cy="50" r="2.5"
                             fill="#C9B037"
                             filter="url(#peakGlow)"
                         />
-
                     </g>
 
                 </svg>
@@ -149,7 +118,7 @@ permalink: /welcome/
 
         </div>
 
-        <!-- RIGHT: Welcome message -->
+        <!-- RIGHT: Welcome message — trimmed to essentials -->
         <div class="panel-message">
 
             <p class="eyebrow">Transmission confirmed</p>
@@ -157,17 +126,9 @@ permalink: /welcome/
             <h1 class="headline">You've crossed<br>the threshold</h1>
 
             <p class="pitch">
-                Welcome to the <em>Éskhatos Kósmos</em>. You are now
-                officially part of the Chronicles — a reader cleared for
-                transmission from the edge of the known cosmos.
-            </p>
-
-            <p class="pitch">
-                Your welcome transmission is already in transit. Inside
-                you'll find your <em>free reader magnet</em> — the first
-                glimpse into a universe that has never known night.
-                Check your inbox, and your spam folder if it doesn't
-                arrive within a few minutes.
+                Welcome to the <em>Éskhatos Kósmos</em>. Your free preview
+                is already on its way — check your inbox, and your spam
+                folder if it doesn't arrive within a few minutes.
             </p>
 
             <hr class="divider">
@@ -181,20 +142,37 @@ permalink: /welcome/
                 <li>Occasional sneak peeks from the saga ahead</li>
             </ul>
 
-            <hr class="divider">
-
-            <a href="/" class="back-link">← Return to the chronicles</a>
-
         </div>
+    </div>
+
+    <!-- ── BELOW-CARD ACTIONS ───────────────────────────────────
+         Pre-order first (primary CTA), back-link second (exit).
+         Centred beneath the card so neither panel is stretched. -->
+    <div class="page-actions">
+
+        <div class="preorder-block">
+            <p class="preorder-note">
+                <strong><em>The Radiants</em></strong> — Book 1 of the <strong>Heliopaides Saga</strong>
+                — is available to pre-order now before its <strong>5 November 2026 release</strong>.
+            </p>
+            <a href="https://www.amazon.com/dp/B0HBTGDVNJ"
+               target="_blank" rel="noopener"
+               class="btn btn-dim preorder-btn">
+                Pre-order on Amazon →
+            </a>
+        </div>
+
+        <a href="/" class="back-link">← Return to the chronicles</a>
+
     </div>
 
 </div>
 
 <style>
     /* ── WELCOME PAGE — SPECIFIC STYLES ONLY ──────────────────────
-       All shared styles (starfield, card, panel structure, brand,
-       eyebrow, headline, pitch, perks, divider, back-link, etc.)
-       live in style.css under MINIMAL LAYOUT — SHARED COMPONENTS. */
+       Shared styles (starfield, card, panel structure, brand,
+       eyebrow, headline, pitch, perks, divider, back-link)
+       live in style.css.                                          */
 
     /* ── LEFT PANEL ───────────────────────────────────────────── */
     .panel-eclipse {
@@ -225,7 +203,6 @@ permalink: /welcome/
     /* ── ECLIPSE + CITY GRAPHIC ───────────────────────────────── */
     .eclipse-wrap {
         width: 160px;
-        /* height: auto — determined by viewBox aspect ratio (100×115) */
     }
 
     .eclipse-wrap svg {
@@ -235,61 +212,33 @@ permalink: /welcome/
         overflow: visible;
     }
 
-    /* Corona ring breathes in size and brightness */
     @keyframes coronaPulse {
         0%, 100% { opacity: 0.5; r: 38px; }
         50%       { opacity: 0.9; r: 41px; }
     }
-
-    /* Individual rays shimmer */
     @keyframes rayFade {
         0%, 100% { opacity: 0.4; }
         50%       { opacity: 0.8; }
     }
-
-    /* Whole city bobs gently — very subtle, ~3 SVG units */
     @keyframes cityFloat {
-        0%, 100% { transform: translateY(0px);   }
-        50%       { transform: translateY(3px);   }
+        0%, 100% { transform: translateY(0px); }
+        50%       { transform: translateY(3px); }
     }
-
-    /* Spire tip pulses gold */
     @keyframes peakPulse {
         0%, 100% { opacity: 0.25; r: 2px;   }
         50%       { opacity: 0.85; r: 4.5px; }
     }
-
-    /* City outline brightens in sync with the spire — same 3s cycle */
     @keyframes cityOutlinePulse {
         0%, 100% { opacity: 0.15; }
         50%       { opacity: 0.6;  }
     }
 
-    .corona-ring {
-        animation: coronaPulse 4s ease-in-out infinite;
-    }
-
-    .corona-ray {
-        animation: rayFade 4s ease-in-out infinite;
-    }
-
-    .corona-ray:nth-child(odd) {
-        animation-delay: 0.5s;
-    }
-
-    .city-group {
-        animation: cityFloat 8s ease-in-out infinite;
-        transform-box: fill-box;
-        transform-origin: center bottom;
-    }
-
-    .peak-glow {
-        animation: peakPulse 3s ease-in-out infinite;
-    }
-
-    .city-outline {
-        animation: cityOutlinePulse 3s ease-in-out infinite;
-    }
+    .corona-ring  { animation: coronaPulse 4s ease-in-out infinite; }
+    .corona-ray   { animation: rayFade 4s ease-in-out infinite; }
+    .corona-ray:nth-child(odd) { animation-delay: 0.5s; }
+    .city-group   { animation: cityFloat 8s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+    .peak-glow    { animation: peakPulse 3s ease-in-out infinite; }
+    .city-outline { animation: cityOutlinePulse 3s ease-in-out infinite; }
 
     /* ── BADGE ────────────────────────────────────────────────── */
     .confirmed-badge {
@@ -322,6 +271,42 @@ permalink: /welcome/
         justify-content: center;
         padding: 3rem 2.5rem;
         gap: 1.25rem;
+    }
+
+    /* ── BELOW-CARD ACTIONS ───────────────────────────────────── */
+    .page-actions {
+        width: 100%;
+        max-width: 860px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .preorder-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .preorder-note {
+        font-size: 0.82rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+
+    .preorder-note em {
+        color: var(--color-accent);
+        font-style: italic;
+    }
+
+    .preorder-btn {
+        font-size: 0.65rem;
+        padding: 0.65rem 1.25rem;
     }
 
     /* ── RESPONSIVE ───────────────────────────────────────────── */
