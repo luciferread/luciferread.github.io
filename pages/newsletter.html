@@ -65,25 +65,23 @@ og_image: "/assets/images/og_images/og_image_release.jpg"
     }
 
     .perks li {
+        position: relative;
+        padding-left: 1rem;
         font-size: 0.85rem;
         color: var(--color-text-main);
         opacity: 0.85;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.6rem;
     }
 
     .perks li::before {
         content: '▸';
+        position: absolute;
+        left: 0;
         color: var(--color-accent);
-        flex-shrink: 0;
-        margin-top: 0.05em;
     }
 
     .perks em {
         color: var(--color-accent);
         font-style: italic;
-        margin-left: -0.5em;
     }
 
     /* ── RESPONSIVE ───────────────────────────────── */
