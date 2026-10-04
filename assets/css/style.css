@@ -429,13 +429,147 @@ footer {
     white-space: nowrap;
 }
 
-/* Desktop Layout: Book 1 left, Books 2-3 stacked right */
-.progress-container-featured {
+/* --- Two-zone layout: Completed | In Progress --- */
+.progress-layout {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+    gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.progress-group-active {
+    border-left: 1px solid rgba(201, 176, 55, 0.2);
+    padding-left: 3rem;
+}
+
+.group-title {
+    font-family: var(--font-header);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+/* --- Completed shelf (grows as books are published) --- */
+.completed-shelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-progress-card.released {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.book-cover-static {
+    display: block;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.book-progress-card.released .book-series {
+    margin-bottom: 1rem;
+}
+
+.release-line {
+    margin: 0 0 1.25rem 0;
+    color: var(--color-text-main);
+    font-size: 0.95rem;
+}
+
+.btn-amazon {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background: var(--color-accent);
+    color: #0f100a;
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid var(--color-accent);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-amazon:hover,
+.btn-amazon:focus-visible {
+    background: transparent;
+    color: var(--color-accent);
+}
+
+.format-line {
+    margin: -0.75rem 0 1.25rem 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* For the paperback button later */
+.btn-amazon.btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+}
+
+.btn-amazon.btn-outline:hover,
+.btn-amazon.btn-outline:focus-visible {
+    background: var(--color-accent);
+    color: #0f100a;
+}
+
+.progress-group {display: flex;
+    flex-direction: column;
+}
+
+.completed-shelf,
+.active-books {
+    flex: 1;
+}
+
+/* --- In Progress: Book 2 featured, Book 3 small beside it --- */
+.active-books {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.active-books > .book-progress-card.featured {
+    flex: 1.5 1 300px;
+}
+
+.active-books > .book-progress-sidebar {
+    flex: 1 1 280px;
+}
+
+/* Featured card is now stacked (cover above text) to fit the narrower column */
+.book-progress-card.featured {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.book-progress-card.featured .book-progress-content {
+    width: 100%;
 }
 
 /* Featured Book Card */
@@ -450,13 +584,6 @@ footer {
 .book-progress-card:hover {
     border-color: var(--color-accent);
     box-shadow: 0 0 20px rgba(201, 176, 55, 0.2);
-}
-
-.book-progress-card.featured {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    align-items: start;
 }
 
 /* Book Cover with Progress Fill */
@@ -533,13 +660,14 @@ footer {
     box-shadow: 0 0 8px var(--color-accent);
 }
 
-/* Percentage badge - positioned to the LEFT of book cover */
+/* Percentage badges now sit just inside the cover, above the dashed marker,
+   so they no longer spill into neighbouring cards */
 .progress-percentage-overlay {
     position: absolute;
-    left: -50px;
-    top: -10px;
+    left: 8px;
+    top: -34px;
     font-family: var(--font-header);
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--color-accent);
     font-weight: 700;
     background: rgba(15, 16, 10, 0.95);
@@ -613,16 +741,17 @@ footer {
     letter-spacing: 0.5px
 }
 
-/* Sidebar - Books 2-3 Stacked */
+/* Sidebar - Books Stacked */
 .book-progress-sidebar {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .book-progress-card.compact {
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 80px minmax(0, 1fr);
     gap: 1rem;
     padding: 1.5rem;
     align-items: center;
@@ -696,13 +825,13 @@ footer {
     bottom: 0; /* Default position */
 }
 
-/* Percentage - to the LEFT of small covers */
+/* Percentage on covers */
 .progress-percentage-small {
     position: absolute;
-    left: -40px;
-    top: -6px;
+    left: 4px;
+    top: -24px;
     font-family: var(--font-header);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--color-accent);
     font-weight: 700;
     background: rgba(15, 16, 10, 0.95);
@@ -718,6 +847,11 @@ footer {
     margin: 0 0 0.25rem 0;
     font-family: var(--font-header);
     color: var(--color-accent);
+}
+
+.book-title-small,
+.book-title {
+    overflow-wrap: anywhere;
 }
 
 .book-series-small {
@@ -755,14 +889,26 @@ footer {
     margin: 0;
 }
 
-/* Mobile Responsiveness */
+/* Tablet Responsiveness */
 @media (max-width: 1024px) {
-    /* Prevent horizontal overflow at medium widths */
-    .progress-container-featured {
+    .progress-layout {
         grid-template-columns: 1fr;
+    }
+    .progress-group-active {
+        border-left: none;
+        border-top: 1px solid rgba(201, 176, 55, 0.2);
+        padding-left: 0;
+        padding-top: 2.5rem;
+    }
+
+    /* On tablet, ensure completed book/s area isn't full width */
+    .completed-shelf {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
+        justify-content: center;
     }
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .progress-tracker {
         padding: 3rem 5%;
@@ -781,42 +927,20 @@ footer {
         display: none;
     }
     
-    .book-progress-card.featured {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .book-cover-container {
-        margin: 0 auto 1.5rem auto;
-    }
-    
-    .progress-percentage-overlay {
-        left: -45px;
-        font-size: 0.9rem;
-    }
-    
-    .book-progress-content {
-        text-align: center;
-    }
-    
     .progress-details {
         flex-direction: column;
         gap: 1.5rem;
-    }
-    
-    .progress-status,
-    .progress-next {
-        text-align: center;
-    }
-    
-    .book-progress-card.compact {
-        grid-template-columns: 100px 1fr;
     }
 
     .progress-release {
         margin-top: 1rem;
         padding-top: 1rem;
     }
+
+    .completed-shelf {
+        grid-template-columns: 1fr;
+    }
+    
 }
 
 
@@ -1409,19 +1533,6 @@ footer {
 
   
   /* Writing progress bar */
-.progress-container-featured {
-    grid-template-columns: 1fr;
-  }
-  
-  .book-progress-card.featured {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .book-cover-container {
-    margin: 0 auto;
-  }
-
   .progress-meta {
     flex-direction: column;
     gap: 0.5rem;
@@ -1429,11 +1540,6 @@ footer {
   
   .progress-meta-separator {
     display: none;
-  }
-
-  /* Center progress details on mobile */
-  .book-progress-content {
-    text-align: center;
   }
   
   .progress-details {
@@ -1449,10 +1555,6 @@ footer {
   /* Mobile: everything stacked */
   .book-progress-sidebar {
     grid-template-columns: 1fr;
-  }
-  
-  .book-progress-card.compact {
-    grid-template-columns: 100px 1fr;
   }
 
 

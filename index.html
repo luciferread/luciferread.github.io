@@ -54,75 +54,83 @@ stories of extinction, survival, and immortality."
         <span class="progress-meta-item">Next Update: <strong>End of October</strong></span>
     </div>
 
-    <div class="progress-container-featured">
-        <!-- FEATURED BOOK 1 -->
-        <div class="book-progress-card featured">
-            <div class="book-cover-container">
-                <div class="book-cover-progress" data-progress="99"></div>
-                <img src="/assets/images/radiant_cover_400w.webp" alt="The Radiants Cover" class="book-cover">
-                <div class="progress-marker">
-                    <span class="progress-percentage-overlay"></span>
-                </div>
-            </div>
-            <div class="book-progress-content">
-                <h3 class="book-title">THE RADIANTS</h3>
-                <p class="book-series">Book 1 | Heliopaides Saga</p>
-                
-                <div class="progress-details">
-                    <div class="progress-status">
-                        <div class="progress-label">Current Status</div>
-                        <div class="progress-value">Formatting</div>
-                    </div>
-                    <div class="progress-next">
-                        <div class="progress-label">Next Step</div>
-                        <div class="progress-value">Release!</div>
-                    </div>
-                </div>
+    <div class="progress-layout">
 
-                <!-- Expected Release (uncomment when date is confirmed) -->
-                <div class="progress-release">
-                    <div class="progress-label">RELEASE DATE</div>
-                    <div class="progress-value progress-value-highlight">5 NOVEMBER 2026</div>
-                </div>
+        <!-- LEFT: COMPLETED / PUBLISHED SHELF -->
+        <div class="progress-group progress-group-completed">
+            <h3 class="group-title">Completed</h3>
+            <div class="completed-shelf">
+
+                <!-- BOOK 1 (duplicate this block for future releases) -->
+                <article class="book-progress-card released">
+                    <img src="/assets/images/radiant_cover_400w.webp" alt="The Radiants Cover" class="book-cover-static">
+                    <h4 class="book-title">THE RADIANTS</h4>
+                    <p class="book-series">Book 1 | Heliopaides Saga</p>
+                    <p class="release-line">Releases <strong>5 November 2026</strong></p>
+                    <p class="format-line">Ebook · Kindle Unlimited</p>
+                    <div class="book-actions">
+                        <a class="btn-amazon" href="https://www.amazon.com/dp/B0HBTGDVNJ" target="_blank" rel="noopener">Preorder now on Amazon</a>
+                        <!-- Paperback release: add a second button here, e.g.
+                        <a class="btn-amazon btn-outline" href="PAPERBACK-LINK" target="_blank" rel="noopener">Paperback</a> -->
+                    </div>
+                    <!-- After launch, change the text to "Read on Amazon" and the release line to "Out now" -->
+                </article>
+
             </div>
         </div>
 
-        <!-- SIDEBAR: BOOKS 2-3 STACKED -->
-        <div class="book-progress-sidebar">
-            <!-- BOOK 2 -->
-            <div class="book-progress-card compact">
-                <div class="book-cover-container-small">
-                    <div class="book-cover-progress-small" data-progress="2"></div>
-                    <div class="book-cover-placeholder">
-                        <span class="placeholder-text">BOOK 2</span>
+        <!-- RIGHT: IN PROGRESS -->
+        <div class="progress-group progress-group-active">
+            <h3 class="group-title">In Progress</h3>
+            <div class="active-books">
+
+                <!-- FEATURED: BOOK 2 (same markup as the old Book 1 card, so your existing progress JS still applies) -->
+                <div class="book-progress-card featured">
+                    <div class="book-cover-container">
+                        <div class="book-cover-progress" data-progress="2"></div>
+                        <div class="book-cover-placeholder">
+                            <span class="placeholder-text">BOOK 2</span>
+                        </div>
+                        <div class="progress-marker">
+                            <span class="progress-percentage-overlay"></span>
+                        </div>
                     </div>
-                    <div class="progress-marker-small">
-                        <span class="progress-percentage-small"></span>
+                    <div class="book-progress-content">
+                        <h3 class="book-title">HELIOPAIDES BOOK 2</h3>
+                        <p class="book-series">Book 2 | Heliopaides Saga</p>
+
+                        <div class="progress-details">
+                            <div class="progress-status">
+                                <div class="progress-label">Current Status</div>
+                                <div class="progress-value">First Draft</div>
+                            </div>
+                            <div class="progress-next">
+                                <div class="progress-label">Next Step</div>
+                                <div class="progress-value">Finish draft</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="book-progress-content-compact">
-                    <h4 class="book-title-small">HELIOPAIDES BOOK 2</h4>
-                    <!-- <p class="book-series-small">Untitled</p> -->
-                    <p class="progress-status-small">First Draft</p>
-                </div>
-            </div>
-            
-            <!-- BOOK 3 -->
-            <div class="book-progress-card compact">
-                <div class="book-cover-container-small">
-                    <div class="book-cover-progress-small" data-progress="0"></div>
-                    <div class="book-cover-placeholder">
-                        <span class="placeholder-text">BOOK 3</span>
+
+                <!-- COMPACT: BOOK 3 -->
+                <div class="book-progress-sidebar">
+                    <div class="book-progress-card compact">
+                        <div class="book-cover-container-small">
+                            <div class="book-cover-progress-small" data-progress="0"></div>
+                            <div class="book-cover-placeholder">
+                                <span class="placeholder-text">BOOK 3</span>
+                            </div>
+                            <div class="progress-marker-small">
+                                <span class="progress-percentage-small"></span>
+                            </div>
+                        </div>
+                        <div class="book-progress-content-compact">
+                            <h4 class="book-title-small">HELIOPAIDES BOOK 3</h4>
+                            <p class="progress-status-small">Outlining</p>
+                        </div>
                     </div>
-                    <div class="progress-marker-small">
-                        <span class="progress-percentage-small"></span>
-                    </div>
                 </div>
-                <div class="book-progress-content-compact">
-                    <h4 class="book-title-small">HELIOPAIDES BOOK 3</h4>
-                    <!-- <p class="book-series-small">Untitled</p> -->
-                    <p class="progress-status-small">Outlining</p>
-                </div>
+
             </div>
         </div>
 
