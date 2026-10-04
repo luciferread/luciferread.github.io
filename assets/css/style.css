@@ -1396,6 +1396,14 @@ footer {
     margin-top: 0.5rem;
 }
 
+.footer-social-note {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
 /* Mobile - adjust spacing */
 @media (max-width: 768px) {
     .footer-social-links {
