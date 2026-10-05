@@ -44,7 +44,7 @@ async function fetchTransmission() {
         }
 
         // Strip other promotional phrases
-        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Sky Surprise'];
+        var promoPhrases = ['Jigsaw Galaxy', 'Jigsaw Nebula', 'Astronomy Puzzle', 'Sky Movie', 'Your Sky Surprise'];
         for (var i = 0; i < promoPhrases.length; i++) {
             var idx = explanation.indexOf(promoPhrases[i]);
             if (idx !== -1) {
