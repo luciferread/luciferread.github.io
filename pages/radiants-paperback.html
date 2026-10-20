@@ -1,0 +1,163 @@
+---
+layout: minimal
+title: "Thank You for Reading | Lucifer Read"
+description: "Thank you for reading The Radiants. Join the newsletter for news on future books, or leave a review."
+robots: "noindex, nofollow"
+permalink: /radiants-paperback/
+newsletter_page: true
+og_image: "/assets/images/og_images/og_image_release.jpg"
+---
+
+<div class="stars"></div>
+<div class="ambient"></div>
+
+<div class="page-wrap">
+
+    <a href="/" class="brand">Lucifer Read</a>
+
+    <div class="card">
+
+        <!-- TOP: Thank-you message, spans both columns -->
+        <div class="panel-thanks">
+
+            <p class="eyebrow">Thank you, reader</p>
+
+            <h1 class="headline">You've reached<br>the final page</h1>
+
+            <p class="pitch">
+                Thank you for reading <em>The Radiants</em>. The story
+                continues, and there are two small ways you can help it
+                along.
+            </p>
+
+        </div>
+
+        <!-- BOTTOM LEFT: Newsletter box (default widget, same panel as /newsletter/).
+             data-source pins every signup from this page to "radiants_paperback",
+             so the URL needs no ?ref= at all. -->
+        <div class="panel-book">
+            <div class="newsletter-widget"
+                 data-source="radiants_paperback"
+                 data-heading="Follow the saga"
+                 data-description="News on Book 2 of the Heliopaides Saga, behind-the-scenes lore, and first access to new releases."></div>
+        </div>
+
+        <!-- BOTTOM RIGHT: Review.
+             Reuses the widget's own classes (.newsletter, .newsletter-description,
+             .privacy-text) so heading, text and spacing match the signup panel.
+             Deliberately NOT given the .newsletter-widget class, because
+             newsletter.js replaces the contents of every element with that class. -->
+        <div class="panel-review">
+            <div class="review-widget">
+                <section class="newsletter">
+
+                    <h2>Leave a review</h2>
+
+                    <p class="newsletter-description">
+                        Reviews are how independent books get found. Even a
+                        sentence or two makes a real difference.
+                    </p>
+
+                    <div class="review-actions">
+                        <a href="https://www.amazon.com/dp/B0HBTGDVNJ"
+                           target="_blank" rel="noopener"
+                           class="btn btn-primary">
+                            Review on Amazon →
+                        </a>
+                        <a href="https://www.goodreads.com/book/show/259813668-the-radiants"
+                           target="_blank" rel="noopener"
+                           class="btn btn-dim">
+                            Goodreads →
+                        </a>
+                    </div>
+
+                    <p class="privacy-text">
+                        Thank you for helping the saga find its readers.
+                    </p>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-actions">
+        <a href="/" class="back-link">← Return to the chronicles</a>
+    </div>
+
+</div>
+
+<style>
+    /* ── PAPERBACK PAGE — SPECIFIC STYLES ONLY ────────────────────
+       Uses the same .card / .panel-book layout as /newsletter/.
+       Shared styles live in style.css and minimal.css.            */
+
+    /* ── TOP PANEL — THANK YOU ────────────────────────────────── */
+    .panel-thanks {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 2.5rem 2.5rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid var(--color-border);
+        background: linear-gradient(160deg, rgba(201,176,55,0.05) 0%, transparent 60%);
+    }
+
+    .panel-thanks .pitch {
+        max-width: 34rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* ── BOTTOM RIGHT PANEL — REVIEW ──────────────────────────────
+       Centred like .panel-book; spacing and type come from the
+       .newsletter section inside, same as the signup widget.      */
+    .panel-review {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .review-widget {
+        width: 100%;
+        max-width: 700px;
+    }
+
+    /* Inline buttons follow the section's own text alignment */
+    .review-actions .btn {
+        display: inline-block;
+        margin: 0.25rem;
+    }
+
+    .page-actions {
+        width: 100%;
+        max-width: 860px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+        .card {
+            grid-template-columns: 1fr;
+        }
+
+        .panel-thanks {
+            padding: 2.5rem 1.5rem 2rem;
+        }
+
+        .panel-book {
+            border-right: none;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .panel-review {
+            padding: 2.5rem 1.5rem;
+        }
+    }
+</style>
