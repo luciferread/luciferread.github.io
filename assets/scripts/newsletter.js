@@ -143,7 +143,7 @@ widgets.forEach((widget, index) => {
             <div
                 id="${uid}-success"
                 class="success-message">
-                ✓ Thank you for subscribing! Please check your email to confirm your subscription.
+                ✓ Thank you! You've been sent an email to confirm your subscription, so check your junk folder if it doesn't appear.
             </div>
 
             <p class="privacy-text">
@@ -186,6 +186,9 @@ const success =
     document.getElementById(
         `${uid}-success`
     );
+
+// Remember the original thank-you text so we can restore it later
+const defaultSuccessText = success.textContent;
 
 form.addEventListener(
     "submit",
@@ -253,9 +256,8 @@ form.addEventListener(
 
                 success.textContent =
                     "Almost there: complete the verification step to finish subscribing.";
-                success.classList.add(
-                    "show"
-                );
+                success.classList.add("show");
+                success.scrollIntoView({ behavior: "smooth", block: "center" });
 
                 return;
             }
@@ -279,10 +281,12 @@ form.addEventListener(
             button.classList.add(
                 "success"
             );
-
+            
+            success.textContent = defaultSuccessText;
             success.classList.add(
                 "show"
             );
+            success.scrollIntoView({ behavior: "smooth", block: "center" });
 
         } catch (error) {
 
