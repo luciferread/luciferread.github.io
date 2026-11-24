@@ -1,0 +1,93 @@
+---
+layout: minimal
+title: "ARC Program | Lucifer Read"
+description: "There's no active ARC program right now — join the newsletter to hear when the next one opens."
+robots: "noindex, nofollow"
+permalink: /arc/
+newsletter_page: true
+og_image: "/assets/images/og_images/og_image_release.jpg"
+---
+
+<div class="stars"></div>
+<div class="ambient"></div>
+
+<div class="page-wrap">
+
+    <a href="/" class="brand">Lucifer Read</a>
+
+    <div class="card">
+
+        <!-- LEFT: Message -->
+        <div class="panel-message">
+
+            <div class="arc-badge">Advance Reader Copy</div>
+
+            <p class="eyebrow">No open program</p>
+
+            <h1 class="headline">Nothing to<br>sign up for yet</h1>
+
+            <p class="pitch">
+                There isn't an active ARC program
+                right now. When the next one opens, newsletter subscribers
+                will be the first to hear — along with early chapters,
+                world-building notes, and release news from the
+                <em>Éskhatos Kósmos</em>.
+            </p>
+
+            <hr class="divider">
+
+            <a href="/" class="back-link">← Return to the chronicles</a>
+
+        </div>
+
+        <!-- RIGHT: Newsletter widget -->
+        <div class="panel-book">
+            <div class="newsletter-widget"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    /* ── ARC PLACEHOLDER PAGE — SPECIFIC STYLES ONLY ──────────────
+       Shared styles (starfield, card, brand, eyebrow, headline,
+       pitch, divider, back-link) live in style.css.               */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── LEFT PANEL ───────────────────────────────────────────── */
+    .panel-message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem 2.5rem;
+        gap: 1.25rem;
+    }
+
+    .arc-badge {
+        font-family: var(--font-header);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: var(--color-bg);
+        background: var(--color-accent);
+        padding: 0.3rem 0.9rem;
+        text-transform: uppercase;
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        width: fit-content;
+    }
+
+    .pitch { font-size: 0.85rem; line-height: 1.6; color: var(--color-text); }
+    .pitch em { color: var(--color-accent); font-style: italic; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+        .card { grid-template-columns: 1fr; }
+        .panel-message { padding: 2rem 1.5rem; }
+    }
+</style>
+
+<!-- GoatCounter page tracking -->
+<script data-goatcounter="https://luciferread.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
